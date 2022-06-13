@@ -46,3 +46,12 @@ void	mtx_clear(t_mtx **mtx)
 	malloc_free_p(0, (void **)mtx);
 	*mtx = NULL;
 }
+
+size_t	get_dsize(int dtype)
+{
+	if (dtype == DTYPE_I)
+		return (sizeof(int));
+	else if (dtype == DTYPE_F)
+		return (sizeof(float));
+	return (0);
+}
