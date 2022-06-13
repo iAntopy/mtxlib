@@ -54,13 +54,12 @@ t_mtx	*mtx_create_zeros(int rows, int cols, int dtype)
 	return (mtx);
 }
 
-t_mtx	*mtx_create_array(int rows, int cols, int dtype, void *arr)
+t_mtx	*mtx_create_array(void *arr, int rows, int cols, int dtype)
 {
 	t_mtx		*mtx;
 
 	if (!arr)
 		return (NULL);
-
 	mtx = mtx_create_empty(rows, cols, dtype);
 	if (!mtx)
 		return (NULL);

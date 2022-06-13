@@ -32,10 +32,10 @@ void	mtx_fill(t_mtx *mtx, void *value)
 		n_elems = mtx->shape[0];
 	else if (mtx->ndims == 2)
 		n_elems = mtx->shape[0] * mtx->shape[1];
-	if (get_dsize(mtx->dtype) == sizeof(int))
-		mtx_fill_4byte((int *)mtx->arr, *(int)value, n_elems);
-	else if (get_dsize(mtx->dtype) == sizeof(size_t))
-		mtx_fill_8byte((size_t *)mtx->arr, *(size_t)value, n_elems);
-	else if (get_dsize(mtx->dtype) == sizeof(char))
-		mtx_fill_1byte((char *)mtx->arr, *(char)value, n_elems);
+	if (dsize == sizeof(int))
+		mtx_fill_4byte((int *)mtx->arr, *(int *)value, n_elems);
+	else if (dsize == sizeof(size_t))
+		mtx_fill_8byte((size_t *)mtx->arr, *(size_t *)value, n_elems);
+	else if (dsize == sizeof(char))
+		mtx_fill_1byte((char *)mtx->arr, *(char *)value, n_elems);
 }

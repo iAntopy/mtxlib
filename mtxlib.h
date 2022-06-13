@@ -38,12 +38,14 @@ t_mtx	*mtx_create_2x2_i(int arr[2][2]);
 t_mtx	*mtx_create_nx2_i(int n, int *arr);
 t_mtx	*mtx_create_1x3_i(int arr[3]);
 t_mtx	*mtx_create_3x3_i(int arr[3][3]);
-t_mtx	*mtx_create_nx3_i(int n, int *arr[3]);
+t_mtx	*mtx_create_nx3_i(int n, int *arr);
 t_mtx	*mtx_create_1x4_i(int arr[4]);
 t_mtx	*mtx_create_4x4_i(int arr[4][4]);
-t_mtx	*mtx_create_nx4_i(int n, int *arr[4]);
+t_mtx	*mtx_create_nx4_i(int n, int *arr);
 t_mtx	*mtx_create_empty(int rows, int cols, int dtype);
 t_mtx	*mtx_create_zeros(int rows, int cols, int dtype);
+t_mtx	*mtx_create_array(void *arr, int rows, int cols, int dtype);
+t_mtx	*mtx_identity(int n, int dtype);
 
 // MEMORY MANAGEMENT
 int	malloc_free_p(size_t size, void **ptr);
@@ -59,7 +61,7 @@ void	mtx_print_i(t_mtx *mtx);
 int	mtxu_max_i(t_mtx *mtx);
 float	mtxu_max_f(t_mtx *mtx);
 void	mtxu_fill(t_mtx *mtx, void *value);
-t_mtx	*mtx_identity(int n, int dtype);
+void	mtx_init_as_array(t_mtx *mtx, void *arr, int rows, int cols);
 
 // MATH_OPS
 int	mtx_dot(t_mtx *m1, t_mtx *m2);
