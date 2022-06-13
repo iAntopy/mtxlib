@@ -53,3 +53,17 @@ t_mtx	*mtx_create_zeros(int rows, int cols, int dtype)
 	mtx_fill(mtx, &zero);
 	return (mtx);
 }
+
+t_mtx	*mtx_create_array(int rows, int cols, int dtype, void *arr)
+{
+	t_mtx		*mtx;
+
+	if (!arr)
+		return (NULL);
+
+	mtx = mtx_create_empty(rows, cols, dtype);
+	if (!mtx)
+		return (NULL);
+	mtx_init_as_array(mtx, arr, rows, cols);
+	return (mtx);
+}

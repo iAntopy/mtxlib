@@ -2,7 +2,7 @@
 #include "libft.h"
 #include "mtxlib.h"
 
-int	mtx_init_mtx_array(t_mtx *mtx, void *arr, int rows, int cols)
+int	mtx_init_as_array(t_mtx *mtx, void *arr, int rows, int cols)
 {
 	if (!mtx->arr || mtx->shape[0] != rows || mtx->shape[1] != cols)
 		return (-1);
