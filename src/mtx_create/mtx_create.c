@@ -74,5 +74,6 @@ t_mtx	*mtx_create_array(void *arr, int rows, int cols, int dtype)
 	printf("mtx_create_array : pre init as array call arr[0] : %d\n", ((int *)mtx->arr)[0]);
 	mtx_init_as_array(mtx, arr, rows, cols);
 	printf("mtx_create_array : post init as array call arr[0] : %d\n", ((int *)mtx->arr)[0]);
+	mtx_print(mtx);
 	return (mtx);
 }

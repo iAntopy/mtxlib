@@ -3,6 +3,8 @@
 
 void	mtx_display_info(t_mtx *mtx)
 {
+	if (!mtx)
+		return ;
 	printf("@@_________ Matrix info (%p) ________@@\n", mtx);
 	printf("[[\n");
 	printf("[[	ndims : %d\n", mtx->ndims);
@@ -12,5 +14,6 @@ void	mtx_display_info(t_mtx *mtx)
 	printf("[[	array at : %p\n", mtx->arr);
 	printf("[[	out at : %p\n", mtx->out);
 	printf("[[	is transposed : %s\n", (mtx->strides[0] < mtx->strides[1])?"TRUE":"FALSE");
+	printf("[[	is view : %s\n", (mtx->is_view)?"TRUE":"FALSE");
 	printf("@@_______________________________________________@@\n");
 }

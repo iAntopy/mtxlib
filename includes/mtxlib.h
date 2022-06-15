@@ -1,5 +1,14 @@
-
-// HEADER
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mtxlib.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/15 00:32:39 by iamongeo          #+#    #+#             */
+/*   Updated: 2022/06/15 18:49:47 by iamongeo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef MTXLIB_H
 # define MTXLIB_H
@@ -15,7 +24,7 @@
 # include "libft.h"
 //# include "mtx_mem_utils.h"
 
-# define SHAPE_STR(rows, cols) ({(cols > 0) ? ("<"#rows" x "#cols">"):("<"#rows" x 1>");})
+# define SHAPE_STR(r, c) ({(c > 0) ? ("<"#r" x "#c">"):("<"#r" x 1>");})
 
 enum	mtx_data_types
 {
@@ -23,15 +32,18 @@ enum	mtx_data_types
 	DTYPE_F = 2
 };
 
+typedef unsigned char U_CHAR;
+typedef unsigned int U_INT;
+
 typedef struct s_mtx_base
 {
-	int	ndims;
-	int	dtype;
-	int	shape[MAX_DIMS];
-	int	strides[MAX_DIMS];
+	int		ndims;
+	int		dtype;
+	int		shape[MAX_DIMS];
+	int		strides[MAX_DIMS];
 	void	*arr;
 	void	*out;
-	int	is_view;
+	int		is_view;
 }	t_mtx;
 
 //t_mtx	*mtx_create_1x2_i(int arr[2]);
@@ -59,6 +71,7 @@ size_t	mtx_sizeof_array(t_mtx *mtx);
 
 // INDEXING FUNCTIONS
 void	*mtx_index(t_mtx *mtx, int row, int col);
+void	*_mtx_idx(t_mtx *mtx, int row, int col);
 int	mtx_index_is_inbound(t_mtx *mtx, int row, int col);
 // PRINT FUNCS
 void	mtx_print(t_mtx *mtx);
@@ -69,26 +82,30 @@ void	mtx_display_info(t_mtx *mtx);
 // VALIDATOR FUNCS
 int	mtx_isvalid_broadcast_dot(t_mtx *m1, t_mtx *m2);
 int	mtx_isvalid_broadcast_to_dot(t_mtx *m1, t_mtx *m2, t_mtx *out);
+int	mtx_dtype_out(t_mtx *m1, t_mtx *m2);
 
 // GENERIC UTILS
 //int	mtxu_max_i(t_mtx *mtx);
 //float	mtxu_max_f(t_mtx *mtx);
-int	mtx_init_as_array(t_mtx *mtx, void *arr, int rows, int cols);
+int		mtx_init_as_array(t_mtx *mtx, void *arr, int rows, int cols);
 t_mtx	*mtx_transpose(t_mtx *mtx);
 void	*mtx_max(t_mtx *mtx);
 void	*mtx_min(t_mtx *mtx);
 void	mtx_fill(t_mtx *mtx, void *value);
 void	mtx_convert_arr_type(t_mtx *new, t_mtx *old);
+int		mtx_dtype_out(t_mtx *m1, t_mtx *m2);
 
 t_mtx	*mtx_dup_struct(t_mtx *mtx);
 t_mtx	*mtx_dup_empty(t_mtx *mtx, int dtype);
 t_mtx	*mtx_copy(t_mtx *mtx, int dtype);
 
+t_mtx	*mtx_slice_view(t_mtx *mtx, const int slice[4]);
+
 // TRIG OPS
 t_mtx	*mtx_trig(t_mtx *mtx, float (*func)(float));
 
 // LINALG OPS
-int	mtx_dot(t_mtx *m1, t_mtx *m2);
+t_mtx	*mtx_dot(t_mtx *m1, t_mtx *m2, t_mtx **out);
 int	mtx_doti_1D(t_mtx *m1, t_mtx *m2);
 int	mtx_dotf_1D(t_mtx *m1, t_mtx *m2);
 

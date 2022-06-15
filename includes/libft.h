@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:20:53 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/12 23:08:40 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/15 02:11:14 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@
 # define CYAN_BC	"\033[1;36m"
 # define WHITE_BC	"\033[1;37m"
 
+# define BIN_BASE "01"
 //# define HEX_BASE_LOWERCASE "0123456789abcdef"
 //# define HEX_BASE_UPPERCASE "0123456789ABCDEF"
+//
 // homemade limits
 /*
 # define CHAR_MAX 127
@@ -114,6 +116,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char const *s, int fd);
 void	ft_putendl_fd(char const *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+void	ft_putbin(const void *addr, size_t n);
 
 void	ft_swap_i(int *a, int *b);
 void	ft_swap_f(float *a, float *b);

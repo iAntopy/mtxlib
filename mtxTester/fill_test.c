@@ -7,7 +7,8 @@ int	main()
 {
 	int	arr[5] = {1, 2, 3, 4, 5};
 	t_mtx	*mtx;
-	int	value = 99;
+	int		value = 99;
+	float	valuef;
 
 	mtx = mtx_create_array(arr, 5, 1, DTYPE_I);
 	printf("fill test : Post creation matrix :\n");
@@ -18,5 +19,15 @@ int	main()
 	mtx_print(mtx);
 	mtx_clear(&mtx);
 
+	printf("\nNEW array [FLOAT] :\n");
+	valuef = M_PI;
+	printf("valuef : %f\n", valuef);
+	mtx = mtx_identity(10, DTYPE_F);
+	mtx_print(mtx);
+	mtx_display_info(mtx);
+	printf("fill with PI !!!\n");
+	mtx_fill(mtx, &valuef);
+	mtx_print(mtx);
+	mtx_clear(&mtx);
 	return (0);
 }
