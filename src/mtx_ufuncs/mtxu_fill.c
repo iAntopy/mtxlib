@@ -19,7 +19,6 @@ static void	mtx_fill_8byte(size_t *arr, size_t value, size_t n_elems)
 		*(arr++) = value;
 }
 
-
 //fills matrix with the value poited by void *. The size of the 
 //value to copy is derived from the matrix dtype.
 void	mtx_fill(t_mtx *mtx, void *value)

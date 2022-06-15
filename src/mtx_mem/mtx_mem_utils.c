@@ -37,14 +37,16 @@ void	*malloc_free(size_t size, void **ptr)
 
 }
 
-void	mtx_clear(t_mtx **mtx)
+void	*mtx_clear(t_mtx **mtx)
 {
 	if (!(mtx && *mtx))
-		return ;
+		return (NULL);
 	if ((*mtx)->arr)
 		malloc_free_p(0, (void **)&((*mtx)->arr));
+	if ((*mtx)->out)
+		malloc_free_p(0, (void **)&((*mtx)->out));
 	malloc_free_p(0, (void **)mtx);
-	*mtx = NULL;
+	return (NULL);
 }
 
 size_t	get_dsize(int dtype)
@@ -54,4 +56,10 @@ size_t	get_dsize(int dtype)
 	else if (dtype == DTYPE_F)
 		return (sizeof(float));
 	return (0);
+}
+
+size_t	mtx_sizeof_array(t_mtx *mtx)
+{
+	return (mtx->shape[0] * mtx->shape[1] * get_dsize(mtx->dtype));
+//	return (mtx->shape[0] * mtx->strides[0]);
 }

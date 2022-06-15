@@ -18,9 +18,9 @@ void	mtx_print_i(t_mtx *mtx)
 	int		i;
 	int		j;
 
+	marr = mtx->arr;
 	if (!marr || !(mtx->arr) || mtx->dtype != DTYPE_I)
 		return ;
-	marr = mtx->arr;
 	i = -1;
 	if (mtx->ndims == 1)
 	{
@@ -36,21 +36,21 @@ void	mtx_print_i(t_mtx *mtx)
 			j = -1;
 			printf("[ ");
 			while (++j < mtx->shape[1] - 1)
-				printf("%5d, ", marr[i * mtx->shape[1] + j]);
-			printf("%5d ]\n", marr[i * mtx->shape[1] + j]);
+				printf("%5d, ", *(int *)mtx_index(mtx, i, j));
+			printf("%5d ]\n", *(int *)mtx_index(mtx, i, j));
 		}
 	}
 }
 
 void	mtx_print_f(t_mtx *mtx)
 {
-	float	*marr;
+	float		*marr;
 	int		i;
 	int		j;
 
+	marr = mtx->arr;
 	if (!marr || !(mtx->arr) || mtx->dtype != DTYPE_F)
 		return ;
-	marr = mtx->arr;
 	i = -1;
 	if (mtx->ndims == 1)
 	{
@@ -65,9 +65,10 @@ void	mtx_print_f(t_mtx *mtx)
 		while (++i < mtx->shape[0])
 		{
 			j = -1;
+			printf("[ ");
 			while (++j < mtx->shape[1] - 1)
-				printf("%6.3f, ", marr[i * mtx->shape[1] + j]);
-			printf("%6.3f\n", marr[i * mtx->shape[1] + j]);
+				printf("%6.3f, ", *(float *)mtx_index(mtx, i, j));
+			printf("%6.3f ]\n", *(float *)mtx_index(mtx, i, j));
 		}
 		printf(" ]\n");
 	}
