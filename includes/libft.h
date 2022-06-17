@@ -120,10 +120,13 @@ void	ft_putbin(const void *addr, size_t n);
 
 void	ft_swap_i(int *a, int *b);
 void	ft_swap_f(float *a, float *b);
+int	ft_clamp(int n, int min, int max);
 
 int	ft_printf(const char *fmt, ...);
 int	ft_vprintf(const char *fmt, va_list *ap);
 void	*fperror(char *fmt, ...);
+ssize_t	ft_timedelta_usec(char *note);
+
 
 typedef struct s_list
 {

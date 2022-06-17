@@ -41,8 +41,8 @@ typedef struct s_mtx_base
 	int		dtype;
 	int		shape[MAX_DIMS];
 	int		strides[MAX_DIMS];
-	void	*arr;
-	void	*out;
+	void		*arr;
+	void		*out;
 	int		is_view;
 }	t_mtx;
 
@@ -64,6 +64,7 @@ t_mtx	*mtx_linspace(float start, float end, int n_divs, int w_end);
 
 // MEMORY MANAGEMENT
 void	*mtx_clear(t_mtx **mtx);
+void	*mtx_clear_list(int n, ...);
 int	malloc_free_p(size_t size, void **ptr);
 void	*malloc_free(size_t size, void **ptr);
 size_t	get_dsize(int dtype);
@@ -100,6 +101,50 @@ t_mtx	*mtx_dup_empty(t_mtx *mtx, int dtype);
 t_mtx	*mtx_copy(t_mtx *mtx, int dtype);
 
 t_mtx	*mtx_slice_view(t_mtx *mtx, const int slice[4]);
+t_mtx	*mtx_select_row(t_mtx *mtx, int row);
+t_mtx	*mtx_select_col(t_mtx *mtx, int col);
+
+
+/////// ARITHMETIC OPS
+//	ADD OPS
+void	_mtx_addf_scalar(t_mtx *mtx, float sc, t_mtx *out);
+void	_mtx_iaddf_scalar(t_mtx *mtx, float sc);
+void	_mtx_addf_line(t_mtx *mtx, t_mtx *line, t_mtx *out);
+void	_mtx_iaddf_line(t_mtx *mtx, t_mtx *line);
+void	_mtx_addf_mtx(t_mtx *m1, t_mtx *m2, t_mtx *out);
+void	_mtx_iaddf_mtx(t_mtx *m1, t_mtx *m2);
+
+//	SUB OPS
+void	_mtx_subf_scalar(t_mtx *mtx, float sc, t_mtx *out);
+void	_mtx_isubf_scalar(t_mtx *mtx, float sc);
+void	_mtx_subf_line(t_mtx *mtx, t_mtx *line, t_mtx *out);
+void	_mtx_isubf_line(t_mtx *mtx, t_mtx *line);
+void	_mtx_subf_mtx(t_mtx *m1, t_mtx *m2, t_mtx *out);
+void	_mtx_isubf_mtx(t_mtx *m1, t_mtx *m2);
+void	_mtx_rsubf_scalar(float sc, t_mtx *mtx, t_mtx *out);
+void	_mtx_risubf_scalar(float sc, t_mtx *mtx);
+void	_mtx_rsubf_line(t_mtx *line, t_mtx *mtx, t_mtx *out);
+void	_mtx_risubf_line(t_mtx *line, t_mtx *mtx);
+
+//	MUL OPS
+void	_mtx_mulf_scalar(t_mtx *mtx, float sc, t_mtx *out);
+void	_mtx_imulf_scalar(t_mtx *mtx, float sc);
+void	_mtx_mulf_line(t_mtx *mtx, t_mtx *line, t_mtx *out);
+void	_mtx_imulf_line(t_mtx *mtx, t_mtx *line);
+void	_mtx_mulf_mtx(t_mtx *m1, t_mtx *m2, t_mtx *out);
+void	_mtx_imulf_mtx(t_mtx *m1, t_mtx *m2);
+
+//	DIV OPS
+void	_mtx_divf_scalar(t_mtx *mtx, float sc, t_mtx *out);
+void	_mtx_idivf_scalar(t_mtx *mtx, float sc);
+void	_mtx_divf_line(t_mtx *mtx, t_mtx *line, t_mtx *out);
+void	_mtx_idivf_line(t_mtx *mtx, t_mtx *line);
+void	_mtx_divf_mtx(t_mtx *m1, t_mtx *m2, t_mtx *out);
+void	_mtx_idivf_mtx(t_mtx *m1, t_mtx *m2);
+void	_mtx_rdivf_scalar(float sc, t_mtx *mtx, t_mtx *out);
+void	_mtx_ridivf_scalar(float sc, t_mtx *mtx);
+void	_mtx_rdivf_line(t_mtx *line, t_mtx *mtx, t_mtx *out);
+void	_mtx_ridivf_line(t_mtx *line, t_mtx *mtx);
 
 // TRIG OPS
 t_mtx	*mtx_trig(t_mtx *mtx, float (*func)(float));
@@ -108,6 +153,9 @@ t_mtx	*mtx_trig(t_mtx *mtx, float (*func)(float));
 t_mtx	*mtx_dot(t_mtx *m1, t_mtx *m2, t_mtx **out);
 int	mtx_doti_1D(t_mtx *m1, t_mtx *m2);
 int	mtx_dotf_1D(t_mtx *m1, t_mtx *m2);
+void	_mtx_dotf_4x4_4x4(float *a, float *b, float *out);
+void	_mtx_dotf_nx4_4x4(int n, float *a, float *b, float *out);
+
 
 //int	__mtx_dot_22o22(int *a1, int *a2, int *out);
 //int	__mtx_dot_n2o22(int *a1, int *a2, int n, int *out);

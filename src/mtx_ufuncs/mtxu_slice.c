@@ -32,10 +32,10 @@ t_mtx	*mtx_slice_view(t_mtx *mtx, const int slice[4])
 	int		rrange;
 	int		crange;
 
-	if (!mtx || !mtx_index_is_inbound(mtx, slice[0], slice[1])
-		|| !mtx_index_is_inbound(mtx, slice[2] - 1, slice[3] - 1))
-		return (fperror("mtx_slice_view : no mtx or out of bound : %d, %d",
-				slice[0], slice[2]));
+//	if (!mtx || !mtx_index_is_inbound(mtx, slice[0], slice[1])
+//		|| !mtx_index_is_inbound(mtx, slice[2] - 1, slice[3] - 1))
+//		return (fperror("mtx_slice_view : no mtx or out of bound : %d, %d",
+//				slice[0], slice[2]));
 	rrange = slice[2] - slice[0];
 	crange = slice[3] - slice[1];
 	if (rrange < 1 || crange < 1)
@@ -44,11 +44,33 @@ t_mtx	*mtx_slice_view(t_mtx *mtx, const int slice[4])
 	ret = mtx_dup_struct(mtx);
 	ret->arr = mtx->arr + (mtx->strides[0] * slice[0]);
 	ret->arr += mtx->strides[1] * slice[1];
-	ret->shape[0] = rrange;
-	ret->shape[1] = crange;
+	ret->shape[0] = ft_clamp(rrange, 0, mtx->shape[0]);
+	ret->shape[1] = ft_clamp(crange, 0, mtx->shape[1]);
 	ret->is_view = 1;
 	if (rrange == 1)
 		mtx_transpose(ret);
 	ret->ndims = 2 - (rrange == 1 || crange == 1);
+	return (ret);
+}
+
+t_mtx	*mtx_select_row(t_mtx *mtx, int row)
+{
+	t_mtx		*ret;
+	const int	slice[4] = {row, 0, row + 1, INT_MAX};
+
+	if (!mtx || !mtx_index_is_inbound(mtx, row, 0))
+		return (fperror("mtx_select_row : row %d is out of bounds", row));
+	ret = mtx_slice_view(mtx, slice);
+	return (ret);
+}
+
+t_mtx	*mtx_select_col(t_mtx *mtx, int col)
+{
+	t_mtx		*ret;
+	const int	slice[4] = {0, col, INT_MAX, col + 1};
+
+	if (!mtx || !mtx_index_is_inbound(mtx, 0, col))
+		return (fperror("mtx_select_row : col %d is out of bounds", col));
+	ret = mtx_slice_view(mtx, slice);
 	return (ret);
 }
