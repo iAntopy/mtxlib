@@ -1,5 +1,28 @@
 #include "mtxlib.h"
 
+// CANNOT USE VIEWS
+void	__mtx_imulf_mtx(float *m1, float *m2, size_t n_elem)
+{
+	while (n_elem--)
+	{
+		*m1 = (*m1) * (*m2);
+		m1++;
+		m2++;
+	}
+}
+
+// CANNOT USE VIEWS
+void	__mtx_mulf_mtx(float *m1, float *m2, float *out, size_t n_elem)
+{
+	while (n_elem--)
+	{
+		*out = (*m1) * (*m2);
+		m1++;
+		m2++;
+		out++;
+	}
+}
+
 void	_mtx_imulf_mtx(t_mtx *m1, t_mtx *m2)
 {
 	int	r;

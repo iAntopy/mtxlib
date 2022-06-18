@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:21:30 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/15 06:25:06 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/18 11:49:46 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "mtxlib.h"
@@ -39,9 +39,10 @@ t_mtx	*mtx_slice_view(t_mtx *mtx, const int slice[4])
 	rrange = slice[2] - slice[0];
 	crange = slice[3] - slice[1];
 	if (rrange < 1 || crange < 1)
-		return (fperror("mtx_slice_view : non conforming ranges : r %d, c %d",
+		return (fperror("%s : non conforming ranges : r %d, c %d", __FUNCTION__,
 				rrange, crange));
-	ret = mtx_dup_struct(mtx);
+	if (!mtx || !mtx_dup_struct(mtx, &ret))
+		return (fperror("%s : !mtx or malloc error", __FUNCTION__));
 	ret->arr = mtx->arr + (mtx->strides[0] * slice[0]);
 	ret->arr += mtx->strides[1] * slice[1];
 	ret->shape[0] = ft_clamp(rrange, 0, mtx->shape[0]);
@@ -51,6 +52,31 @@ t_mtx	*mtx_slice_view(t_mtx *mtx, const int slice[4])
 		mtx_transpose(ret);
 	ret->ndims = 2 - (rrange == 1 || crange == 1);
 	return (ret);
+}
+
+// View whole matrix, is_view is set to 0 because there is no offset in memmory 
+// to take special care for. Since most functions have will index faster on 
+// whole arrays than partial ones (sliced views), we treat the view as the 
+// original by just copying its ptr. vout should be a ptr to localy declared 
+// t_mtx in a function call, not malloced.
+t_mtx	*mtx_view(t_mtx *mtx, t_mtx *vout)
+{
+	t_mtx	*view;
+
+	if (!mtx)
+		return (fperror("%s : !mtx", __FUNCTION__));
+	if (vout)
+	{
+		ft_memcpy(vout, mtx, sizeof(t_mtx));
+		vout->out = NULL;
+		vout->is_view = 0;
+		view = vout;
+	}
+	else if (!mtx_dup_struct(mtx, &view))
+		return (fperror("%s : malloc error", __FUNCTION__));
+	view->arr = mtx->arr;
+	vout->is_view = 0;
+	return (view);
 }
 
 t_mtx	*mtx_select_row(t_mtx *mtx, int row)

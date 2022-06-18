@@ -67,17 +67,13 @@ t_mtx	*mtx_create_array(void *arr, int rows, int cols, int dtype)
 
 	if (!arr)
 		return (NULL);
-//	printf("mtx_create_array : creating array with %d rows and %d cols and type %s\n", rows, cols, (dtype == DTYPE_I)?"INT":"FLOAT");
 	mtx = mtx_create_empty(rows, cols, dtype);
 	if (!mtx)
 		return (NULL);
-//	printf("mtx_create_array : pre init as array call arr[0] : %d\n", ((int *)mtx->arr)[0]);
 	if (!mtx_init_as_array(mtx, arr, rows, cols))
 	{
 		mtx_clear(&mtx);
 		return (fperror("mtx_create_array : failed to cpy arr data"));
 	}
-//	printf("mtx_create_array : post init as array call arr[0] : %d\n", ((int *)mtx->arr)[0]);
-	mtx_print(mtx);
 	return (mtx);
 }
