@@ -8,8 +8,8 @@ void	*mtx_clear(t_mtx **mtx)
 		return (NULL);
 	if (!(*mtx)->is_view && (*mtx)->arr)
 		malloc_free_p(0, (void **)&((*mtx)->arr));
-	if ((*mtx)->out)
-		malloc_free_p(0, (void **)&((*mtx)->out));
+	if ((*mtx)->swap)
+		malloc_free_p(0, (void **)&((*mtx)->swap));
 	malloc_free_p(0, (void **)mtx);
 	return (NULL);
 }
