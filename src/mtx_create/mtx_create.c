@@ -37,14 +37,14 @@ t_mtx	*mtx_create_empty(int rows, int cols, int dtype)
 	dsize = get_dsize(dtype);
 	mtx->dtype = dtype;
 	mtx->arr = NULL;
-	mtx->out = NULL;
+	mtx->swap = NULL;
 	if (rows == 1 || cols == 1)
 		__mtx_setup_1d(mtx, rows, cols, dsize);
 	else
 		__mtx_setup_2d(mtx, rows, cols, dsize);
 	if (!malloc_free_p(dsize * rows * cols, (void **)&(mtx->arr)))
 		return (malloc_free(0, (void **)&mtx));
-	mtx->out = NULL;
+	mtx->swap = NULL;
 	return (mtx);
 }
 

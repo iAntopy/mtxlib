@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:32:39 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/18 13:30:15 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/19 01:51:18 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,16 @@ typedef struct s_mtx_base
 	int		shape[MAX_DIMS];
 	int		strides[MAX_DIMS];
 	void		*arr;
-	void		*out;
+	void		*swap;
 	int		is_view;
 }	t_mtx;
+
+typedef struct s_quaternion_base
+{
+	float	uv[4];
+	float	q[4];
+	float	rot_mtx[4][4];
+}	t_quat;
 
 typedef void (*UFUNC_SIDED)(t_mtx *, t_mtx *);
 
