@@ -9,6 +9,7 @@ static void	__mtx_setup_1d(t_mtx *mtx, int rows, int cols, size_t stride)
 	mtx->strides[0] = stride;
 	mtx->strides[1] = 0;
 	mtx->is_view = 0;
+	mtx->swap = NULL;
 }
 
 static void	__mtx_setup_2d(t_mtx *mtx, int rows, int cols, size_t stride)
@@ -19,6 +20,7 @@ static void	__mtx_setup_2d(t_mtx *mtx, int rows, int cols, size_t stride)
 	mtx->strides[1] = stride;
 	mtx->strides[0] = cols * stride;
 	mtx->is_view = 0;
+	mtx->swap = NULL;
 }
 
 t_mtx	*mtx_create_empty(int rows, int cols, int dtype)
@@ -34,7 +36,7 @@ t_mtx	*mtx_create_empty(int rows, int cols, int dtype)
 	if (!malloc_free_p(sizeof(t_mtx), (void **)&mtx))
 		return (NULL);
 	mtx->ndims = (unsigned char)((rows > 1) + (cols > 1));
-	dsize = get_dsize(dtype);
+	dsize = mtx_get_dsize(dtype);
 	mtx->dtype = dtype;
 	mtx->arr = NULL;
 	mtx->swap = NULL;
@@ -45,6 +47,7 @@ t_mtx	*mtx_create_empty(int rows, int cols, int dtype)
 	if (!malloc_free_p(dsize * rows * cols, (void **)&(mtx->arr)))
 		return (malloc_free(0, (void **)&mtx));
 	mtx->swap = NULL;
+	mtx->view_ptr = &mtx->arr;
 	return (mtx);
 }
 

@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:53:46 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/15 18:52:25 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/21 21:23:34 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "mtxlib.h"
@@ -73,7 +73,7 @@ void	mtx_fill(t_mtx *mtx, void *value)
 {
 	size_t	dsize;
 
-	dsize = get_dsize(mtx->dtype);
+	dsize = mtx_get_dsize(mtx->dtype);
 	if (mtx->is_view)
 		__mtx_fill_view(mtx, value, dsize);
 	else

@@ -10,7 +10,7 @@ t_mtx	*mtx_dup_struct(t_mtx *mtx, t_mtx **out)
 		return (fperror("%s : malloc error ", __FUNCTION__));
 	ft_memcpy(new, mtx, sizeof(t_mtx));
 	new->arr = NULL;
-	new->out = NULL;
+	new->swap = NULL;
 	if (out)
 		*out = new;
 	return (new);
@@ -21,7 +21,7 @@ t_mtx	*mtx_dup_empty(t_mtx *mtx, t_mtx **out, int dtype)
 	t_mtx	*new;
 	size_t	arr_size;
 
-	if (!mtx || (dtype && get_dsize(mtx->dtype) != get_dsize(dtype)))
+	if (!mtx || (dtype && mtx_get_dsize(mtx->dtype) != mtx_get_dsize(dtype)))
 		return (fperror("%s : no mtx or dsize mismatch", __FUNCTION__));
 	if (!mtx_dup_struct(mtx, &new))
 		return (NULL);
@@ -42,7 +42,7 @@ t_mtx	*mtx_copy(t_mtx *mtx, int dtype)
 	t_mtx	*new;
 	size_t	arr_size;
 
-	if (!mtx || (dtype && get_dsize(mtx->dtype) != get_dsize(dtype)))
+	if (!mtx || (dtype && mtx_get_dsize(mtx->dtype) != mtx_get_dsize(dtype)))
 		return (fperror("%s : no mtx or dsize mismatch", __FUNCTION__));
 	if (!mtx_dup_struct(mtx, &new))
 		return (NULL);
