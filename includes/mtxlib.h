@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:32:39 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/22 02:37:54 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/22 18:35:14 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,15 @@
 
 # define SHAPE_STR(r, c) ({(c > 0) ? ("<"#r" x "#c">"):("<"#r" x 1>");})
 
+# include "mtx_types.h"
+# include "mtx_core.h"
+# include "mtx_ufuncs.h"
+# include "mtx_trig.h"
+# include "mtx_arithmetic.h"
+# include "mtx_linalg.h"
 
+#endif
+/*
 enum	mtx_data_types
 {
 	DTYPE_I = 0,
@@ -49,11 +57,12 @@ typedef struct s_mtx_base
 	int		dtype;
 	int		shape[MAX_DIMS];
 	int		strides[MAX_DIMS];
-	void		*arr;
-	void		*swap;
-	void		**view_ptr;
+	void	*arr;
+	void	*swap;
+	void	**view_ptr;
 	int		is_view;
-	size_t		offset;
+	size_t	offset;
+	int		is_transposed;
 }	t_mtx;
 
 typedef struct s_math_opp
@@ -82,6 +91,7 @@ typedef struct s_quaternion_base
 typedef void (*UFUNC_SIDED)(t_mtx *, t_mtx *);
 typedef void (*MOPP_FUNC)(t_mtx *, t_mtx *, t_mtx *);
 
+// CREATE MTX FUNCTIONS
 t_mtx	*mtx_create_empty(int rows, int cols, int dtype);
 t_mtx	*mtx_create_zeros(int rows, int cols, int dtype);
 t_mtx	*mtx_create_array(void *arr, int rows, int cols, int dtype);
@@ -116,11 +126,11 @@ int	mtx_isvalid_broadcast_dot(t_mtx *m1, t_mtx *m2);
 void	*mtx_isvalid_broadcast_to_dot(t_mtx *m1, t_mtx *m2, t_mtx *out);
 int	mtx_isvalid_sided_ufunc(t_mtx *mtx, int axis, t_mtx *out, char *fname);
 int	mtx_dtype_out(t_mtx *m1, t_mtx *m2);
-
+int	mtx_are_same_shape(t_mtx *a, t_mtx *b);
+int	mtx_istransposed(t_mtx *mtx);
+*/
+/*
 // GENERIC UTILS
-int	mtx_init_as_array(t_mtx *mtx, void *arr, int rows, int cols);
-t_mtx	*mtx_transpose(t_mtx *mtx);
-
 void	*mtxu_sum(t_mtx *mtx, void *out);
 t_mtx	*mtx_sum_sided(t_mtx *mtx, int axis, t_mtx *out);
 int 	__mtxu_sum_i(int *arr, size_t n_elems);
@@ -175,7 +185,8 @@ void	_mtx_min_by_row_i(t_mtx *mtx, t_mtx *out);
 void	_mtx_min_by_row_f(t_mtx *mtx, t_mtx *out);
 void	_mtx_min_by_col_i(t_mtx *mtx, t_mtx *out);
 void	_mtx_min_by_col_f(t_mtx *mtx, t_mtx *out);
-
+*/
+/*
 void	mtx_fill(t_mtx *mtx, void *value);
 void	mtx_convert_arr_type(t_mtx *new, t_mtx *old);
 int		mtx_dtype_out(t_mtx *m1, t_mtx *m2);
@@ -188,8 +199,8 @@ t_mtx	*mtx_slice_view(t_mtx *mtx, const int slice[4]);
 t_mtx	*mtx_view(t_mtx *mtx, t_mtx	*out);
 t_mtx	*mtx_select_row(t_mtx *mtx, int row);
 t_mtx	*mtx_select_col(t_mtx *mtx, int col);
-
-
+*/
+/*
 /////// ARITHMETIC OPS
 //	STD_OPPS
 void	__mtx_init_math_opp(t_mopp *mo, t_mtx *a, t_mtx *b, t_mtx *out);
@@ -336,7 +347,7 @@ void	_mtx_divi_mtx(t_mtx *a, t_mtx *b, t_mtx *out);
 void	_mtx_idivi_mtx(t_mtx *a, t_mtx *b);
 void	_mtx_divf_mtx(t_mtx *a, t_mtx *b, t_mtx *out);
 void	_mtx_idivf_mtx(t_mtx *a, t_mtx *b);
-
+*/
 /*
 //	ADD OPS
 void	_mtx_addf_scalar(t_mtx *a, t_mtx *b, t_mtx *out);
@@ -416,6 +427,7 @@ void	_mtx_ridivi_scalar(int sc, t_mtx *mtx);
 void	_mtx_rdivi_line(t_mtx *line, t_mtx *mtx, t_mtx *out);
 void	_mtx_ridivi_line(t_mtx *line, t_mtx *mtx);
 */
+/*
 t_mtx	*mtx_sqrt(t_mtx *mtx, int inplace, t_mtx *out);
 void	__mtx_isqrtf(float *arr, size_t n_elem);
 void	__mtx_sqrtf(float *arr, float *out, size_t n_elem);
@@ -427,7 +439,9 @@ void	__mtx_hypot(float *arr, int r, int c, float *out);
 void	__mtx_hypot_nx2(float *arr, int r, float *out);
 void	__mtx_hypot_nx3(float *arr, int r, float *out);
 void	__mtx_hypot_nx4(float *arr, int r, float *out);
+*/
 
+/*
 // TRIG OPS
 t_mtx	*mtx_trig(t_mtx *mtx, float (*func)(float));
 t_mtx	*mtx_get_rotmat_4x4(float rll, float pch, float yaw, t_mtx *out);
@@ -436,8 +450,8 @@ t_mtx	*mtx_get_rotmat_2x2(float ang, t_mtx *out);
 void	__mtx_rotation_matrix_4x4(float rll, float pch, float yaw, float *out);
 void	__mtx_rotation_matrix_3x3(float rll, float pch, float yaw, float *out);
 void	__mtx_rotation_matrix_2x2(float ang, float *out);
-
-
+*/
+/*
 // LINALG OPS
 t_mtx	*mtx_dot(t_mtx *m1, t_mtx *m2, t_mtx **out);
 int	mtx_doti_1D(t_mtx *m1, t_mtx *m2);
@@ -452,3 +466,4 @@ void	__mtx_dotf_nx3_3x3(int n, float *a, float *b, float *out);
 //int	__mtx_dot_n2o22(int *a1, int *a2, int n, int *out);
 
 #endif
+*/

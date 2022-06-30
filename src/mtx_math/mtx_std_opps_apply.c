@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 02:33:54 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/21 21:48:22 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/29 19:00:37 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,24 @@ void	__mtx_std_scalar(t_mopp *mo)
 	int	i;
 	int	j;
 
+	printf("( This is \n");
+	printf("a[0][0] value : %i\n", *(int *)mo->a);
+	mo->bv = _mtx_idx(mo->b, mo->bs, 0, 0);
+	mtx_print_mopp_i(mo);
 	i = -1;
 	while (++i < mo->r)
 	{
+		printf("SO ___ \n");
 		j = -1;
 		while (++j < mo->c)
 		{
-			__mtx_execute_mopp(mo);
 			mo->av = _mtx_idx(mo->a, mo->as, i, j);
 			mo->ov = _mtx_idx(mo->o, mo->os, i, j);
+			printf("indices : %d, %d\n", i, j);
+			__mtx_execute_mopp(mo);
 		}
 	}
+	printf("GOD DAMN !! )\n");
 }
 
 void	__mtx_std_mtx(t_mopp *mo)
@@ -41,10 +48,10 @@ void	__mtx_std_mtx(t_mopp *mo)
 		j = -1;
 		while (++j < mo->c)
 		{
-			__mtx_execute_mopp(mo);
 			mo->av = _mtx_idx(mo->a, mo->as, i, j);
 			mo->bv = _mtx_idx(mo->b, mo->bs, i, j);
 			mo->ov = _mtx_idx(mo->o, mo->os, i, j);
+			__mtx_execute_mopp(mo);
 		}
 	}
 }
@@ -61,9 +68,9 @@ void	__mtx_std_line_col(t_mopp *mo)
 		mo->bv = _mtx_idx(mo->b, mo->bs, i, 0);
 		while (++j < mo->c)
 		{
-			__mtx_execute_mopp(mo);
 			mo->av = _mtx_idx(mo->a, mo->as, i, j);
 			mo->ov = _mtx_idx(mo->o, mo->os, i, j);
+			__mtx_execute_mopp(mo);
 		}
 	}
 }
@@ -80,9 +87,9 @@ void	__mtx_std_line_row(t_mopp *mo)
 		mo->bv = _mtx_idx(mo->b, mo->bs, j, 0);
 		while (++i < mo->r)
 		{
-			__mtx_execute_mopp(mo);
 			mo->av = _mtx_idx(mo->a, mo->as, i, j);
 			mo->ov = _mtx_idx(mo->o, mo->os, i, j);
+			__mtx_execute_mopp(mo);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 08:16:27 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/18 08:20:48 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/26 00:57:47 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,16 @@ float	_mtxu_prod_f(t_mtx *mtx)
 	int		i;
 	int		j;
 	float	prod;
+	float	*arr;
 
+	arr = _mtx_arr(mtx);
 	i = mtx->shape[0];
 	prod = 1;
 	while (--i)
 	{
 		j = mtx->shape[1];
 		while (--j)
-			prod *= *(float *)_mtx_idx(mtx, i, j);
+			prod *= *(float *)_mtx_idx(arr, mtx->strides, i, j);
 	}
 	return (prod);
 }
@@ -56,14 +58,16 @@ int	_mtxu_prod_i(t_mtx *mtx)
 	int	i;
 	int	j;
 	int	prod;
+	int	*arr;
 
+	arr = _mtx_arr(mtx);
 	i = mtx->shape[0];
 	prod = 1;
 	while (--i)
 	{
 		j = mtx->shape[1];
 		while (--j)
-			prod *= *(int *)_mtx_idx(mtx, i, j);
+			prod *= *(int *)_mtx_idx(arr, mtx->strides, i, j);
 	}
 	return (prod);
 }
@@ -78,7 +82,7 @@ void	*mtxu_prod(t_mtx *mtx, void *out)
 		if (mtx->is_view)
 			res_i = _mtxu_prod_i(mtx);
 		else
-			res_i = __mtxu_prod_i(mtx->arr, mtx->shape[0] * mtx->shape[1]);
+			res_i = __mtxu_prod_i(mtx->arr, mtx_get_nb_elems(mtx));
 		*(int *)out = res_i;
 	}
 	else if (mtx->dtype == DTYPE_F)
@@ -86,7 +90,7 @@ void	*mtxu_prod(t_mtx *mtx, void *out)
 		if (mtx->is_view)
 			res_f = _mtxu_prod_f(mtx);
 		else
-			res_f = __mtxu_prod_f(mtx->arr, mtx->shape[0] * mtx->shape[1]);
+			res_f = __mtxu_prod_f(mtx->arr, mtx_get_nb_elems(mtx));//mtx->shape[0] * mtx->shape[1]);
 		*(float *)out = res_f;
 	}
 	else

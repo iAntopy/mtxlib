@@ -6,11 +6,20 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 02:01:52 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/21 19:17:30 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/27 00:39:06 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mtxlib.h"
+
+void	_mtx_swap_arrays(t_mtx *mtx)
+{
+	void	*temp;
+
+	temp = mtx->arr;
+	mtx->arr = mtx->swap;
+	mtx->swap = temp;
+}
 
 int	mtx_swap_arrays(t_mtx *mtx)
 {
@@ -37,13 +46,19 @@ void	*mtx_malloc_swap(t_mtx *mtx)
 	return (mtx->swap);
 }
 
+// For inplace destructive opperations in a view mtx such as dot prod.
+// first puts the result in a swap owned by the view mtx. Than copies
+// the swap array in the original array. This function does not malloc
+// the swap array, use mtx_malloc_swap() before the destructive
+// opperation and route the output to swap. THIS OPPERATION IS 
+// INNEFFICIANT.
 int	__mtx_copy_view_swap_to_array_4bytes(t_mtx *view)
 {
 	int	i;
 	int	j;
-	int	c;
 	size_t	dsize;
 	int	*swap;
+	int	*arr;
 
 	dsize = mtx_get_dsize(view->dtype);
 	if (!view || !view->is_view || !view->swap || dsize != 4)
@@ -51,15 +66,14 @@ int	__mtx_copy_view_swap_to_array_4bytes(t_mtx *view)
 		fperror("%s : no view or !is_view or !swap or dsize != 4", __FUNCTION__);
 		return (0);
 	}
-	c = view->shape[1];
 	swap = view->swap;
+	arr = _mtx_arr(view);
 	i = -1;
 	while (++i < view->shape[0])
 	{
 		j = -1;
-		while (++j < c)
-			*(int *)_mtx_idx(view, i, j) = *(swap++);
+		while (++j < view->shape[1])
+			*(int *)_mtx_idx(arr, view->strides, i, j) = *(int *)(swap++);
 	}
 	return (1);
 }
-

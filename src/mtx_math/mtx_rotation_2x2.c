@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 01:56:14 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/22 02:33:12 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/25 21:40:18 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,9 @@ static void	__fill_rotmat_2x2(float sin_ang, float cos_ang, float *arr)
 	*(arr++) = cos_ang;
 }
 
-// Assumes that out mtx is 3x3.
-void	__mtx_rotation_matrix_2x2(float ang, float *out)
-{
-	__fill_roll_rotmat_3x3(sinf(rll), cos(rll), out);
-}
-
-t_mtx	*mtx_get_rotmat_2x2(float rll, float pch, float yaw, t_mtx *out)
+t_mtx	*mtx_get_rotmat_2x2(float ang, t_mtx *out)
 {
 	t_mtx	*ret;
-	float	sa;
-	float	ca;
 
 	ret = out;
 	if (out && !(out->shape[0] == 2 && out->shape[1] == 2))

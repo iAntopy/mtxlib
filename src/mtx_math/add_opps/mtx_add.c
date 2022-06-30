@@ -6,69 +6,82 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 03:33:18 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/21 19:07:56 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/29 20:25:34 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mtxlib.h"
 
-static void	put_biggest_first(t_mtx **a, t_mtx **b)
+static void	put_biggest_first(t_mtx **a, t_mtx **b, int *rev, int same_sh)
 {
 	t_mtx	*temp;
 
-	if (((*a)->ndims == 1 && (*b)->ndims == 2) || (*a)->shape[0] == 1)
+	if (!same_sh && ((*a == NULL) || ((*a)->shape[0] == 1)
+			|| ((*a)->ndims == 1 && (*b)->ndims == 2)))
 	{	
 		temp = *a;
 		*a = *b;
 		*b = temp;
+		if (*b != NULL)
+			*rev = 1;
 	}
 }
 
-static int	mtx_are_same_shape(t_mtx *a, t_mtx* b)
+static t_mtx	*route_opp(t_mtx *a, t_mtx *b, t_mtx *out, int same_sh)
 {
-	return (a->shape[0] == b->shape[0] && a->ashpes[1] == b->shape[1]);
+	static MOPP_FUNC	opps[2][6] = {
+		{_mtx_addi_scalar, _mtx_raddi_scalar, _mtx_addi_line_r,
+		_mtx_raddi_line_r, _mtx_addi_line_c, _mtx_raddi_line_c},
+		{_mtx_addf_scalar, _mtx_raddf_scalar, _mtx_addf_line_r,
+		_mtx_raddf_line_r, _mtx_addf_line_c, _mtx_raddf_line_c}};
+	int					rev;
+
+	printf("routing opp\n");
+	rev = 0;
+	put_biggest_first(&a, &b, &rev, same_sh);
+	if (b->shape[0] == 1)
+	{
+		printf("Routing scalar opp\n");
+		opps[a->dtype == DTYPE_F][0 + rev](a, b, out);
+	}
+	else if ((b->shape[0] == a->shape[1]) && !a->is_transposed)
+	{
+		printf("Routing line by row opp\n");
+		opps[a->dtype == DTYPE_F][2 + rev](a, b, out);
+	}
+	else if ((b->shape[0] == a->shape[0]) && a->is_transposed)
+	{
+		printf("Routing line by column opp\n");
+		opps[a->dtype == DTYPE_F][4 + rev](a, b, out);
+	}
+	else
+	{
+		printf("Erreur sur la personne.\n");
+		return (fperror("%s: mismatch shapes ", __FUNCTION__));
+	}
+	return (out);
 }
 
 t_mtx	*mtx_add(t_mtx *a, t_mtx *b, t_mtx *out)
 {
-	static MOPP_FUNC	opps[4][2] = {
-		{_mtx_addi_scalar, _mtx_addf_scalar},
-		{_mtx_addi_line_row, _mtx_addf_line_row},
-		{_mtx_addi_line_col, _mtx_addf_line_col},
-		{_mtx_addi_mtx, _mtx_addf_mtx}}
+	t_mtx	*ret;
+	int		same_shape;
 
-	put_biggest_first(&a, &b);
-	if (!out && !mtx_dup_empty(a, &out, dtype))
+	ret = out;
+	printf("mtx_add entered\n");
+	if (!(a || b) || !mtx_are_same_type(a, b, ret))
+		return (fperror("%s: missing inputs or mismatch dtypes", __FUNCTION__));
+	same_shape = mtx_are_same_shape(a, b);
+	printf("same_shape : %d\n", same_shape);
+	if (!ret && !mtx_dup_empty(a, &ret, a->dtype))
 		return (fperror("%s: malloc error", __FUNCTION__));
-	if (mtx_are_same_shape(a, b))
-		opps[6][dtype](a, b, out);
-	else if (b->ndims == 1)
-	{
-		if (b->shape[0] == 1)
-			opps[0][mtx_dtype_out(a, b)](a, b, out);
-		else if (b->shape[0] == a->shape[1])
-			opps[2][mtx_dtype_out(a, b)](a, b, out);
-		else if (b->shape[0] == a->shape[0])
-			opps[4][mtxdtype_out(a, b)](a, b, out);
-		else
-			return (fperror("%s: mismatch shapes ", __FUNCTION__));
-	}
+	printf("ret is valid\n");
+	if (same_shape && (a->dtype == DTYPE_F))
+		_mtx_addf_mtx(a, b, ret);
+	else if (same_shape && (a->dtype == DTYPE_I))
+		_mtx_addi_mtx(a, b, ret);
 	else
-		return (fperror("%s: mismatch shapes ", __FUNCTION__));
-	return (out);
+		route_opp(a, b, ret, same_shape);
+	printf("mtx_add SUCCESSFUL\n");
+	return (ret);
 }
-/*
-	if (b->shape[0] == 1)
-		
-
-	if (a->shape[0] == 1 || b->shape[0] == 1);// IS SCALAR OPP
-
-
-	func_idx |= (a->shape[0] == 1 && b->shape[0] == 1) << 0;
-
-	if ()
-	if (!a || !b)
-		return (fperror("%s: missing operand", __FUNCTION__));
-	
-	
-}*/

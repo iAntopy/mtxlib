@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtxu_sum_sided.c                                   :+:      :+:    :+:   */
+/*   mtxu_sum_sided.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/18 05:48:50 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/18 07:45:34 by iamongeo         ###   ########.fr       */
+/*   Created: 2022/06/18 08:22:07 by iamongeo          #+#    #+#             */
+/*   Updated: 2022/06/26 01:06:53 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ void	_mtx_sum_by_row_f(t_mtx *mtx, t_mtx *out)
 	int		i;
 	int		j;
 	float	sum;
-	int		r;
-	int		c;
+	float	*marr;
+	float	*mout;
 
+	marr = _mtx_arr(mtx);
+	mout = _mtx_arr(out);
 	i = -1;
-	r = mtx->shape[0];
-	c = mtx->shape[1];
-	while (++i < r)
+	while (++i < mtx->shape[0])
 	{
 		j = -1;
-		sum = 0;
-		while (++j < c)
-			sum += *(float *)_mtx_idx(mtx, i, j);
-		*(float *)_mtx_idx(out, i, 0) = sum;
+		sum = 1;
+		while (++j < mtx->shape[1])
+			sum += *(float *)_mtx_idx(marr, mtx->strides, i, j);
+		*(float *)_mtx_idx(mout, out->strides, i, 0) = sum;
 	}
 }
 
@@ -38,19 +38,19 @@ void	_mtx_sum_by_col_f(t_mtx *mtx, t_mtx *out)
 	int		i;
 	int		j;
 	float	sum;
-	int		r;
-	int		c;
+	float	*marr;
+	float	*mout;
 
+	marr = _mtx_arr(mtx);
+	mout = _mtx_arr(out);
 	j = -1;
-	r = mtx->shape[0];
-	c = mtx->shape[1];
-	while (++j < c)
+	while (++j < mtx->shape[1])
 	{
 		i = -1;
-		sum = 0;
-		while (++i < r)
-			sum += *(float *)_mtx_idx(mtx, i, j);
-		*(float *)_mtx_idx(out, j, 0) = sum;
+		sum = 1;
+		while (++i < mtx->shape[0])
+			sum += *(float *)_mtx_idx(marr, mtx->strides, i, j);
+		*(float *)_mtx_idx(mout, out->strides, j, 0) = sum;
 	}
 }
 
@@ -59,19 +59,19 @@ void	_mtx_sum_by_row_i(t_mtx *mtx, t_mtx *out)
 	int	i;
 	int	j;
 	int	sum;
-	int	r;
-	int	c;
+	int	*marr;
+	int	*mout;
 
+	marr = _mtx_arr(mtx);
+	mout = _mtx_arr(out);
 	i = -1;
-	r = mtx->shape[0];
-	c = mtx->shape[1];
-	while (++i < r)
+	while (++i < mtx->shape[0])
 	{
 		j = -1;
-		sum = 0;
-		while (++j < c)
-			sum += *(int *)_mtx_idx(mtx, i, j);
-		*(int *)_mtx_idx(out, i, 0) = sum;
+		sum = 1;
+		while (++j < mtx->shape[1])
+			sum += *(int *)_mtx_idx(marr, mtx->strides, i, j);
+		*(int *)_mtx_idx(mout, out->strides, i, 0) = sum;
 	}
 }
 
@@ -80,19 +80,19 @@ void	_mtx_sum_by_col_i(t_mtx *mtx, t_mtx *out)
 	int	i;
 	int	j;
 	int	sum;
-	int	r;
-	int	c;
+	int	*marr;
+	int	*mout;
 
+	marr = _mtx_arr(mtx);
+	mout = _mtx_arr(out);
 	j = -1;
-	r = mtx->shape[0];
-	c = mtx->shape[1];
-	while (++j < c)
+	while (++j < mtx->shape[1])
 	{
 		i = -1;
-		sum = 0;
-		while (++i < r)
-			sum += *(int *)_mtx_idx(mtx, i, j);
-		*(int *)_mtx_idx(out, j, 0) = sum;
+		sum = 1;
+		while (++i < mtx->shape[0])
+			sum += *(int *)_mtx_idx(marr, mtx->strides, i, j);
+		*(int *)_mtx_idx(mout, out->strides, j, 0) = sum;
 	}
 }
 

@@ -1,18 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mtx_create.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/22 17:47:08 by iamongeo          #+#    #+#             */
+/*   Updated: 2022/06/29 17:46:36 by iamongeo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "mtxlib.h"
 
-static void	__mtx_setup_1d(t_mtx *mtx, int rows, int cols, size_t stride)
+void	__mtx_setup_1d(t_mtx *mtx, int rows, int cols, size_t stride)
 {
 	mtx->ndims = (unsigned char)1;
-	mtx->shape[0] = (rows > 1) * rows + (cols > 1) * cols;
+	if ((rows > 1) || (cols > 1))
+		mtx->shape[0] = (rows > 1) * rows + (cols > 1) * cols;
+	else
+		mtx->shape[0] = 1;
 	mtx->shape[1] = 1;
 	mtx->strides[0] = stride;
 	mtx->strides[1] = 0;
 	mtx->is_view = 0;
+	mtx->is_transposed = 0;
 	mtx->swap = NULL;
 }
 
-static void	__mtx_setup_2d(t_mtx *mtx, int rows, int cols, size_t stride)
+void	__mtx_setup_2d(t_mtx *mtx, int rows, int cols, size_t stride)
 {	
 	mtx->ndims = (unsigned char)2;
 	mtx->shape[0] = rows;
@@ -20,6 +35,7 @@ static void	__mtx_setup_2d(t_mtx *mtx, int rows, int cols, size_t stride)
 	mtx->strides[1] = stride;
 	mtx->strides[0] = cols * stride;
 	mtx->is_view = 0;
+	mtx->is_transposed = 0;
 	mtx->swap = NULL;
 }
 
@@ -28,7 +44,7 @@ t_mtx	*mtx_create_empty(int rows, int cols, int dtype)
 	t_mtx	*mtx;
 	size_t	dsize;
 
-	if (rows < 1 || cols < 1 || !(dtype == DTYPE_I || dtype == DTYPE_F))
+	if (rows < 1 || cols < 1 || !mtx_isvalid_dtype(dtype))//!(dtype == DTYPE_I || dtype == DTYPE_F))
 	{
 		perror("mtx_creat_empty : Invalid inputs ");
 		return (NULL);
@@ -76,7 +92,7 @@ t_mtx	*mtx_create_array(void *arr, int rows, int cols, int dtype)
 	if (!mtx_init_as_array(mtx, arr, rows, cols))
 	{
 		mtx_clear(&mtx);
-		return (fperror("mtx_create_array : failed to cpy arr data"));
+		return (fperror("%s: failed to copy arr data", __FUNCTION__));
 	}
 	return (mtx);
 }

@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 08:22:07 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/18 08:27:40 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/26 01:04:04 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ void	_mtx_prod_by_row_f(t_mtx *mtx, t_mtx *out)
 	int		i;
 	int		j;
 	float	prod;
-	int		r;
-	int		c;
+	float	*marr;
+	float	*mout;
 
+	marr = _mtx_arr(mtx);
+	mout = _mtx_arr(out);
 	i = -1;
-	r = mtx->shape[0];
-	c = mtx->shape[1];
-	while (++i < r)
+	while (++i < mtx->shape[0])
 	{
 		j = -1;
 		prod = 1;
-		while (++j < c)
-			prod *= *(float *)_mtx_idx(mtx, i, j);
-		*(float *)_mtx_idx(out, i, 0) = prod;
+		while (++j < mtx->shape[1])
+			prod *= *(float *)_mtx_idx(marr, mtx->strides, i, j);
+		*(float *)_mtx_idx(mout, out->strides, i, 0) = prod;
 	}
 }
 
@@ -38,19 +38,19 @@ void	_mtx_prod_by_col_f(t_mtx *mtx, t_mtx *out)
 	int		i;
 	int		j;
 	float	prod;
-	int		r;
-	int		c;
+	float	*marr;
+	float	*mout;
 
+	marr = _mtx_arr(mtx);
+	mout = _mtx_arr(out);
 	j = -1;
-	r = mtx->shape[0];
-	c = mtx->shape[1];
-	while (++j < c)
+	while (++j < mtx->shape[1])
 	{
 		i = -1;
 		prod = 1;
-		while (++i < r)
-			prod *= *(float *)_mtx_idx(mtx, i, j);
-		*(float *)_mtx_idx(out, j, 0) = prod;
+		while (++i < mtx->shape[0])
+			prod *= *(float *)_mtx_idx(marr, mtx->strides, i, j);
+		*(float *)_mtx_idx(mout, out->strides, j, 0) = prod;
 	}
 }
 
@@ -59,19 +59,19 @@ void	_mtx_prod_by_row_i(t_mtx *mtx, t_mtx *out)
 	int	i;
 	int	j;
 	int	prod;
-	int	r;
-	int	c;
+	int	*marr;
+	int	*mout;
 
+	marr = _mtx_arr(mtx);
+	mout = _mtx_arr(out);
 	i = -1;
-	r = mtx->shape[0];
-	c = mtx->shape[1];
-	while (++i < r)
+	while (++i < mtx->shape[0])
 	{
 		j = -1;
 		prod = 1;
-		while (++j < c)
-			prod *= *(int *)_mtx_idx(mtx, i, j);
-		*(int *)_mtx_idx(out, i, 0) = prod;
+		while (++j < mtx->shape[1])
+			prod *= *(int *)_mtx_idx(marr, mtx->strides, i, j);
+		*(int *)_mtx_idx(mout, out->strides, i, 0) = prod;
 	}
 }
 
@@ -80,19 +80,19 @@ void	_mtx_prod_by_col_i(t_mtx *mtx, t_mtx *out)
 	int	i;
 	int	j;
 	int	prod;
-	int	r;
-	int	c;
+	int	*marr;
+	int	*mout;
 
+	marr = _mtx_arr(mtx);
+	mout = _mtx_arr(out);
 	j = -1;
-	r = mtx->shape[0];
-	c = mtx->shape[1];
-	while (++j < c)
+	while (++j < mtx->shape[1])
 	{
 		i = -1;
 		prod = 1;
-		while (++i < r)
-			prod *= *(int *)_mtx_idx(mtx, i, j);
-		*(int *)_mtx_idx(out, j, 0) = prod;
+		while (++i < mtx->shape[0])
+			prod *= *(int *)_mtx_idx(marr, mtx->strides, i, j);
+		*(int *)_mtx_idx(mout, out->strides, j, 0) = prod;
 	}
 }
 

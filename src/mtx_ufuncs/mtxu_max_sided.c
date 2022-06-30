@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 03:26:05 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/18 07:14:40 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/26 00:49:27 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,21 @@ void	_mtx_max_by_row_f(t_mtx *mtx, t_mtx *out)
 	int		j;
 	float	res;
 	float	value;
+	float	*arr;
 
+	arr = _mtx_arr(mtx);
 	i = -1;
 	while (++i < mtx->shape[0])
 	{
 		j = 0;
-		res = *(float *)_mtx_idx(mtx, i, j);
+		res = *(float *)_mtx_idx(arr, mtx->strides, i, j);
 		while (++j < mtx->shape[1])
 		{
-			value = *(float *)_mtx_idx(mtx, i, j);
+			value = *(float *)_mtx_idx(arr, mtx->strides, i, j);
 			if (value > res)
 				res = value;
 		}
-		*(float *)_mtx_idx(out, i, 0) = res;
+		*(float *)_mtx_idx(_mtx_arr(out), out->strides, i, 0) = res;
 	}
 }
 
@@ -40,19 +42,21 @@ void	_mtx_max_by_col_f(t_mtx *mtx, t_mtx *out)
 	int		j;
 	float	res;
 	float	value;
+	float	*arr;
 
+	arr = _mtx_arr(mtx);
 	j = -1;
 	while (++j < mtx->shape[1])
 	{
 		i = 0;
-		res = *(float *)_mtx_idx(mtx, i, j);
+		res = *(float *)_mtx_idx(arr, mtx->strides, i, j);
 		while (++i < mtx->shape[0])
 		{
-			value = *(float *)_mtx_idx(mtx, i, j);
+			value = *(float *)_mtx_idx(arr, mtx->strides, i, j);
 			if (value > res)
 				res = value;
 		}
-		*(float *)_mtx_idx(out, j, 0) = res;
+		*(float *)_mtx_idx(_mtx_arr(out), out->strides, j, 0) = res;
 	}
 }
 
@@ -62,19 +66,21 @@ void	_mtx_max_by_row_i(t_mtx *mtx, t_mtx *out)
 	int	j;
 	int	res;
 	int	value;
+	int	*arr;
 
+	arr = _mtx_arr(mtx);
 	i = -1;
 	while (++i < mtx->shape[0])
 	{
 		j = 0;
-		res = *(int *)_mtx_idx(mtx, i, j);
+		res = *(int *)_mtx_idx(arr, mtx->strides, i, j);
 		while (++j < mtx->shape[1])
 		{
-			value = *(int *)_mtx_idx(mtx, i, j);
+			value = *(int *)_mtx_idx(arr, mtx->strides, i, j);
 			if (value > res)
 				res = value;
 		}
-		*(int *)_mtx_idx(out, i, 0) = res;
+		*(int *)_mtx_idx(_mtx_arr(out), out->strides, i, 0) = res;
 	}
 }
 
@@ -84,19 +90,21 @@ void	_mtx_max_by_col_i(t_mtx *mtx, t_mtx *out)
 	int	j;
 	int	res;
 	int	value;
+	int	*arr;
 
+	arr = _mtx_arr(mtx);
 	j = -1;
 	while (++j < mtx->shape[1])
 	{
 		i = 0;
-		res = *(int *)_mtx_idx(mtx, i, j);
+		res = *(int *)_mtx_idx(arr, mtx->strides, i, j);
 		while (++i < mtx->shape[0])
 		{
-			value = *(int *)_mtx_idx(mtx, i, j);
+			value = *(int *)_mtx_idx(arr, mtx->strides, i, j);
 			if (value > res)
 				res = value;
 		}
-		*(int *)_mtx_idx(out, j, 0) = res;
+		*(int *)_mtx_idx(_mtx_arr(out), out->strides, j, 0) = res;
 	}
 }
 

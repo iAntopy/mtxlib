@@ -13,7 +13,7 @@ void	mtx_display_info(t_mtx *mtx)
 	printf("[[	strides: r %d, c %d\n", mtx->strides[0], mtx->strides[1]);
 	printf("[[	array at : %p\n", mtx->arr);
 	printf("[[	swap at : %p\n", mtx->swap);
-	printf("[[	is transposed : %s\n", (mtx->strides[0] < mtx->strides[1])?"TRUE":"FALSE");
+	printf("[[	is transposed : %s\n", mtx_istransposed(mtx)?"TRUE":"FALSE");
 	printf("[[	is view : %s\n", (mtx->is_view)?"TRUE":"FALSE");
 	printf("@@_______________________________________________@@\n");
 }

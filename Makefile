@@ -1,14 +1,13 @@
 SRC_DIR	= src
 
-SRCS	= $(wildcard $(SRC_DIR)/*/*.c)# mtx_create/* mtx_ufuncs/* mtx_display/* mtx_mem/* miniLibft/*
-
+SRCS	= $(wildcard $(SRC_DIR)/*/*.c) $(wildcard $(SRC_DIR)/mtx_math/*opps/*.c)
 
 OBJS	= $(SRCS:.c=.o)
 
 INCLS	= includes/
 
 CC	= gcc
-CFLAGS	= -Wall -Wextra -Werror -I$(INCLS)
+CFLAGS	= -Wall -Wextra -Werror -O2 -I$(INCLS)
 
 AR	= ar -rcs
 
