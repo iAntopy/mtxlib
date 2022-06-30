@@ -6,13 +6,13 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:28:50 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/25 23:19:50 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 00:10:07 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#ifndef MTX_TRIG
-# define MTX_TRIG
+#ifndef MTX_TRIG_H
+# define MTX_TRIG_H
 
 # include "mtx_types.h"
 

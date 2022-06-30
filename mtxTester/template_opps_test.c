@@ -6,11 +6,36 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 23:51:19 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/29 20:16:44 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 01:12:46 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mtxlib.h"
+
+void	line_opps_test()
+{
+	float	arr[3][3] = {{10, 20, 30}, {-1.5, -4.5, -9.99}, {9000, 6000, 3000}};
+	t_mtx	*mtx;
+	t_mtx	*lmtx;
+	t_mtx	*out;
+
+	mtx = mtx_create_array(arr, 3, 3, DTYPE_F);
+	mtx_print(mtx);
+	mtx_display_info(mtx);
+
+	lmtx = mtx_arange(2, 5, DTYPE_F);
+	mtx_transpose(lmtx);
+	mtx_print(lmtx);
+	mtx_display_info(lmtx);
+
+	out = mtx_sub(lmtx, mtx, NULL);
+	mtx_print(out);
+	mtx_display_info(out);
+
+	mtx_clear_list(3, mtx, lmtx, out);
+
+}
+
 
 int	main()
 {
@@ -20,6 +45,8 @@ int	main()
 	int		value;
 	int		value2;
 
+	line_opps_test();
+/*
 	out = NULL;
 	eye = NULL;
 	scalar = NULL;
@@ -42,21 +69,12 @@ int	main()
 	mtx_display_info(out);
 	printf("Will the output display at last ?\n");
 
-	printf("Add 40 to output\n");
-	_mtx_iaddi_scalar(out, scalar);
-	_mtx_iaddi_scalar(out, scalar);
-	_mtx_iaddi_scalar(out, scalar);
-	_mtx_iaddi_scalar(out, scalar);
-	_mtx_iaddi_scalar(out, scalar);
-	_mtx_iaddi_scalar(out, scalar);
-	_mtx_iaddi_scalar(out, scalar);
-	_mtx_iaddi_scalar(out, scalar);
-	_mtx_iaddi_scalar(out, scalar);
-	_mtx_iaddi_scalar(out, scalar);
+	printf("Add 20 to output\n");
+	_mtx_iaddi_pscalar(out, 20);
 	mtx_print(out);
 	mtx_display_info(out);
 
-	printf("Mul scalar * 20\n");
+	printf("Mul scalar * 100\n");
 	_mtx_imuli_pscalar(scalar, 100);
 	mtx_print(scalar);
 	mtx_display_info(scalar);
@@ -73,5 +91,6 @@ int	main()
 	mtx_print(eye);
 	mtx_display_info(eye);
 	mtx_clear_list(3, eye, scalar, out);
+*/
 	return (0);
 }

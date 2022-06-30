@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 03:33:18 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/29 20:25:34 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 01:07:15 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ static t_mtx	*route_opp(t_mtx *a, t_mtx *b, t_mtx *out, int same_sh)
 		printf("Routing scalar opp\n");
 		opps[a->dtype == DTYPE_F][0 + rev](a, b, out);
 	}
-	else if ((b->shape[0] == a->shape[1]) && !a->is_transposed)
+	else if ((b->shape[0] == a->shape[1]) && !b->is_transposed)
 	{
-		printf("Routing line by row opp\n");
+		printf("Routing line by row opp. is transposed ? %d, bshape[0] == ashape[1] ? %d\n", b->is_transposed, b->shape[0] == a->shape[1]);
 		opps[a->dtype == DTYPE_F][2 + rev](a, b, out);
 	}
-	else if ((b->shape[0] == a->shape[0]) && a->is_transposed)
+	else if ((b->shape[0] == a->shape[0]) && b->is_transposed)
 	{
 		printf("Routing line by column opp\n");
 		opps[a->dtype == DTYPE_F][4 + rev](a, b, out);

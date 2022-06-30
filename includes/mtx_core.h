@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:18:46 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/29 17:27:56 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 00:13:54 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define MTX_CORE_H
 
 # include "mtx_types.h"
+
+// LIMITS
+# ifndef SIZE_MAX
+#  define SIZE_MAX 0xffffffffffffffffULL
+# endif
 
 // CREATE MTX FUNCTIONS
 t_mtx	*mtx_create_empty(int rows, int cols, int dtype);

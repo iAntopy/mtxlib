@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 22:12:37 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/26 00:01:40 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 00:07:25 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	_mtx_apply_f(t_mopp *mo)
 		j = -1;
 		while (++j < mo->c)
 		{
-			__mtx_execute_unary_moppf(mo);
 			mo->av = _mtx_idx(mo->a, mo->as, i, j);
 			mo->ov = _mtx_idx(mo->o, mo->os, i, j);
+			__mtx_execute_unary_moppf(mo);
 		}
 	}
 }
@@ -41,9 +41,9 @@ void	_mtx_apply_i(t_mopp *mo)
 		j = -1;
 		while (++j < mo->c)
 		{
-			__mtx_execute_unary_moppi(mo);
 			mo->av = _mtx_idx(mo->a, mo->as, i, j);
 			mo->ov = _mtx_idx(mo->o, mo->os, i, j);
+			__mtx_execute_unary_moppi(mo);
 		}
 	}
 }
