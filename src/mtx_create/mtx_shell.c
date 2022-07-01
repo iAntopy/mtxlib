@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 22:47:09 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/29 20:05:25 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 21:04:01 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,21 @@
 // The array should also be declared on the stack and set as mtx->arr.
 // No verification is made that the array is the right size so 
 // use carefully.
-void	mtx_shell(t_mtx *mtx, int rows, int cols, int dtype)
+t_mtx	*mtx_shell(t_mtx *mtx, int rows, int cols, int dtype)
 {
 	if (!mtx || (rows < 1) || (cols < 1))
-		fperror("%s: input missing or row/col < 1", __FUNCTION__);
+		return (MTX_ERROR("input missing or row/col < 1"));
 	if (!mtx_isvalid_dtype(dtype))
-		fperror("%s: dtype is invalid", __FUNCTION__);
+		return (MTX_ERROR("dtype is invalid"));
 	if ((rows == 1) || (cols == 1))
 		__mtx_setup_1d(mtx, rows, cols, mtx_get_dsize(dtype));
 	else
 		__mtx_setup_2d(mtx, rows, cols, mtx_get_dsize(dtype));
-	/*
-	if ((rows == 1) || (cols == 1))
-	{
-		mtx->ndims = (unsigned char)1;
-		mtx->shape[0] = (rows > 1) * rows + (cols > 1) * cols;
-		mtx->shape[1] = 1;
-		mtx->strides[0] = mtx_get_dsize(dtype);
-		mtx->strides[1] = 0;
-	}
-	else
-	{
-		mtx->ndims = (unsigned char)2;
-		mtx->shape[0] = rows;
-		mtx->shape[1] = cols;
-		mtx->strides[0] = mtx_get_dsize(dtype);
-		mtx->strides[1] = mtx->strides[0] * cols;
-	}
-	*/
 	mtx->is_view = 0;
 	mtx->is_transposed = 0;
 	mtx->dtype = dtype;
 	mtx->view_ptr = &mtx->arr;
 	mtx->swap = NULL;
 	mtx->offset = 0;
+	return (mtx);
 }

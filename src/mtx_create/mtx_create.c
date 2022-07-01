@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 17:47:08 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/29 17:46:36 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 20:59:00 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,9 @@ t_mtx	*mtx_create_empty(int rows, int cols, int dtype)
 	size_t	dsize;
 
 	if (rows < 1 || cols < 1 || !mtx_isvalid_dtype(dtype))//!(dtype == DTYPE_I || dtype == DTYPE_F))
-	{
-		perror("mtx_creat_empty : Invalid inputs ");
-		return (NULL);
-	}
+		return (MTX_ERROR("invalid inputs"));
 	if (!malloc_free_p(sizeof(t_mtx), (void **)&mtx))
-		return (NULL);
+		return (MTX_ERROR("malloc error"));
 	mtx->ndims = (unsigned char)((rows > 1) + (cols > 1));
 	dsize = mtx_get_dsize(dtype);
 	mtx->dtype = dtype;
@@ -75,7 +72,7 @@ t_mtx	*mtx_create_zeros(int rows, int cols, int dtype)
 	zero = 0;
 	mtx = mtx_create_empty(rows, cols, dtype);
 	if (!mtx)
-		return (NULL);
+		return (MTX_ERROR("malloc error"));
 	mtx_fill(mtx, &zero);
 	return (mtx);
 }
@@ -85,14 +82,14 @@ t_mtx	*mtx_create_array(void *arr, int rows, int cols, int dtype)
 	t_mtx		*mtx;
 
 	if (!arr)
-		return (NULL);
+		return (MTX_ERROR("no array provided"));
 	mtx = mtx_create_empty(rows, cols, dtype);
 	if (!mtx)
-		return (NULL);
+		return (MTX_ERROR("malloc error"));
 	if (!mtx_init_as_array(mtx, arr, rows, cols))
 	{
 		mtx_clear(&mtx);
-		return (fperror("%s: failed to copy arr data", __FUNCTION__));
+		return (MTX_ERROR("failed to copy arr data"));
 	}
 	return (mtx);
 }

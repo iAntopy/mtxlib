@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 08:04:15 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/27 00:38:43 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 21:11:03 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ t_mtx	*mtx_hypot(t_mtx *mtx, t_mtx *out)
 	t_mtx	*ret;
 
 	if (!mtx || mtx->dtype != DTYPE_F)
-		return (fperror("%s : !mtx or dtype != DTYPE_F ", __FUNCTION__));
+		return (MTX_ERROR("!mtx or dtype != DTYPE_F "));
 	ret = out;
 	if (!ret && !mtx_create_empty(mtx->shape[0], 1, DTYPE_F))
-		return (fperror("%s : malloc error ", __FUNCTION__));
+		return (MTX_ERROR("malloc error ", __FUNCTION__));
 	else if (out->shape[1] != 1 || out->shape[0] != mtx->shape[0]
 		|| out->dtype != DTYPE_F)
-		return (fperror("%s : out shape or dtype mismatch", __FUNCTION__));
+		return (MTX_ERROR("out shape or dtype mismatch"));
 	_mtx_hypot(mtx, out);//mtx->arr, mtx->shape[0], mtx->shape[1], out->arr);
 	return (ret);
 }

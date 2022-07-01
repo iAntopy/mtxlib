@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:21:30 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/20 19:08:45 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 22:54:16 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "mtxlib.h"
@@ -35,10 +35,10 @@ t_mtx	*mtx_slice_view(t_mtx *mtx, const int slice[4])
 	rrange = slice[2] - slice[0];
 	crange = slice[3] - slice[1];
 	if (rrange < 1 || crange < 1)
-		return (fperror("%s : non conforming ranges : r %d, c %d", __FUNCTION__,
+		return (MTX_ERROR("non conforming ranges : r %d, c %d",
 				rrange, crange));
 	if (!mtx || !mtx_dup_struct(mtx, &ret))
-		return (fperror("%s : !mtx or malloc error", __FUNCTION__));
+		return (MTX_ERROR("!mtx or malloc error"));
 	ret->offset = (mtx->strides[0] * slice[0]);
 	ret->offset += mtx->strides[1] * slice[1];
 	ret->shape[0] = ft_clamp(rrange, 0, mtx->shape[0]);
@@ -61,7 +61,7 @@ t_mtx	*mtx_view(t_mtx *mtx, t_mtx *vout)
 	t_mtx	*view;
 
 	if (!mtx)
-		return (fperror("%s : !mtx", __FUNCTION__));
+		return (MTX_ERROR("!mtx"));
 	if (vout)
 	{
 		ft_memcpy(vout, mtx, sizeof(t_mtx));
@@ -70,7 +70,7 @@ t_mtx	*mtx_view(t_mtx *mtx, t_mtx *vout)
 		view = vout;
 	}
 	else if (!mtx_dup_struct(mtx, &view))
-		return (fperror("%s : malloc error", __FUNCTION__));
+		return (MTX_ERROR("malloc error"));
 	view->arr = mtx->arr;
 	vout->is_view = 0;
 	return (view);

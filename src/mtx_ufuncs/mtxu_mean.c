@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 05:05:18 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/18 07:09:19 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 22:53:18 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ void	*mtxu_mean(t_mtx *mtx, void *out)
 		*(float *)out = res_f;
 	}
 	else
-		fperror("%s : dtype of mtx is invalid ", __FUNCTION__);
+		MTX_ERROR("dtype of mtx is invalid ");
 	return (out);	
 }

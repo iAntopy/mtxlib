@@ -1,40 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_sqrt.c                                         :+:      :+:    :+:   */
+/*   ft_random.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/18 08:36:19 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/30 21:13:19 by iamongeo         ###   ########.fr       */
+/*   Created: 2022/06/30 16:05:47 by iamongeo          #+#    #+#             */
+/*   Updated: 2022/06/30 17:20:30 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mtxlib.h"
+#include "libft.h"
+#include <time.h>
 
-// DOES NOT work with views
-void	__mtx_isqrtf(float *arr, size_t n_elem)
+//Generates random uniformaly distributed float nb between [0, 1].
+float	ft_random(void)
 {
-	while (n_elem--)
+	static int	seed_is_set;
+	
+	if (!seed_is_set)
 	{
-		*arr = sqrtf(*arr);
-		arr++;
+		srand(time(NULL));
+		seed_is_set = 1;
 	}
+	return ((double)rand() / (double)RAND_MAX);
 }
 
-// DOES NOT work with views
-void	__mtx_sqrtf(float *arr, float *out, size_t n_elem)
+int	ft_randint(int min, int range)
 {
-	while (n_elem--)
+	static int	seed_is_set;
+	
+	if (!seed_is_set)
 	{
-		*out = sqrtf(*arr);
-		out++;
-		arr++;
+		srand(time(NULL));
+		seed_is_set = 1;
 	}
-}
-
-t_mtx	*mtx_sqrtf(t_mtx *mtx, t_mtx *out)
-{
-	printf("Get in the weeds\n");
-	return (mtx_apply_f(mtx, sqrtf, out));
+	return (rand() % range + min);
 }

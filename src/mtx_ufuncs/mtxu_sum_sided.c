@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtxu_sum_sided.c                                  :+:      :+:    :+:   */
+/*   mtxu_sum_sided.c                                  :+:      :+:    :+:    */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 08:22:07 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/26 01:06:53 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 22:45:54 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	_mtx_sum_by_row_f(t_mtx *mtx, t_mtx *out)
 		j = -1;
 		sum = 1;
 		while (++j < mtx->shape[1])
-			sum += *(float *)_mtx_idx(marr, mtx->strides, i, j);
+			sum +*= *(float *)_mtx_idx(marr, mtx->strides, i, j);
 		*(float *)_mtx_idx(mout, out->strides, i, 0) = sum;
 	}
 }
@@ -95,7 +95,7 @@ void	_mtx_sum_by_col_i(t_mtx *mtx, t_mtx *out)
 		*(int *)_mtx_idx(mout, out->strides, j, 0) = sum;
 	}
 }
-
+/*
 t_mtx	*mtx_sum_sided(t_mtx *mtx, int axis, t_mtx *out)
 {
 	static UFUNC_SIDED	ufuncs[2][2] = {
@@ -115,3 +115,4 @@ t_mtx	*mtx_sum_sided(t_mtx *mtx, int axis, t_mtx *out)
 	ufuncs[axis][mtx->dtype == DTYPE_F](mtx, ret);
 	return (ret);
 }
+*/

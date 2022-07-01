@@ -1,40 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_sqrt.c                                         :+:      :+:    :+:   */
+/*   mtx_perror.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/18 08:36:19 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/30 21:13:19 by iamongeo         ###   ########.fr       */
+/*   Created: 2022/06/30 20:50:10 by iamongeo          #+#    #+#             */
+/*   Updated: 2022/06/30 21:58:33 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mtxlib.h"
 
-// DOES NOT work with views
-void	__mtx_isqrtf(float *arr, size_t n_elem)
+t_mtx	*mtx_err(char *origin, char *err)
 {
-	while (n_elem--)
-	{
-		*arr = sqrtf(*arr);
-		arr++;
-	}
+	fprintf(stderr, RED_BC"[=> MTX ERROR : %s : %s <=]\n"WHITE_C, origin, err);
+	return (NULL);
 }
 
-// DOES NOT work with views
-void	__mtx_sqrtf(float *arr, float *out, size_t n_elem)
+t_mtx	*mtx_e_clr(char *origin, char *err, t_mtx **mtx)
 {
-	while (n_elem--)
-	{
-		*out = sqrtf(*arr);
-		out++;
-		arr++;
-	}
-}
-
-t_mtx	*mtx_sqrtf(t_mtx *mtx, t_mtx *out)
-{
-	printf("Get in the weeds\n");
-	return (mtx_apply_f(mtx, sqrtf, out));
+	mtx_error(origin, err);
+	mtx_clear(mtx);
+	return (NULL);
 }

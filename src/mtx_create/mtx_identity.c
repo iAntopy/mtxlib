@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:01:06 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/22 02:09:04 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 21:01:06 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_mtx	*mtx_identity(int n, t_mtx *out, int dtype)
 	size_t	v;
 
 	if (n < 1)
-		return ((t_mtx *)fperror("mtx_identity : %d is invalid n", n));
+		return (MTX_ERROR("invalid negative shape value"));
 	if (out)
 	{
 		mtx = out;
@@ -47,20 +47,10 @@ t_mtx	*mtx_identity(int n, t_mtx *out, int dtype)
 	else
 		mtx = mtx_create_zeros(n, n, dtype);
 	if (!mtx)
-		return (fperror("%s: malloc error", __FUNCTION__));
+		return (MTX_ERROR("malloc error"));
 	if (dtype == DTYPE_I)
 		fill_identity_i(mtx);
 	else if (dtype == DTYPE_F)
 		fill_identity_f(mtx);
 	return (mtx);
 }
-/*
-int	main()
-{
-	t_mtx	*mtx;
-
-	mtx = mtx_identity(3, DTYPE_I);
-	mtx_print(mtx);
-	mtx_clear(&mtx);
-	return (0);
-}*/

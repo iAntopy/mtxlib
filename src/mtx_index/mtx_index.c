@@ -29,6 +29,6 @@ void	*_mtx_idx(void *arr, int *strides, int row, int col)
 void	*mtx_index(t_mtx *mtx, int row, int col)
 {
 	if (row < 0 || col < 0 || row >= mtx->shape[0] || col >= mtx->shape[1])
-		return (fperror("mtx_index :i index out of bounds\n"));
+		return (MTX_ERROR("index out of bounds"));
 	return (_mtx_idx(_mtx_arr(mtx), mtx->strides, row, col));
 }

@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 22:52:08 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/27 00:42:40 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 21:17:08 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ t_mtx	*mtx_normalize(t_mtx *mtx, t_mtx *out)
 
 	ret = out;
 	if (mtx->dtype != DTYPE_F || out->dtype != DTYPE_F)
-		return (fperror("%s: only dtype float allowed", __FUNCTION__));
+		return (MTX_ERROR("only dtype float allowed"));
 	if (!ret && !mtx_dup_empty(mtx, &ret, mtx->dtype))
-		return (fperror("%s: malloc error", __FUNCTION__));
+		return (MTX_ERROR("malloc error"));
 	_mtx_norm_apply(mtx, out, 0);
 	return (ret);
 }
@@ -58,7 +58,7 @@ t_mtx	*mtx_normalize(t_mtx *mtx, t_mtx *out)
 t_mtx	*mtx_inormalize(t_mtx *mtx)
 {
 	if (mtx->dtype != DTYPE_F)
-		return (fperror("%s: only dtype float allowed", __FUNCTION__));
+		return (MTX_ERROR("only dtype float allowed"));
 	_mtx_norm_apply(mtx, mtx, 0);
 	return (mtx);
 }

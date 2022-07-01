@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 01:48:10 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/25 21:41:42 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 21:12:37 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ t_mtx	*mtx_get_rotmat_3x3(float rll, float pch, float yaw, t_mtx *out)
 
 	ret = out;
 	if (out && !(out->shape[0] == 3 && out->shape[1] == 3))
-		return (fperror("%s: wrong output shape", __FUNCTION__));
+		return (MTX_ERROR("wrong output shape"));
 	if (!ret)
 	{
 		ret = mtx_create_empty(3, 3, DTYPE_F);
 		if (!ret)
-			return (fperror("%s: malloc error", __FUNCTION__));
+			return (MTX_ERROR("malloc error"));
 	}
 	__mtx_rotation_matrix_3x3(rll, pch, yaw, ret->arr);
 	return (ret);	

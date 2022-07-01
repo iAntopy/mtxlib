@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 01:15:36 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/26 00:55:03 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 22:53:32 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "mtxlib.h"
@@ -109,6 +109,6 @@ void	*mtxu_min(t_mtx *mtx)
 			res = __mtxu_min_f(mtx->arr, mtx_get_nb_elems(mtx));// mtx->shape[0] * mtx->shape[1]);
 	}
 	else
-		fperror("%s : dtype of mtx is invalid ", __FUNCTION__);
+		MTX_ERROR("dtype of mtx is invalid ");
 	return (res);
 }

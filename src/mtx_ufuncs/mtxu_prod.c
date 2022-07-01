@@ -1,99 +1,109 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtxu_prod.c                                        :+:      :+:    :+:   */
+/*   mtx_prod.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 08:16:27 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/26 00:57:47 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 22:41:26 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mtxlib.h"
 
-//works on full raw array, NOT on views.
-int	__mtxu_prod_i(int *arr, size_t n_elem)
+static t_mtx	*__route_prod_rowwise(t_mtx *mtx, t_mtx *out)
 {
-	int	prod;
+	int	out_null;
 
-	prod = *(arr++);
-	while (--n_elem)
-		prod *= *(arr++);
-	return (prod);
-}
-
-//works on full raw array, NOT on views.
-float	__mtxu_prod_f(float *arr, size_t n_elem)
-{
-	float	prod;
-
-	prod = *(arr++);
-	while (--n_elem)
-		prod *= *(arr++);
-	return (prod);
-}
-
-float	_mtxu_prod_f(t_mtx *mtx)
-{
-	int		i;
-	int		j;
-	float	prod;
-	float	*arr;
-
-	arr = _mtx_arr(mtx);
-	i = mtx->shape[0];
-	prod = 1;
-	while (--i)
+	out_null = !out;
+	if (out_null)
 	{
-		j = mtx->shape[1];
-		while (--j)
-			prod *= *(float *)_mtx_idx(arr, mtx->strides, i, j);
+		out = mtx_create_empty(mtx->shape[1], 1, mtx->dtype);
+		if (!out)
+			return (MTX_ERROR("malloc error"));
 	}
-	return (prod);
-}
-
-int	_mtxu_prod_i(t_mtx *mtx)
-{
-	int	i;
-	int	j;
-	int	prod;
-	int	*arr;
-
-	arr = _mtx_arr(mtx);
-	i = mtx->shape[0];
-	prod = 1;
-	while (--i)
-	{
-		j = mtx->shape[1];
-		while (--j)
-			prod *= *(int *)_mtx_idx(arr, mtx->strides, i, j);
-	}
-	return (prod);
-}
-
-void	*mtxu_prod(t_mtx *mtx, void *out)
-{
-	int		res_i;
-	float	res_f;
-
-	if (mtx->dtype == DTYPE_I)
-	{
-		if (mtx->is_view)
-			res_i = _mtxu_prod_i(mtx);
-		else
-			res_i = __mtxu_prod_i(mtx->arr, mtx_get_nb_elems(mtx));
-		*(int *)out = res_i;
-	}
-	else if (mtx->dtype == DTYPE_F)
-	{
-		if (mtx->is_view)
-			res_f = _mtxu_prod_f(mtx);
-		else
-			res_f = __mtxu_prod_f(mtx->arr, mtx_get_nb_elems(mtx));//mtx->shape[0] * mtx->shape[1]);
-		*(float *)out = res_f;
-	}
+	if (!mtx_are_same_type(mtx, out, NULL))
+		return (MTX_ERROR("mtx/out dtype mismatch"));
+	if (!(mtx->shape[1] == out->shape[0]))
+		return (MTX_ERROR("invalid out shape"));
+	if (dtype == DTYPE_F)
+		_mtx_prod_by_col_f(mtx, out);
+	else if (dtype == DTYPE_I)
+		_mtx_prod_by_col_i(mtx, out);
+	else if (out_null)
+		return (MTX_ERR_CLR("invalid dtype", out));
 	else
-		fperror("%s : mtx->dtype is invalid", __FUNCTION__);
+		return (MTX_ERROR("invalid dtype"));
 	return (out);
+}
+
+static t_mtx	*__route_prod_colwise(t_mtx *mtx, t_mtx *out)
+{
+	int	out_null;
+
+	out_null = !out;
+	if (out_null)
+	{
+		out = mtx_create_empty(mtx->shape[0], 1, mtx->dtype);
+		if (!out)
+			return (MTX_ERROR("malloc error"));
+	}
+	if (!mtx_are_same_type(mtx, out, NULL))
+		return (MTX_ERROR("mtx/out dtype mismatch"));
+	if (!(mtx->shape[0] == out->shape[0]))
+		return (MTX_ERROR("invalid out shape"));
+	if (dtype == DTYPE_F)
+		_mtx_prod_by_row_f(mtx, out);
+	else if (dtype == DTYPE_I)
+		_mtx_prod_by_row_i(mtx, out);
+	else if (out_null)
+		return (MTX_ERR_CLR("invalid dtype", out));
+	else
+		return (MTX_ERROR("invalid dtype"));
+	return (out);
+}
+
+static t_mtx	*__route_prod_whole(t_mtx *mtx, t_mtx *out)
+{
+	int	out_null;
+
+	out_null = !out;
+	if (out_null)
+	{
+		out = mtx_create_scalar(1, 1, mtx->dtype);
+		if (!out)
+			return (MTX_ERROR("malloc error"));
+	}
+	if (!mtx_are_same_type(mtx, out, NULL))
+		return (MTX_ERROR("mtx/out dtype mismatch"));
+	if (!((out->shape[0] == 1) && out->shape[1] == 1))
+		return (MTX_ERROR("invalid out shape"));
+	if (mtx->dtype == DTYPE_F)
+		_mtx_prod_f(mtx, out);
+	else if (mtx->dtype == DTYPE_I)
+		_mtx_prod_i(mtx, out);
+	else if (out_null)
+		return (MTX_ERR_CLR("invalid dtype", out));
+	else
+		return (MTX_ERROR("invalid dtype"));
+	return (out);
+}
+
+t_mtx	*mtx_prod(t_mtx *mtx, int axis, t_mtx *out)
+{
+	t_mtx	*ret;
+
+	ret = out;
+	if (!mtx)
+		return (MTX_ERROR("no input mtx"));
+	if (axis == ROWWISE)	
+		ret = __route_prod_rowwise(mtx, ret);
+	else if (axis == COLWISE)	
+		ret = __route_prod_colwise(mtx, ret);
+	else if (axis == WHOLE)
+		ret = __route_prod_whole(mtx, ret);
+	else
+		return (MTX_ERROR("invalid axis"));
+	return (ret);
 }

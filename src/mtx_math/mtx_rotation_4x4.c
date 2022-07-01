@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 16:02:38 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/22 02:32:36 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 21:12:51 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,12 @@ t_mtx	*mtx_get_rotmat_4x4(float rll, float pch, float yaw, t_mtx *out)
 
 	ret = out;
 	if (out && !(out->shape[0] == 4 && out->shape[1] == 4))
-		return (fperror("%s: wrong output shape", __FUNCTION__));
+		return (MTX_ERROR("wrong output shape"));
 	if (!ret)
 	{
 		ret = mtx_create_empty(4, 4, DTYPE_F);
 		if (!ret)
-			return (fperror("%s: malloc error", __FUNCTION__));
+			return (MTX_ERROR("malloc error"));
 	}
 	__mtx_rotation_matrix_4x4(rll, pch, yaw, ret->arr);
 	return (ret);	

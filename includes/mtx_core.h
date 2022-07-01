@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:18:46 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/30 00:13:54 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/30 20:49:53 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	mtx_shell(t_mtx *mtx, int rows, int cols, int dtype);
 t_mtx	*mtx_identity(int n, t_mtx *out, int dtype);
 t_mtx	*mtx_arange(int a, int b, int dtype);
 t_mtx	*mtx_linspace(float start, float end, int n_divs, int w_end);
+t_mtx	*mtx_random(int rows, int cols, t_mtx *out);
+t_mtx	*mtx_randint(int rows, int cols, int range[2], t_mtx *out);
 void	__mtx_setup_1d(t_mtx *mtx, int rows, int cols, size_t stride);
 void	__mtx_setup_2d(t_mtx *mtx, int rows, int cols, size_t stride);
 
@@ -73,6 +75,7 @@ int		mtx_istransposed(t_mtx *mtx);
 // CORE UTILITY
 int		mtx_init_as_array(t_mtx *mtx, void *arr, int rows, int cols);
 t_mtx	*mtx_transpose(t_mtx *mtx);
+t_mtx	*mtx_reshape(t_mtx *mtx, int rows, int cols);
 
 void	mtx_fill(t_mtx *mtx, void *value);
 void	mtx_convert_arr_type(t_mtx *new, t_mtx *old);
@@ -86,5 +89,8 @@ t_mtx	*mtx_slice_view(t_mtx *mtx, const int slice[4]);
 t_mtx	*mtx_view(t_mtx *mtx, t_mtx	*out);
 t_mtx	*mtx_select_row(t_mtx *mtx, int row);
 t_mtx	*mtx_select_col(t_mtx *mtx, int col);
+
+// ERROR HANDLING
+t_mtx	*mtx_err(char *origin, char *err);
 
 #endif
