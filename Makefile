@@ -1,13 +1,13 @@
 SRC_DIR	= src
 
-SRCS	= $(wildcard $(SRC_DIR)/*/*.c) $(wildcard $(SRC_DIR)/mtx_math/*opps/*.c)
+SRCS	= $(wildcard $(SRC_DIR)/*/*.c) $(wildcard $(SRC_DIR)/mtx_math/*opps/*.c) $(wildcard $(SRC_DIR)/mtx_ufuncs/*copps/*.c)
 
 OBJS	= $(SRCS:.c=.o)
 
 INCLS	= includes/
 
 CC	= gcc
-CFLAGS	= -Wall -Wextra -Werror -O2 -I$(INCLS)
+CFLAGS	= -Wall -Wextra -Werror -I$(INCLS)
 
 AR	= ar -rcs
 

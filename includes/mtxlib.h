@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:32:39 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/30 21:52:51 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/03 20:49:49 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,16 @@
 //# include "mtx_mem_utils.h"
 
 # define SHAPE_STR(r, c) ({(c > 0) ? ("<"#r" x "#c">"):("<"#r" x 1>");})
-# define MTX_ERROR(err) mtx_err((char *)__FUNCTION__, (char *)(err));
-# define MTX_ERR_CLR(e, m) mtx_e_clr((char *)__FUNCTION__, (char *)(e), (m));
+# define MTX_ERROR(err) mtx_err((char *)__FUNCTION__, (char *)(err))
+# define MTX_ERR_CLR(e, m) mtx_e_clr((char *)__FUNCTION__, (char *)(e), (m))
+# define UNUSED(x) (void)(x)
 
 # include "mtx_types.h"
 # include "mtx_core.h"
 # include "mtx_ufuncs.h"
 # include "mtx_trig.h"
-# include "mtx_arithmetic.h"
+# include "mtx_arithmetic.h"	//AUTO_GENERATED
+# include "mtx_cumul_ufuncs.h"	//AUTO GENERATED
 # include "mtx_linalg.h"
 
 #endif

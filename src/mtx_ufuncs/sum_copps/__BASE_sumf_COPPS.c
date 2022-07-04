@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_perror.c                                       :+:      :+:    :+:   */
+/*   __BASE_sumf_COPPS.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
+/*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/30 20:50:10 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/03 19:58:33 by iamongeo         ###   ########.fr       */
+/*   Created: 2022/07/03 17:12:36 by iamongeo          #+#    #+#             */
+/*   Updated: 2022/07/03 20:50:47 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mtxlib.h"
 
-t_mtx	*mtx_err(char *origin, char *err)
+void	__mtx_sumf_init(float *a, float *out)
 {
-	fprintf(stderr, RED_BC"[=> MTX ERROR : %s : %s <=]\n"WHITE_C, origin, err);
-	return (NULL);
+	UNUSED(a);
+	*out = 0;
 }
 
-t_mtx	*mtx_e_clr(char *origin, char *err, t_mtx **mtx)
+void	__mtx_sumf_cumul(float *a, float *out)
 {
-	mtx_err(origin, err);
-	mtx_clear(mtx);
-	return (NULL);
+	*out += *a;
+}
+
+void	__mtx_sumf_post(float *out, int n)
+{
+	UNUSED(out);
+	UNUSED(n);
+	return ;
 }

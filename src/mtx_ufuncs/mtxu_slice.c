@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:21:30 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/30 22:54:16 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/03 20:06:47 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "mtxlib.h"
@@ -32,11 +32,13 @@ t_mtx	*mtx_slice_view(t_mtx *mtx, const int slice[4])
 	int	rrange;
 	int	crange;
 
+
+	if (!mtx_index_is_inbound(mtx, slice[0], slice[1]))
+		return (MTX_ERROR("slice start is out off bounds."));
 	rrange = slice[2] - slice[0];
 	crange = slice[3] - slice[1];
 	if (rrange < 1 || crange < 1)
-		return (MTX_ERROR("non conforming ranges : r %d, c %d",
-				rrange, crange));
+		return (MTX_ERROR("hori and vert slice ranges must be > 0."));
 	if (!mtx || !mtx_dup_struct(mtx, &ret))
 		return (MTX_ERROR("!mtx or malloc error"));
 	ret->offset = (mtx->strides[0] * slice[0]);

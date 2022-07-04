@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:18:46 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/30 20:49:53 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/03 20:10:32 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_mtx	*mtx_create_empty(int rows, int cols, int dtype);
 t_mtx	*mtx_create_zeros(int rows, int cols, int dtype);
 t_mtx	*mtx_create_array(void *arr, int rows, int cols, int dtype);
 t_mtx	*mtx_create_scalar(void *s, int dtype);
-void	mtx_shell(t_mtx *mtx, int rows, int cols, int dtype);
+t_mtx	*mtx_shell(t_mtx *mtx, int rows, int cols, int dtype);
 t_mtx	*mtx_identity(int n, t_mtx *out, int dtype);
 t_mtx	*mtx_arange(int a, int b, int dtype);
 t_mtx	*mtx_linspace(float start, float end, int n_divs, int w_end);
@@ -65,7 +65,7 @@ void	mtx_display_info(t_mtx *mtx);
 // VALIDATOR FUNCS
 int		mtx_isvalid_broadcast_dot(t_mtx *m1, t_mtx *m2);
 void	*mtx_isvalid_broadcast_to_dot(t_mtx *m1, t_mtx *m2, t_mtx *out);
-int		mtx_isvalid_sided_ufunc(t_mtx *mtx, int axis, t_mtx *out, char *fname);
+//int		mtx_isvalid_sided_ufunc(t_mtx *mtx, int axis, t_mtx *out, char *fname);
 int		mtx_dtype_out(t_mtx *m1, t_mtx *m2);
 int		mtx_are_same_type(t_mtx *a, t_mtx *b, t_mtx *out);
 int		mtx_are_same_shape(t_mtx *a, t_mtx *b);
@@ -92,5 +92,6 @@ t_mtx	*mtx_select_col(t_mtx *mtx, int col);
 
 // ERROR HANDLING
 t_mtx	*mtx_err(char *origin, char *err);
+t_mtx	*mtx_e_clr(char *origin, char *err, t_mtx **mtx);
 
 #endif

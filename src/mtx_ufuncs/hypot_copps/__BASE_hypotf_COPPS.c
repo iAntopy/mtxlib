@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_perror.c                                       :+:      :+:    :+:   */
+/*   __BASE_hypotf_COPPS.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
+/*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/30 20:50:10 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/03 19:58:33 by iamongeo         ###   ########.fr       */
+/*   Created: 2022/07/03 17:33:43 by iamongeo          #+#    #+#             */
+/*   Updated: 2022/07/03 21:10:27 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mtxlib.h"
 
-t_mtx	*mtx_err(char *origin, char *err)
+void	__mtx_hypotf_init(float *a, float *out)
 {
-	fprintf(stderr, RED_BC"[=> MTX ERROR : %s : %s <=]\n"WHITE_C, origin, err);
-	return (NULL);
+	UNUSED(a);
+	*out = 0;
 }
 
-t_mtx	*mtx_e_clr(char *origin, char *err, t_mtx **mtx)
+void	__mtx_hypotf_cumul(float *a, float *out)
 {
-	mtx_err(origin, err);
-	mtx_clear(mtx);
-	return (NULL);
+	*out += powf(*a, 2);
+}
+
+void	__mtx_hypotf_post(float *out, int n)
+{
+	UNUSED(n);
+	*out = sqrtf(*out);
 }

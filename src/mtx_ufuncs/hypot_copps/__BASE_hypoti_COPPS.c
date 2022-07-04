@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trig_test.c                                        :+:      :+:    :+:   */
+/*   __BASE_hypoti_COPPS.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/04 02:23:32 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/04 02:24:42 by iamongeo         ###   ########.fr       */
+/*   Created: 2022/07/03 17:33:43 by iamongeo          #+#    #+#             */
+/*   Updated: 2022/07/03 21:01:30 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mtxlib.h"
 
-float	sinf(float nb);
-
-int	main()
+void	__mtx_hypoti_init(int *a, int *out)
 {
-	t_mtx	*m1;
-	t_mtx	*m2;
+	UNUSED(a);
+	*out = 0;
+}
 
-	m1 = mtx_linspace(0, M_PI, 16, 1);
-	if (!m1)
-		return (1);
-	m2 = mtx_sin(m1, NULL);
-	if (!m2)
-		return (2);
-	printf("linspace array : \n");
-	mtx_print(m1);
-	mtx_display_info(m1);
-	printf("sin func over linspace : \n");
-	mtx_print(m2);
-	mtx_display_info(m2);	
-	return (0);
+void	__mtx_hypoti_cumul(int *a, int *out)
+{
+	*out += (*a) * (*a);
+}
+
+// Possibly illigal int to float to int convertion.
+void	__mtx_hypoti_post(int *out, int n)
+{
+	float	temp;
+
+	UNUSED(n);
+	temp = 1;
+	temp *= *out;
+	*out = 1;
+	*out *= sqrtf(temp);
 }
