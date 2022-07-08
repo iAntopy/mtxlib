@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:18:46 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/03 20:10:32 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/07 16:41:53 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,11 @@ t_mtx	*mtx_slice_view(t_mtx *mtx, const int slice[4]);
 t_mtx	*mtx_view(t_mtx *mtx, t_mtx	*out);
 t_mtx	*mtx_select_row(t_mtx *mtx, int row);
 t_mtx	*mtx_select_col(t_mtx *mtx, int col);
+
+void	fill_identity_i(int *arr);
+void	fill_identity_f(float *arr);
+void	__fill_identity_i(int n, int *arr);
+void	__fill_identity_f(int n, float *arr);
 
 // ERROR HANDLING
 t_mtx	*mtx_err(char *origin, char *err);

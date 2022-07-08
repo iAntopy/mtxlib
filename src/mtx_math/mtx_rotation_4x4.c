@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 16:02:38 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/30 21:12:51 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/07 15:39:59 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ static void	__fill_yaw_rotmat_4x4(float sin_ang, float cos_ang, float *arr)
 	*(arr++) = cos_ang;
 	*(arr++) = -sin_ang;
 	*(arr++) = 0;
-	*(arr++) = 0;	*(arr++) = sin_ang;
+	*(arr++) = 0;
+	*(arr++) = sin_ang;
 	*(arr++) = cos_ang;
 	*(arr++) = 0;
 	*(arr++) = 0;

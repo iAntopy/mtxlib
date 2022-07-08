@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_quaternion.c                                   :+:      :+:    :+:   */
+/*   quat_create.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 23:55:34 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/26 01:17:06 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/07 17:52:30 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static void	__quat_init_rot_mtx(float r[4][4], float q[4], float s)
 	r[3][3] = 1;
 }
 
-void	_quat_update_data(t_quat *q, float vect[3], float ang)
+void	_quat_update(t_quat *q, float vect[3], float ang)
+
 {
 	float	x;
 	float	y;
@@ -63,15 +64,36 @@ void	_quat_update_data(t_quat *q, float vect[3], float ang)
 	__quat_init_rot_mtx(q->rot_mtx, q->q, q->q[0]);
 }
 
+t_quat	*quat_create_empty(t_quat *out)
+{
+	t_quat	*ret;
+
+	ret = out;
+	if (!ret && malloc_free_p(sizeof(t_quat), (void **)&ret))
+		return (MTX_ERROR("malloc error"));
+	*(size_t *)ret->uv = 0;
+	*(size_t *)(ret->uv + 2) = 0;
+	*(size_t *)ret->q = 0;
+	*(size_t *)(ret->q + 2) = 0;
+	__fill_identity_f(4, ret->rot_mtx);
+	(ret->__mtx).arr = ret->rot_mtx;
+	q->mtx = &q->__mtx;
+	mtx_shell(q->mtx, 4, 4, DTYPE_F);	
+	return (ret);
+}
+
 t_quat	*quat_create(float ang, float x, float y, float z)
 {
 	t_quat	*q;
 
 	if (!malloc_free_p(sizeof(t_quat), (void **)&q))
-		return (fperror("%s : malloc error", __FUNCTION__));
+		return (MTX_ERROR("malloc error"));
 	q->uv[1] = x;
 	q->uv[2] = y;
 	q->uv[3] = z;
-	_quat_update_data(q, q->uv + 1, ang);
+	_quat_update(q, q->uv + 1, ang);
+	(q->__mtx).arr = q->rot_mtx;
+	q->mtx = &q->__mtx;
+	mtx_shell(q->mtx, 4, 4, DTYPE_F);
 	return (q);
 }

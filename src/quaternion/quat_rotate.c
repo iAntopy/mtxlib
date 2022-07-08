@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 01:33:38 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/27 00:44:52 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/08 14:13:35 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ void	_quat_rotate(t_mtx *mtx, t_quat *q, float *out)
 	__mtx_dotf_nx4_4x4(mtx->shape[0], mtx->arr, (float *)q->rot_mtx, out);
 }
 
+//Assumes mtx is <n x 4> and DTYPE_F and mtx and q exist and mtx is NOT view.
 void	_quat_irotate(t_mtx *mtx, t_quat *q)
 {
+	if (!mtx->swap && !mtx_malloc_swap(mtx))
+		return (MTX_ERROR("malloc error"));
 	__mtx_dotf_nx4_4x4(mtx->shape[0], mtx->arr, (float *)q->rot_mtx, mtx->swap);
 	_mtx_swap_arrays(mtx);		
 }
@@ -28,12 +31,14 @@ void	_quat_irotate(t_mtx *mtx, t_quat *q)
 void	*quat_irotate(t_mtx *mtx, t_quat *q)
 {
 	if (!mtx || !q)
-		return (fperror("%s : missing params", __FUNCTION__));
+		return (MTX_ERROR("missing params"));
+	if (mtx->is_view)
+		return (MTX_ERROR("Can't output quaternion rotation to view"));
 	else if (!mtx_malloc_swap(mtx))
-		return (fperror("%s : malloc error", __FUNCTION__));
+		return (MTX_ERROR("malloc error"));
 	__mtx_dotf_nx4_4x4(mtx->shape[0], mtx->arr, (float *)q->rot_mtx, mtx->swap);
 	if (!mtx_swap_arrays(mtx))
-		return (NULL);
+		return (MTX_ERROR("swap error"));
 	return ((void *)SIZE_MAX);
 }
 

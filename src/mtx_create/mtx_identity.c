@@ -6,13 +6,41 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:01:06 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/30 21:01:06 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/07 17:08:17 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mtxlib.h"
 
-static void	fill_identity_i(t_mtx *mtx)
+void	__fill_identity_i(int n, int *arr)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < n)
+	{
+		j = -1;
+		while (++j < n)
+			*(arr++) = (i == j);
+	}
+}
+
+void	__fill_identity_f(int n, float *arr)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < n)
+	{
+		j = -1;
+		while (++j < n)
+			*(arr++) = (i == j);
+	}
+}
+
+void	fill_identity_i(t_mtx *mtx)
 {
 	int	i;
 
@@ -21,7 +49,7 @@ static void	fill_identity_i(t_mtx *mtx)
 		*(int *)_mtx_idx(mtx->arr, mtx->strides, i, i) = 1;
 }
 
-static void	fill_identity_f(t_mtx *mtx)
+void	fill_identity_f(t_mtx *mtx)
 {
 	int	i;
 
