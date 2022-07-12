@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 17:47:08 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/04 01:52:38 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/11 21:30:21 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,11 @@ t_mtx	*mtx_create_empty(int rows, int cols, int dtype)
 t_mtx	*mtx_create_zeros(int rows, int cols, int dtype)
 {
 	t_mtx		*mtx;
-	size_t		zero;
-
-	zero = 0;
+	
 	mtx = mtx_create_empty(rows, cols, dtype);
 	if (!mtx)
 		return (MTX_ERROR("malloc error"));
-	mtx_fill(mtx, &zero);
+	__mtx_fill_zeros(mtx);
 	return (mtx);
 }
 

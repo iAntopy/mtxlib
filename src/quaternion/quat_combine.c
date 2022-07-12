@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 16:28:07 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/08 14:02:18 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/11 21:59:07 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ t_quat	*quat_combine(t_quat *q1, t_quat *q2, t_quat *out)
 	if (!ret)
 		return (MTX_ERROR("malloc error"));	
 	mtx_dot(q1->mtx, q2->mtx, out->mtx);
+	return (ret);
 }

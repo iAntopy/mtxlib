@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:14:49 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/07 16:06:11 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/11 20:36:50 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,24 @@ typedef struct s_cumul_opp
 	void	(*post_opp)();	// optional post opperation at the end of the rowwise/colwise opperation. (eg.: out /= (row_len) or \= col_len for mean). If post_opp is NULL, no post opp will be performed (eg.: sum and prod have no post_opp).
 }	t_copp;
 
+typedef struct s_dot_opp
+{
+	void	*a;	// mtx a offset arr ptr;
+	void	*b;	// mtx b offset arr ptr;
+	void	*o;	// mtx out offset arr ptr;
+	int	*as;	// mtx a strides
+	int	*bs;	// mtx b strides
+	int	*os;	// mtx b strides
+	int	n;	// mtx a nb of rows
+	int	m;	// mtx a nb of cols && mtx b nb of rows
+	int	l;	// mtx b nb of cols
+	int		is_pure;
+	t_mtx	*inplace_mtx;
+//	void	*av;	// mtx a value ptr
+//	void	*bv;	// mtx b value ptr
+//	void	*ov;	// mtx out value ptr
+}	t_dopp;
+
 typedef struct s_quaternion_base
 {
 	float	uv[4];
@@ -88,5 +106,6 @@ typedef struct s_quaternion_base
 
 typedef void (*UFUNC_SIDED)(t_mtx *, t_mtx *);
 typedef void (*MOPP_FUNC)(t_mtx *, t_mtx *, t_mtx *);
+typedef void (*DOPP_FUNC)(t_dopp *);
 
 #endif
