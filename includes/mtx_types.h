@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:14:49 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/11 20:36:50 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/12 04:47:23 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_quaternion_base
 	float	rot_mtx[4][4];
 	t_mtx	__mtx;
 	t_mtx	*mtx;
+	float	ang;
 }	t_quat;
 
 typedef void (*UFUNC_SIDED)(t_mtx *, t_mtx *);

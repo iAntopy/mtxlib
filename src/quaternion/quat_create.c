@@ -6,13 +6,13 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 23:55:34 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/11 22:03:32 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/09 15:35:50 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mtxlib.h"
 
-static void	__quat_init_rot_mtx(float r[4][4], float q[4], float s)
+void	__quat_init_rot_mtx(float r[4][4], float q[4], float s)
 {
 	float	x;
 	float	y;
@@ -48,6 +48,7 @@ void	_quat_update(t_quat *q, float vect[3], float ang)
 	float	mag;
 	float	sin_ang;
 
+	q->ang = ang;
 	x = vect[0];
 	y = vect[1];
 	z = vect[2];
@@ -75,8 +76,7 @@ t_quat	*quat_create_empty(t_quat *out)
 	*(size_t *)(ret->uv + 2) = 0;
 	*(size_t *)ret->q = 0;
 	*(size_t *)(ret->q + 2) = 0;
-	__mtx_fill_zeros(ret->mtx);
-	__mtx_fill_identity_f(4, (float *)ret->rot_mtx);
+	__fill_identity_f(4, (float *)ret->rot_mtx);
 	(ret->__mtx).arr = ret->rot_mtx;
 	ret->mtx = &ret->__mtx;
 	mtx_shell(ret->mtx, 4, 4, DTYPE_F);	
