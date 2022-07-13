@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:18:46 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/11 21:53:21 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:07:01 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_mtx	*mtx_dup_struct(t_mtx *mtx, t_mtx **out);
 t_mtx	*mtx_dup_empty(t_mtx *mtx, t_mtx **out, int dtype);
 t_mtx	*mtx_copy(t_mtx *mtx);//, int dtype);
 
-t_mtx	*mtx_slice_view(t_mtx *mtx, const int slice[4]);
+t_mtx	*mtx_slice_view(t_mtx *mtx, int slice[4]);
 t_mtx	*mtx_view(t_mtx *mtx, t_mtx	*out);
 t_mtx	*mtx_select_row(t_mtx *mtx, int row);
 t_mtx	*mtx_select_col(t_mtx *mtx, int col);

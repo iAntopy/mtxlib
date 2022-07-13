@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:21:30 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/03 20:06:47 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:07:51 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "mtxlib.h"
@@ -26,15 +26,18 @@
 // if INT_MAX is given as [side]_e, slicing is done to the end of this side of 
 // matrix. Indices must within [0:shape[side][ exclusively.
 
-t_mtx	*mtx_slice_view(t_mtx *mtx, const int slice[4])
+t_mtx	*mtx_slice_view(t_mtx *mtx, int slice[4])
 {
 	t_mtx	*ret;
 	int	rrange;
 	int	crange;
 
-
 	if (!mtx_index_is_inbound(mtx, slice[0], slice[1]))
 		return (MTX_ERROR("slice start is out off bounds."));
+	if (slice[2] == -1)
+		slice[2] = mtx->shape[0];
+	if (slice[3] == -1)
+		slice[3] = mtx->shape[1];
 	rrange = slice[2] - slice[0];
 	crange = slice[3] - slice[1];
 	if (rrange < 1 || crange < 1)
@@ -51,7 +54,6 @@ t_mtx	*mtx_slice_view(t_mtx *mtx, const int slice[4])
 	ret->ndims = 2 - (rrange == 1 || crange == 1);
 	return (ret);
 }
-
 /*
 // View whole matrix, is_view is set to 0 because there is no offset in memmory 
 // to take special care for. Since most functions have will index faster on 
@@ -82,7 +84,7 @@ t_mtx	*mtx_view(t_mtx *mtx, t_mtx *vout)
 t_mtx	*mtx_select_row(t_mtx *mtx, int row)
 {
 	t_mtx		*ret;
-	const int	slice[4] = {row, 0, row + 1, INT_MAX};
+	int	slice[4] = {row, 0, row + 1, INT_MAX};
 
 	if (!mtx || !mtx_index_is_inbound(mtx, row, 0))
 		return (fperror("mtx_select_row : row %d is out of bounds", row));
@@ -93,7 +95,7 @@ t_mtx	*mtx_select_row(t_mtx *mtx, int row)
 t_mtx	*mtx_select_col(t_mtx *mtx, int col)
 {
 	t_mtx		*ret;
-	const int	slice[4] = {0, col, INT_MAX, col + 1};
+	int	slice[4] = {0, col, INT_MAX, col + 1};
 
 	if (!mtx || !mtx_index_is_inbound(mtx, 0, col))
 		return (fperror("mtx_select_row : col %d is out of bounds", col));

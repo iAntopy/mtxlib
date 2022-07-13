@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 23:55:34 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/09 15:35:50 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/12 15:41:01 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_quat	*quat_create_empty(t_quat *out)
 	*(size_t *)(ret->uv + 2) = 0;
 	*(size_t *)ret->q = 0;
 	*(size_t *)(ret->q + 2) = 0;
-	__fill_identity_f(4, (float *)ret->rot_mtx);
+	__mtx_fill_identity_f(4, (float *)ret->rot_mtx);
 	(ret->__mtx).arr = ret->rot_mtx;
 	ret->mtx = &ret->__mtx;
 	mtx_shell(ret->mtx, 4, 4, DTYPE_F);	
