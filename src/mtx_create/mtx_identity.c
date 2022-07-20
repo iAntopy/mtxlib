@@ -6,13 +6,13 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:01:06 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/11 22:18:35 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/19 20:30:09 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mtxlib.h"
 
-// Assumes filles with zeros.
+// Assumes filled with zeros.
 void	__fill_identity_i(int n, int *arr)
 {
 	int	i;
@@ -25,7 +25,7 @@ void	__fill_identity_i(int n, int *arr)
 	}
 }
 
-// Assumes filles with zeros.
+// Assumes filled with zeros.
 void	__fill_identity_f(int n, float *arr)
 {
 	int	i;
@@ -38,7 +38,7 @@ void	__fill_identity_f(int n, float *arr)
 	}
 }
 
-// Assumes filles with zeros.
+// Assumes filled with zeros.
 void	_mtx_fill_identity_i(t_mtx *mtx)
 {
 	int	n;
@@ -51,7 +51,7 @@ void	_mtx_fill_identity_i(t_mtx *mtx)
 	}
 }
 
-// Assumes filles with zeros.
+// Assumes filled with zeros.
 void	_mtx_fill_identity_f(t_mtx *mtx)
 {
 	int	n;
@@ -73,6 +73,8 @@ t_mtx	*mtx_identity(int n, t_mtx *out, int dtype)
 	ret = out;
 	if (!ret)
 		ret = mtx_create_empty(n, n, dtype);
+	else if (out->shape[0] != out->shape[1])
+		return (MTX_ERROR("output mtx must be symetrical"));
 	if (!ret)
 		return (MTX_ERROR("malloc error"));
 	if (ret->is_view)
@@ -84,7 +86,4 @@ t_mtx	*mtx_identity(int n, t_mtx *out, int dtype)
 	else if (dtype == DTYPE_F)
 		_mtx_fill_identity_f(ret);
 	return (ret);
-
-
-
 }

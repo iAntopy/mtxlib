@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:53:46 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/11 21:56:19 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/14 21:43:26 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "mtxlib.h"
@@ -14,11 +14,10 @@
 // Does NOT work with views, Very fast.
 t_mtx	*__mtx_fill_zeros(t_mtx *mtx)
 {
-	size_t	arr_size;
-	size_t	*arr;
-	char	*carr;
-
-	arr_size = mtx_sizeof_array(mtx);
+	ft_memclear(mtx->arr, mtx_sizeof_array(mtx));
+	return (mtx);
+}
+/*
 	arr = mtx->arr;
 	while (arr_size > sizeof(size_t))
 	{
@@ -28,8 +27,10 @@ t_mtx	*__mtx_fill_zeros(t_mtx *mtx)
 	carr = (char *)arr;
 	while (arr_size--)
 		*(carr++) = 0;
+
 	return (mtx);
 }
+*/
 
 t_mtx	*_mtx_fill_zeros(t_mtx *mtx)
 {

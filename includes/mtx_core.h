@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:18:46 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/12 19:07:01 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/15 16:51:18 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ t_mtx	*mtx_reshape(t_mtx *mtx, int rows, int cols);
 t_mtx	*mtx_fill(t_mtx *mtx, void *value);
 t_mtx	*__mtx_fill_zeros(t_mtx *mtx);
 t_mtx	*_mtx_fill_zeros(t_mtx *mtx);
+t_mtx	*__mtx_fill_int(t_mtx *mtx, int value); // DOES NOT WORK WITH VIEWS
+t_mtx	*__mtx_fill_float(t_mtx *mtx, float value); // DOES NOT WORK WITH VIEWS
+t_mtx	*_mtx_fill_int(t_mtx *mtx, int value); // WORKS WITH VIEWS
+t_mtx	*_mtx_fill_float(t_mtx *mtx, float value); // WORKS WITH VIEWS
 void	mtx_convert_arr_type(t_mtx *new, t_mtx *old);
 int		mtx_dtype_out(t_mtx *m1, t_mtx *m2);
 
@@ -88,10 +92,12 @@ t_mtx	*mtx_dup_struct(t_mtx *mtx, t_mtx **out);
 t_mtx	*mtx_dup_empty(t_mtx *mtx, t_mtx **out, int dtype);
 t_mtx	*mtx_copy(t_mtx *mtx);//, int dtype);
 
-t_mtx	*mtx_slice_view(t_mtx *mtx, int slice[4]);
-t_mtx	*mtx_view(t_mtx *mtx, t_mtx	*out);
-t_mtx	*mtx_select_row(t_mtx *mtx, int row);
-t_mtx	*mtx_select_col(t_mtx *mtx, int col);
+t_mtx	*mtx_slice_view(t_mtx *mtx, int slice[4], t_mtx *out);
+t_mtx	*mtx_select_row(t_mtx *mtx, int row, t_mtx *out);
+t_mtx	*mtx_select_col(t_mtx *mtx, int col, t_mtx *out);
+t_mtx	*mtx_select_row_range(t_mtx *mtx, int start, int end, t_mtx *out);
+t_mtx	*mtx_select_col_range(t_mtx *mtx, int start, int end, t_mtx *out);
+//t_mtx	*mtx_view(t_mtx *mtx, t_mtx	*out);
 
 void	_mtx_fill_identity_i(t_mtx *arr);
 void	_mtx_fill_identity_f(t_mtx *arr);
