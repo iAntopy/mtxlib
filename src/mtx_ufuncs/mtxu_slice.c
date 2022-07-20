@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:21:30 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/15 17:09:13 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/20 03:13:20 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "mtxlib.h"
@@ -105,7 +105,7 @@ t_mtx	*mtx_select_row(t_mtx *mtx, int row, t_mtx *out)
 	slice[1] = 0;
 	slice[2] = row + 1;
 	slice[3] = INT_MAX;
-	return (mtx_slice_view(mtx, slice, out);
+	return (mtx_slice_view(mtx, slice, out));
 }
 
 t_mtx	*mtx_select_col(t_mtx *mtx, int col, t_mtx *out)

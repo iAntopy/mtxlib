@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 16:28:07 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/16 20:24:36 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/20 03:33:41 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_quat	*quat_combine(t_quat *q1, t_quat *q2, t_quat *out)
 	if (!ret)
 		return (MTX_ERROR("malloc error"));
 	__quat_combine(q1, q2, ret, q2->q[0]);
-	__quat_init_rot_mtx(ret->__rot_mtx, ret->q, ret->q[0]);
+	__quat_init_rot_mtx(ret->__rot_mtx, ret->q + 1, ret->q[0]);
 	return (ret);
 }
 
@@ -76,10 +76,8 @@ t_quat	*quat_add(t_quat *q, float rll, float ptc, float yaw)
 		q3.uv[1] = 1;
 		q3.uv[2] = 0;
 		q3.uv[3] = 0;
-		_quat_update(rll, q3.uv + 1, 0);
-		quat
+		_quat_update(rll, q3.uv + 1, q3);
 	}
-
 
 	if (!ret)
 		ret = quat_create_empty(NULL);
@@ -88,7 +86,5 @@ t_quat	*quat_add(t_quat *q, float rll, float ptc, float yaw)
 	__quat_combine(q1, q2, ret, 0);
 	__quat_init_rot_mtx(ret->rot_mtx, ret->q, ret->q[0]);
 //	mtx_dot(q1->mtx, q2->mtx, out->mtx, 0);
-	free(q2);
-	free(q3);
 	return (ret);
 }

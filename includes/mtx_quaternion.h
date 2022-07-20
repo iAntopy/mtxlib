@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 22:13:30 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/16 18:55:40 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/20 02:50:02 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ t_mtx	*_quat_rotate(t_mtx *mtx, t_quat *q, t_mtx *out);
 t_mtx	*_quat_irotate(t_mtx *mtx, t_quat *q);
 
 // QUATERNION TRANSLATION (quaternion can also produce translation if desired. The translation is done post-rotation)
-t_quat	*_quat_translation_set(t_quat *q, float x, float y, float z)
-t_quat	*_quat_translation_move(t_quat *q, float dx, float dy, float dz)
-t_quat	*quat_translation_set(t_quat *q, t_mtx *pos)
-t_quat	*quat_translation_set(t_quat *q, t_mtx *delta)
+t_quat	*_quat_translation_set(t_quat *q, float x, float y, float z);
+t_quat	*_quat_translation_move(t_quat *q, float dx, float dy, float dz);
+t_quat	*quat_translation_set(t_quat *q, t_mtx *pos);
+t_quat	*quat_translation_set(t_quat *q, t_mtx *delta);
 
 #endif
 
