@@ -6,13 +6,13 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 23:55:34 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/20 03:12:31 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/07/22 18:42:35 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mtxlib.h"
 
-void	__quat_init_rot_mtx(float r[4][4], float q[4], float s, float trans[3])
+void	__quat_init_rot_mtx(float r[4][4], float q[4], float s)
 {
 	float	x;
 	float	y;
@@ -57,20 +57,20 @@ void	_quat_update(t_quat *q, float vect[3], float ang)
 	q->uv[1] = (x / mag);
 	q->uv[2] = (y / mag);
 	q->uv[3] = (z / mag);
-	q->q[0] = cos(ang / 2);
+	q->q[0] = cosf(ang / 2);
 	q->q[1] = q->uv[1] * sin_ang;
 	q->q[2] = q->uv[2] * sin_ang;
 	q->q[3] = q->uv[3] * sin_ang;
-	__quat_init_rot_mtx(q->__rot_mtx, q->q, q->q[0]);
+	__quat_init_rot_mtx(q->__rot_arr, q->q, q->q[0]);
 }
 
-static __setup_quat(t_quat *q)
+static void	__setup_quat(t_quat *q)
 {
 	(q->__mtx).arr = (float *)q->__rot_arr;
 	q->rot_mtx = &(q->__mtx);
 	printf("__setup_quat : quat rot_mtx ptr %p\n", q->rot_mtx);
 	mtx_shell(q->rot_mtx, 4, 4, DTYPE_F);
-//	q->rot_mtx->swap = (float *)q->__rot_arr_swap;
+//im 	q->rot_mtx->swap = (float *)q->__rot_arr_swap;
 	q->translation = &(q->__tr_view);
 	mtx_select_row(q->rot_mtx, 3, q->translation);
 }
@@ -83,7 +83,7 @@ t_quat	*quat_create_empty(t_quat *out)
 	if (!ret && malloc_free_p(sizeof(t_quat), (void **)&ret))
 		return (MTX_ERROR("malloc error"));
 	ft_memclear(ret, sizeof(t_quat));
-	__mtx_fill_identity_f(4, (float *)ret->__rot_mtx);
+	__mtx_fill_identity_f(4, (float *)ret->__rot_arr);
 	__setup_quat(ret);
 	return (ret);
 }
