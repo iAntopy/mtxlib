@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 17:37:02 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/26 22:43:58 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/02/28 23:33:40 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	mtx_istransposed(t_mtx *mtx)
 	return (mtx->is_transposed);
 }
 
-int mtx_are_same_type(t_mtx *a, t_mtx *b, t_mtx *out)
+int	mtx_are_same_type(t_mtx *a, t_mtx *b, t_mtx *out)
 {
 	if (out)
 		return ((a->dtype == b->dtype) && (out->dtype == a->dtype));
@@ -25,7 +25,7 @@ int mtx_are_same_type(t_mtx *a, t_mtx *b, t_mtx *out)
 		return (a->dtype == b->dtype);
 }
 
-int	mtx_are_same_shape(t_mtx *a, t_mtx* b)
+int	mtx_are_same_shape(t_mtx *a, t_mtx *b)
 {
 	return (a->shape[0] == b->shape[0] && a->shape[1] == b->shape[1]);
 }

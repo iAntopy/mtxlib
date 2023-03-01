@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 17:00:25 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/11 17:08:06 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 03:22:27 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	_mtx_dot_nxn_ii_to_arr(t_dopp *dop)
 			j = -1;
 			*s = 0;
 			while (++j < dop->m)
-				*s += *(int *)_mtx_idx(dop->a, dop->as, i, j) * *(int *)_mtx_idx(dop->b, dop->bs, j, k);
+				*s += *(int *)_mtx_idx(dop->a, dop->as, i, j)
+					* *(int *)_mtx_idx(dop->b, dop->bs, j, k);
 			s++;
 		}
 	}
@@ -52,7 +53,8 @@ void	_mtx_dot_nxn_ff_to_arr(t_dopp *dop)
 			j = -1;
 			*s = 0;
 			while (++j < dop->m)
-				*s += *(float *)_mtx_idx(dop->a, dop->as, i, j) * *(float *)_mtx_idx(dop->b, dop->bs, j, k);
+				*s += *(float *)_mtx_idx(dop->a, dop->as, i, j)
+					* *(float *)_mtx_idx(dop->b, dop->bs, j, k);
 			s++;
 		}
 	}
@@ -75,7 +77,8 @@ void	_mtx_dot_nxn_fi_to_arr(t_dopp *dop)
 			j = -1;
 			*s = 0;
 			while (++j < dop->m)
-				*s += *(float *)_mtx_idx(dop->a, dop->as, i, j) * *(int *)_mtx_idx(dop->b, dop->bs, j, k);
+				*s += *(float *)_mtx_idx(dop->a, dop->as, i, j)
+					* *(int *)_mtx_idx(dop->b, dop->bs, j, k);
 			s++;
 		}
 	}
@@ -98,7 +101,8 @@ void	_mtx_dot_nxn_if_to_arr(t_dopp *dop)
 			j = -1;
 			*s = 0;
 			while (++j < dop->m)
-				*s += *(int *)_mtx_idx(dop->a, dop->as, i, j) * *(float *)_mtx_idx(dop->b, dop->bs, j, k);
+				*s += *(int *)_mtx_idx(dop->a, dop->as, i, j)
+					* *(float *)_mtx_idx(dop->b, dop->bs, j, k);
 			s++;
 		}
 	}

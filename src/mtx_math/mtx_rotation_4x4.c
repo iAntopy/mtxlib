@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 16:02:38 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/12 15:39:55 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 04:14:44 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,5 @@ t_mtx	*mtx_get_rotmat_4x4(float rll, float pch, float yaw, t_mtx *out)
 		__mtx_fill_identity_f(4, ret->arr);
 	else
 		__mtx_rotation_matrix_4x4(rll, pch, yaw, ret->arr);
-	return (ret);	
+	return (ret);
 }

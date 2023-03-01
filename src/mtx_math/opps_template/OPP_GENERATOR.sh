@@ -39,9 +39,10 @@ do
 		if test -f "${DIRECTORY}/__BASE_ZZZ_OPPS.c"; then
 			echo "ALMOST THERE !"
 			cd temp_payload
-			SED_SCRIPT="s/ZZZ/${OPP}/g"
+			SED_TITLE_SCRIPT="s/ZZZ/${OPP}/g"
+			SED_SCRIPT="s/zzz/${OPP}/g"
 			for f in mtx*.c; do
-				FNAME=$(echo $f | sed $SED_SCRIPT)
+				FNAME=$(echo $f | sed $SED_TITLE_SCRIPT)
 				SED_F_SCRIPT="s/FFF/$(printf "%-30s" $FNAME)/g"
 				CP_NAME='../'${DIRECTORY}"/${FNAME}"
 				echo 'copied file '"${CP_NAME}"
@@ -68,7 +69,7 @@ do
 				sed "$d" $TRGT_H
 			fi
 			UP_OPP=$(echo $OPP | tr '[:lower:]' '[:upper:]')
-			echo "\n\n//// ${UP_OPP} OPERATIONS" | tee -a "${INCL_DIR}mtx_arithmetic.h"
+			echo "\n//// ${UP_OPP} OPERATIONS" | tee -a "${INCL_DIR}mtx_arithmetic.h"
 			echo 't_mtx	*'"mtx_${OPP}"'(t_mtx *a, t_mtx *b, t_mtx *out);' | tee -a "${INCL_DIR}mtx_arithmetic.h"
 			grep -h 'void' *.c | grep -v 'static' | while read -r line;
 			do

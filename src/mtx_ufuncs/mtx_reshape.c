@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 17:36:35 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/30 21:17:20 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 00:03:01 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_mtx	*mtx_reshape(t_mtx *mtx, int rows, int cols)
 	{
 		mtx->ndims = 2;
 		mtx->strides[0] = dsize * cols;
-		mtx->strides[1] = dsize;	
+		mtx->strides[1] = dsize;
 	}
 	return (mtx);
 }

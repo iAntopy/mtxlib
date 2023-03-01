@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 21:43:40 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/20 03:17:06 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 00:04:58 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 t_mtx	*__mtx_fill_int(t_mtx *mtx, int value)
 {
 	int		*arr;
-	size_t		nelems;
+	size_t	nelems;
 
 	arr = mtx->arr;
 	nelems = mtx_get_nb_elems(mtx);
@@ -81,4 +81,3 @@ t_mtx	*_mtx_fill_float(t_mtx *mtx, float value)
 	}
 	return (mtx);
 }
-

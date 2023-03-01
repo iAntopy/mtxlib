@@ -6,10 +6,9 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:13:21 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/04 02:17:02 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 04:40:26 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MTX_CUMUL_UFUNCS_H
 # define MTX_CUMUL_UFUNCS_H
@@ -20,9 +19,6 @@ void	__mtx_init_cumul_opp(t_copp *co, t_mtx *mtx, t_mtx *out);
 void	_mtx_copp_whole(t_copp *co);
 void	_mtx_copp_by_row(t_copp *co);
 void	_mtx_copp_by_col(t_copp *co);
-
-
-
 
 //// SUM OPERATIONS
 t_mtx	*mtx_sum(t_mtx *mtx, int axis, t_mtx *out);
@@ -39,7 +35,6 @@ void	_mtx_sumi_col(t_mtx *mtx, t_mtx *out);
 void	_mtx_sumf_whole(t_mtx *mtx, t_mtx *out);
 void	_mtx_sumi_whole(t_mtx *mtx, t_mtx *out);
 
-
 //// PROD OPERATIONS
 t_mtx	*mtx_prod(t_mtx *mtx, int axis, t_mtx *out);
 void	__mtx_prodf_init(float *a, float *out);
@@ -54,7 +49,6 @@ void	_mtx_prodi_row(t_mtx *mtx, t_mtx *out);
 void	_mtx_prodi_col(t_mtx *mtx, t_mtx *out);
 void	_mtx_prodf_whole(t_mtx *mtx, t_mtx *out);
 void	_mtx_prodi_whole(t_mtx *mtx, t_mtx *out);
-
 
 //// MIN OPERATIONS
 t_mtx	*mtx_min(t_mtx *mtx, int axis, t_mtx *out);
@@ -71,7 +65,6 @@ void	_mtx_mini_col(t_mtx *mtx, t_mtx *out);
 void	_mtx_minf_whole(t_mtx *mtx, t_mtx *out);
 void	_mtx_mini_whole(t_mtx *mtx, t_mtx *out);
 
-
 //// MAX OPERATIONS
 t_mtx	*mtx_max(t_mtx *mtx, int axis, t_mtx *out);
 void	__mtx_maxf_init(int *a, int *out);
@@ -86,7 +79,6 @@ void	_mtx_maxi_row(t_mtx *mtx, t_mtx *out);
 void	_mtx_maxi_col(t_mtx *mtx, t_mtx *out);
 void	_mtx_maxf_whole(t_mtx *mtx, t_mtx *out);
 void	_mtx_maxi_whole(t_mtx *mtx, t_mtx *out);
-
 
 //// MEAN OPERATIONS
 t_mtx	*mtx_mean(t_mtx *mtx, int axis, t_mtx *out);
@@ -103,7 +95,6 @@ void	_mtx_meani_col(t_mtx *mtx, t_mtx *out);
 void	_mtx_meanf_whole(t_mtx *mtx, t_mtx *out);
 void	_mtx_meani_whole(t_mtx *mtx, t_mtx *out);
 
-
 //// HYPOT OPERATIONS
 t_mtx	*mtx_hypot(t_mtx *mtx, int axis, t_mtx *out);
 void	__mtx_hypotf_init(float *a, float *out);
@@ -118,4 +109,5 @@ void	_mtx_hypoti_row(t_mtx *mtx, t_mtx *out);
 void	_mtx_hypoti_col(t_mtx *mtx, t_mtx *out);
 void	_mtx_hypotf_whole(t_mtx *mtx, t_mtx *out);
 void	_mtx_hypoti_whole(t_mtx *mtx, t_mtx *out);
+
 #endif

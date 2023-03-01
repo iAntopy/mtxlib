@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mtx_arange.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/01 01:09:49 by iamongeo          #+#    #+#             */
+/*   Updated: 2023/03/01 01:11:45 by iamongeo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "mtxlib.h"
 
@@ -19,17 +30,17 @@ static void	fill_arange_f(float *arr, int start, int end, int incr)
 	}
 }
 
-t_mtx	*mtx_arange(int	a, int b, int dtype)
+t_mtx	*mtx_arange(int a, int b, int dtype)
 {
 	t_mtx	*mtx;
 	ssize_t	range;
-	int	incr;
+	int		incr;
 
 	range = b - a;
 	incr = 1 - (2 * (range < 0));
 	range *= incr;
 	if (!(dtype == DTYPE_I || dtype == DTYPE_F) || (range > INT_MAX))
-		return (NULL);	
+		return (NULL);
 	mtx = mtx_create_zeros(range, 1, dtype);
 	if (!mtx)
 		return (NULL);

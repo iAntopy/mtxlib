@@ -6,10 +6,9 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:28:50 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/30 00:10:07 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 04:47:59 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MTX_TRIG_H
 # define MTX_TRIG_H
@@ -30,9 +29,7 @@ t_mtx	*mtx_asinh(t_mtx *a, t_mtx *out);
 t_mtx	*mtx_acosh(t_mtx *a, t_mtx *out);
 t_mtx	*mtx_atanh(t_mtx *a, t_mtx *out);
 
-
 // ROTATION FUNCTIONS
-//t_mtx	*mtx_trig(t_mtx *mtx, float (*func)(float));
 t_mtx	*mtx_get_rotmat_4x4(float rll, float pch, float yaw, t_mtx *out);
 t_mtx	*mtx_get_rotmat_3x3(float rll, float pch, float yaw, t_mtx *out);
 t_mtx	*mtx_get_rotmat_2x2(float ang, t_mtx *out);

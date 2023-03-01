@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 02:01:52 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/11 18:47:47 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/02/28 23:24:30 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ void	*mtx_malloc_swap(t_mtx *mtx)
 // INNEFFICIANT.
 t_mtx	*__mtx_copy_view_swap_to_array_4bytes(t_mtx *view)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	size_t	dsize;
-	int	*swap;
-	int	*arr;
+	int		*swap;
+	int		*arr;
 
 	dsize = mtx_get_dsize(view->dtype);
 	if (!view || !view->is_view || !view->swap || dsize != 4)

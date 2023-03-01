@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:43:20 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/04 01:59:36 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 00:01:01 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_mtx	*__route_sum_rowwise(t_mtx *mtx, t_mtx *out)
 	if (!(mtx->shape[1] == out->shape[0]))
 		return (MTX_ERROR("invalid out shape"));
 	if (mtx->dtype == DTYPE_F)
-		_mtx_sumf_row(mtx, out);//_mtx_sum_by_col_f(mtx, out);
+		_mtx_sumf_row(mtx, out);
 	else if (mtx->dtype == DTYPE_I)
 		_mtx_sumi_row(mtx, out);
 	else if (out_null)
@@ -101,9 +101,9 @@ t_mtx	*mtx_sum(t_mtx *mtx, int axis, t_mtx *out)
 	ret = out;
 	if (!mtx)
 		return (MTX_ERROR("no input mtx"));
-	if (axis == ROWWISE)	
+	if (axis == ROWWISE)
 		ret = __route_sum_rowwise(mtx, ret);
-	else if (axis == COLWISE)	
+	else if (axis == COLWISE)
 		ret = __route_sum_colwise(mtx, ret);
 	else if (axis == WHOLE)
 		ret = __route_sum_whole(mtx, ret);

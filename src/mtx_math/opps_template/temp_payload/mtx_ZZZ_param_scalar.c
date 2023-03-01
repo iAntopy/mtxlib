@@ -1,49 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FFF                     :+:      :+:    :+:   */
+/*   mtx_ZZZ_param_scalar.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 19:38:08 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/29 20:10:58 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 04:20:21 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mtxlib.h"
 
-void	_mtx_iZZZf_pscalar(t_mtx *a, float b)
+void	_mtx_izzzf_pscalar(t_mtx *a, float b)
 {
 	t_mtx	mb;
 
 	mb.arr = &b;
 	mtx_shell(&mb, 1, 1, DTYPE_F);
-	_mtx_opp_scalar(a, &mb, a, __mtx_std_ZZZf);
+	_mtx_opp_scalar(a, &mb, a, __mtx_std_zzzf);
 }
 
-void	_mtx_ZZZf_pscalar(t_mtx *a, float b, t_mtx *out)
+void	_mtx_zzzf_pscalar(t_mtx *a, float b, t_mtx *out)
 {
 	t_mtx	mb;
 
 	mb.arr = &b;
 	mtx_shell(&mb, 1, 1, DTYPE_F);
-	_mtx_opp_scalar(a, &mb, out, __mtx_std_ZZZf);
+	_mtx_opp_scalar(a, &mb, out, __mtx_std_zzzf);
 }
 
-void	_mtx_iZZZi_pscalar(t_mtx *a, int b)
+void	_mtx_izzzi_pscalar(t_mtx *a, int b)
 {
 	t_mtx	mb;
 
 	mb.arr = &b;
 	mtx_shell(&mb, 1, 1, DTYPE_I);
-	_mtx_opp_scalar(a, &mb, a, __mtx_std_ZZZi);
+	_mtx_opp_scalar(a, &mb, a, __mtx_std_zzzi);
 }
 
-void	_mtx_ZZZi_pscalar(t_mtx *a, int b, t_mtx *out)
+void	_mtx_zzzi_pscalar(t_mtx *a, int b, t_mtx *out)
 {
 	t_mtx	mb;
 
 	mb.arr = &b;
 	mtx_shell(&mb, 1, 1, DTYPE_I);
-	_mtx_opp_scalar(a, &mb, out, __mtx_std_ZZZi);
+	_mtx_opp_scalar(a, &mb, out, __mtx_std_zzzi);
 }

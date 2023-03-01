@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mtx_clears.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/28 23:21:56 by iamongeo          #+#    #+#             */
+/*   Updated: 2023/02/28 23:22:50 by iamongeo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mtxlib.h"
 #include <stdarg.h>
-
 
 void	*mtx_clear(t_mtx **mtx)
 {
@@ -19,7 +30,7 @@ void	*mtx_clear_list(int n, ...)
 {
 	va_list	args;
 	t_mtx	*mtx;
-	int	i;
+	int		i;
 
 	va_start(args, n);
 	i = -1;

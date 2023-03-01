@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 18:31:38 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/20 03:27:25 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/02/28 23:32:20 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,6 @@ t_quat	*quat_translation_set(t_quat *q, t_mtx *pos)
 		return (MTX_ERROR("missing quaternion or pos, or dtype not float."));
 	_qarr = (float *)_mtx_arr(q->rot_mtx);
 	_parr = (float *)_mtx_arr(pos);
-//	*(_qarr++) = *(float *)_mtx_idx(_parr, pos->strides, 0, 0);
-//	*(_qarr++) = *(float *)_mtx_idx(_parr, pos->strides, 1, 0);
-//	*(_qarr++) = *(float *)_mtx_idx(_parr, pos->strides, 2, 0);
 	*(_qarr++) += *(_parr++);
 	*(_qarr++) += *(_parr++);
 	*(_qarr++) += *(_parr++);
@@ -73,9 +70,6 @@ t_quat	*quat_translation_move(t_quat *q, t_mtx *delta)
 		return (MTX_ERROR("missing quaternion or pos, or dtype not float."));
 	_qarr = (float *)_mtx_arr(q->rot_mtx);
 	_parr = (float *)_mtx_arr(delta);
-//	*(_qarr++) += *(float *)_mtx_idx(_parr, delta->strides, 0, 0);
-//	*(_qarr++) += *(float *)_mtx_idx(_parr, delta->strides, 1, 0);
-//	*(_qarr++) += *(float *)_mtx_idx(_parr, delta->strides, 2, 0);
 	*(_qarr++) += *(_parr++);
 	*(_qarr++) += *(_parr++);
 	*(_qarr++) += *(_parr++);

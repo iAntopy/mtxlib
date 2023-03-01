@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mtx_doti_1D.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/01 03:29:17 by iamongeo          #+#    #+#             */
+/*   Updated: 2023/03/01 03:29:55 by iamongeo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mtxlib.h"
 
-int	_mtx_doti_1D_1D(t_mtx *m1, t_mtx *m2)
+int	_mtx_doti_1d_1d(t_mtx *m1, t_mtx *m2)
 {
-	int	res;
-	int	*ma1;
-	int	*ma2;
+	int		res;
+	int		*ma1;
+	int		*ma2;
 	size_t	n_elems;
 
 	res = 0;
@@ -37,7 +49,7 @@ int	_mtx_doti_1x4_1x4(t_mtx *m1, t_mtx *m2)
 		+ ((int *)m1->arr)[3] * ((int *)m2->arr)[3]);
 }
 
-int	mtx_doti_1D_1D(t_mtx *m1, t_mtx *m2)
+int	mtx_doti_1d_1d(t_mtx *m1, t_mtx *m2)
 {
 	if (!mtx_isvalid_broadcast_dot(m1, m2))
 	{	
@@ -47,9 +59,8 @@ int	mtx_doti_1D_1D(t_mtx *m1, t_mtx *m2)
 	else if (!((m1->shape[0] == 1) && (m2->shape[0] == 1))
 		|| (m1->dtype != DTYPE_I))
 	{
-		MTX_ERROR("mtx not 1D or not DTYPE_I");
+		MTX_ERROR("mtx not 1d or not DTYPE_I");
 		return (0);
 	}
-
-	return (_mtx_doti_1D_1D(m1, m2));
+	return (_mtx_doti_1d_1d(m1, m2));
 }

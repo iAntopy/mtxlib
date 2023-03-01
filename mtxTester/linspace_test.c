@@ -15,6 +15,9 @@ int	main()
 	mtx_display_info(mtx);
 	mtx_print(mtx2);
 	mtx_display_info(mtx2);
+	mtx_linspace_update(mtx, 0, 100, 1);
+	mtx_print(mtx);
+	mtx_display_info(mtx);
 	mtx_clear(&mtx);
 	mtx_clear(&mtx2);
 	return (0);

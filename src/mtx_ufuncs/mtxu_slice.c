@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:21:30 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/20 03:13:20 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 00:10:45 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "mtxlib.h"
@@ -20,13 +20,12 @@
 // slice is a 4 int array where each member represents the following:
 //	- slice[0] = row_s = starting row index.
 //	- slice[1] = col_s = starting col index.
-//	- slice[2] = row_e = ending row index (indexed exclisivly [row_s:row_e[ ).
-//	- slice[3] = col_e = ending col index (indexed exclisivly [col_s:col_e[ ).
+//	- slice[2] = row_e = ending row index ( indexed [row_s:row_e[ ).
+//	- slice[3] = col_e = ending col index ( indexed [col_s:col_e[ ).
 // positive and negative slicing are possible and the selection will be cropped
 // to garantee that it is within bounds of the mtx and at least 1 row/col wide.
 
-
-static int	* __validate_setup_slice(t_mtx *m, int slice[4], int *rr, int *cr)
+static int	*__validate_setup(t_mtx *m, int slice[4], int *rr, int *cr)
 {
 	int	sx;
 	int	sy;
@@ -56,14 +55,14 @@ t_mtx	*mtx_slice_view(t_mtx *mtx, int slice[4], t_mtx	*out)
 
 	if (!mtx)
 		return (MTX_ERROR("missing mtx input"));
-	if (!__validate_setup_slice(mtx, slice, &rrange, &crange))
+	if (!__validate_setup(mtx, slice, &rrange, &crange))
 		return (MTX_ERROR("invalid slice"));
 	ret = out;
 	if (!ret || !mtx_dup_struct(mtx, &ret))
 		return (MTX_ERROR("!mtx or malloc error"));
 	ret->offset = (mtx->strides[0] * slice[0] + mtx->strides[1] * slice[1]);
-	ret->shape[0] = rrange;//ft_clamp(rrange, 0, mtx->shape[0]);
-	ret->shape[1] = crange;//ft_clamp(crange, 0, mtx->shape[1]);
+	ret->shape[0] = rrange;
+	ret->shape[1] = crange;
 	ret->is_view = 1;
 	if (rrange == 1)
 		mtx_transpose(ret);

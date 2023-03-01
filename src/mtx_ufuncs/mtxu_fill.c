@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:53:46 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/14 21:43:26 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 05:09:15 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "mtxlib.h"
@@ -17,20 +17,6 @@ t_mtx	*__mtx_fill_zeros(t_mtx *mtx)
 	ft_memclear(mtx->arr, mtx_sizeof_array(mtx));
 	return (mtx);
 }
-/*
-	arr = mtx->arr;
-	while (arr_size > sizeof(size_t))
-	{
-		*(arr++) = 0;
-		arr_size -= sizeof(size_t);
-	}
-	carr = (char *)arr;
-	while (arr_size--)
-		*(carr++) = 0;
-
-	return (mtx);
-}
-*/
 
 t_mtx	*_mtx_fill_zeros(t_mtx *mtx)
 {
@@ -53,21 +39,21 @@ t_mtx	*_mtx_fill_zeros(t_mtx *mtx)
 
 static void	__mtx_fill(void *a, void *v, size_t dsize, size_t n_elems)
 {
-	U_CHAR	*carr;
-	U_INT	*iarr;
+	char	*carr;
+	int		*iarr;
 	size_t	*sarr;
 
-	if (dsize == sizeof(U_INT))
+	if (dsize == sizeof(int))
 	{
-		iarr = (U_INT *)a;
+		iarr = (int *)a;
 		while (n_elems--)
-			*(iarr++) = *(U_INT *)v;
+			*(iarr++) = *(int *)v;
 	}
-	else if (dsize == sizeof(U_CHAR))
+	else if (dsize == sizeof(char))
 	{
-		carr = (U_CHAR *)a;
+		carr = (char *)a;
 		while (n_elems--)
-			*(carr++) = *(U_CHAR *)v;
+			*(carr++) = *(char *)v;
 	}
 	else if (dsize == sizeof(size_t))
 	{
@@ -75,12 +61,6 @@ static void	__mtx_fill(void *a, void *v, size_t dsize, size_t n_elems)
 		while (n_elems--)
 			*(sarr++) = *(size_t *)v;
 	}
-}
-
-static int	__reset_j(int *j)
-{
-	*j = -1;
-	return (1);
 }
 
 static void	__mtx_fill_view(t_mtx *m, void *value, size_t dsize)
@@ -95,18 +75,19 @@ static void	__mtx_fill_view(t_mtx *m, void *value, size_t dsize)
 	c = m->shape[1];
 	i = -1;
 	arr = _mtx_arr(m);
-	if (dsize == sizeof(U_INT))
-		while (++i < r && __reset_j(&j))
-			while (++j < c)
-				*(U_INT *)_mtx_idx(arr, m->strides, i, j) = *(U_INT *)value;
-	else if (dsize == sizeof(size_t))
-		while (++i < r && __reset_j(&j))
-			while (++j < c)
+	while (++i < r)
+	{
+		j = -1;
+		while (++j < c)
+		{
+			if (dsize == sizeof(int))
+				*(int *)_mtx_idx(arr, m->strides, i, j) = *(int *)value;
+			else if (dsize == sizeof(size_t))
 				*(size_t *)_mtx_idx(arr, m->strides, i, j) = *(size_t *)value;
-	else if (dsize == sizeof(U_CHAR))
-		while (++i < r && __reset_j(&j))
-			while (++j < c)
-				*(U_CHAR *)_mtx_idx(arr, m->strides, i, j) = *(U_CHAR *)value;
+			else if (dsize == sizeof(char))
+				*(char *)_mtx_idx(arr, m->strides, i, j) = *(char *)value;
+		}
+	}
 }
 
 //fills matrix with the value pointed by void *. The size of the 

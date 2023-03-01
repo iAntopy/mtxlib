@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 22:35:05 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/14 19:57:43 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 00:03:54 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ t_mtx	*mtx_dup_empty(t_mtx *mtx, t_mtx **out, int dtype)
 	t_mtx	*new;
 	size_t	arr_size;
 
-	if (!mtx || (dtype && mtx_get_dsize(mtx->dtype) != mtx_get_dsize(dtype)))
+	if (!mtx
+		|| (dtype && mtx_get_dsize(mtx->dtype) != mtx_get_dsize(dtype)))
 		return (MTX_ERROR("no mtx or dsize mismatch"));
 	if (!mtx_dup_struct(mtx, &new))
 		return (MTX_ERROR("malloc error"));
@@ -47,7 +48,8 @@ t_mtx	*mtx_dup_empty(t_mtx *mtx, t_mtx **out, int dtype)
 	printf("dup empty : new->arr after malloc : %p\n", new->arr);
 	new->dtype = dtype;
 	new->view_ptr = &(new->arr);
-	printf("dup empty : new->dtype, new->view_ptr : %d, %p\n", new->dtype, new->view_ptr);
+	printf("dup empty : new->dtype, new->view_ptr : %d, %p\n",
+		new->dtype, new->view_ptr);
 	if (out)
 		*out = new;
 	printf("dup empty : returning new\n");
@@ -55,7 +57,7 @@ t_mtx	*mtx_dup_empty(t_mtx *mtx, t_mtx **out, int dtype)
 }
 
 // CANNOT BE VIEW
-t_mtx	*mtx_copy(t_mtx *mtx)//, int dtype)
+t_mtx	*mtx_copy(t_mtx *mtx)
 {
 	t_mtx	*new;
 

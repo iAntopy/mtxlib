@@ -6,10 +6,9 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:13:21 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/22 18:17:20 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 04:45:00 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MTX_ARITHMETIC_H
 # define MTX_ARITHMETIC_H
@@ -31,9 +30,6 @@ void	__mtx_std_scalar(t_mopp *mo);
 void	__mtx_std_mtx(t_mopp *mo);
 void	__mtx_std_line_col(t_mopp *mo);
 void	__mtx_std_line_row(t_mopp *mo);
-
-
-
 
 //// ADD OPERATIONS
 t_mtx	*mtx_add(t_mtx *a, t_mtx *b, t_mtx *out);
@@ -78,7 +74,6 @@ void	_mtx_riaddi_line_r(t_mtx *a, t_mtx *b);
 void	_mtx_raddi_line_c(t_mtx *a, t_mtx *b, t_mtx *out);
 void	_mtx_riaddi_line_c(t_mtx *a, t_mtx *b);
 
-
 //// SUB OPERATIONS
 t_mtx	*mtx_sub(t_mtx *a, t_mtx *b, t_mtx *out);
 void	__mtx_std_subi(int *v1, int *v2, int *out);
@@ -121,7 +116,6 @@ void	_mtx_subi_line_r(t_mtx *a, t_mtx *b, t_mtx *out);
 void	_mtx_isubi_line_r(t_mtx *a, t_mtx *b);
 void	_mtx_subi_line_c(t_mtx *a, t_mtx *b, t_mtx *out);
 void	_mtx_isubi_line_c(t_mtx *a, t_mtx *b);
-
 
 //// MUL OPERATIONS
 t_mtx	*mtx_mul(t_mtx *a, t_mtx *b, t_mtx *out);
@@ -166,7 +160,6 @@ void	_mtx_rimuli_line_r(t_mtx *a, t_mtx *b);
 void	_mtx_rmuli_line_c(t_mtx *a, t_mtx *b, t_mtx *out);
 void	_mtx_rimuli_line_c(t_mtx *a, t_mtx *b);
 
-
 //// DIV OPERATIONS
 t_mtx	*mtx_div(t_mtx *a, t_mtx *b, t_mtx *out);
 void	__mtx_std_divi(int *v1, int *v2, int *out);
@@ -209,7 +202,6 @@ void	_mtx_rdivi_line_r(t_mtx *a, t_mtx *b, t_mtx *out);
 void	_mtx_ridivi_line_r(t_mtx *a, t_mtx *b);
 void	_mtx_rdivi_line_c(t_mtx *a, t_mtx *b, t_mtx *out);
 void	_mtx_ridivi_line_c(t_mtx *a, t_mtx *b);
-
 
 //// POW OPERATIONS
 t_mtx	*mtx_pow(t_mtx *a, t_mtx *b, t_mtx *out);
@@ -254,7 +246,6 @@ void	_mtx_ripowi_line_r(t_mtx *a, t_mtx *b);
 void	_mtx_rpowi_line_c(t_mtx *a, t_mtx *b, t_mtx *out);
 void	_mtx_ripowi_line_c(t_mtx *a, t_mtx *b);
 
-
 //// ATAN2 OPERATIONS
 t_mtx	*mtx_atan2(t_mtx *a, t_mtx *b, t_mtx *out);
 void	__mtx_std_atan2i(int *v1, int *v2, int *out);
@@ -297,4 +288,5 @@ void	_mtx_ratan2i_line_r(t_mtx *a, t_mtx *b, t_mtx *out);
 void	_mtx_riatan2i_line_r(t_mtx *a, t_mtx *b);
 void	_mtx_ratan2i_line_c(t_mtx *a, t_mtx *b, t_mtx *out);
 void	_mtx_riatan2i_line_c(t_mtx *a, t_mtx *b);
+
 #endif

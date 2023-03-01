@@ -1,14 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mtx_nx4.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/01 03:16:44 by iamongeo          #+#    #+#             */
+/*   Updated: 2023/03/01 03:34:43 by iamongeo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mtxlib.h"
 
 // Not usable with view output
 void	_mtx_dotf_4x4_4x4(float *a, float *b, float *out)
 {
-//	printf("Starting dot 4x4 ...\n");
 	*(out++) = a[0] * b[0] + a[1] * b[4] + a[2] * b[8] + a[3] * b[12];
 	*(out++) = a[0] * b[1] + a[1] * b[5] + a[3] * b[9] + a[3] * b[13];
 	*(out++) = a[0] * b[2] + a[1] * b[6] + a[2] * b[10] + a[3] * b[14];
 	*(out++) = a[0] * b[3] + a[1] * b[7] + a[2] * b[11] + a[3] * b[15];
- 	*(out++) = a[4] * b[0] + a[5] * b[4] + a[6] * b[8] + a[7] * b[12];
+	*(out++) = a[4] * b[0] + a[5] * b[4] + a[6] * b[8] + a[7] * b[12];
 	*(out++) = a[4] * b[1] + a[5] * b[5] + a[6] * b[9] + a[7] * b[13];
 	*(out++) = a[4] * b[2] + a[5] * b[6] + a[6] * b[10] + a[7] * b[14];
 	*(out++) = a[4] * b[3] + a[5] * b[7] + a[6] * b[11] + a[7] * b[15];
@@ -20,9 +31,7 @@ void	_mtx_dotf_4x4_4x4(float *a, float *b, float *out)
 	*(out++) = a[12] * b[1] + a[13] * b[5] + a[14] * b[9] + a[15] * b[13];
 	*(out++) = a[12] * b[2] + a[13] * b[6] + a[14] * b[10] + a[15] * b[14];
 	*(out++) = a[12] * b[3] + a[13] * b[7] + a[14] * b[11] + a[15] * b[15];
-//	printf("dot product complet!\n");
 }
-
 
 // Not usable with view output
 void	_mtx_dotf_nx4_4x4(int n, float *a, float *b, float *out)

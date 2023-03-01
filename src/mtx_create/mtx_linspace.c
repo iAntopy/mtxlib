@@ -1,12 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mtx_linspace.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/01 00:32:42 by iamongeo          #+#    #+#             */
+/*   Updated: 2023/03/01 02:42:36 by iamongeo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mtxlib.h"
 
+static void	__mtx_fill_linspace(float *arr, float start, float incr, int n_divs)
+{
+	while (n_divs--)
+	{
+		*(arr++) = start;
+		start += incr;
+	}
+}
+
+// Only available with floats. w_end will segment the linear space so that
+// the last entry == end. In other words, if (w_end != 0) then end is inclusive 
+// otherwise is end exclusive.
 t_mtx	*mtx_linspace(float start, float end, int n_divs, int w_end)
 {
 	t_mtx	*mtx;
-	float	range;
 	float	incr;
-	int	i;
-	float	*fptr;
 
 	if (!n_divs || start == end)
 		return (fperror("mtx_linspace : n_divs or range == 0"));
@@ -14,19 +35,20 @@ t_mtx	*mtx_linspace(float start, float end, int n_divs, int w_end)
 	mtx = mtx_create_empty(n_divs, 1, DTYPE_F);
 	if (!mtx)
 		return (NULL);
-	mtx_print(mtx);
-	mtx_display_info(mtx);
-	range = end - start;
-	incr = range / (n_divs - !!w_end);
-	i = -1;
-	while (++i < n_divs)
-	{
-//		printf("linspace : i %d / %d, range %.03f, incr %.03f, (n_divs - !w_end) %d\n", i + 1, n_divs, range, incr, (n_divs - !w_end));
-		fptr = mtx_index(mtx, i, 0);
-		if (!fptr)
-			return (mtx_clear(&mtx));
-		*fptr = start;
-		start += incr;
-	}
+	incr = (end - start) / (n_divs - !!w_end);
+	__mtx_fill_linspace((float *)_mtx_arr(mtx), start, incr, n_divs);
+	return (mtx);
+}
+
+t_mtx	*mtx_linspace_update(t_mtx *mtx, float start, float end, int w_end)
+{
+	float	incr;
+	int		n_divs;
+
+	if (start == end)
+		return (fperror("mtx_linspace : range == 0"));
+	n_divs = mtx->shape[0];
+	incr = (end - start) / (n_divs - !!w_end);
+	__mtx_fill_linspace((float *)_mtx_arr(mtx), start, incr, n_divs);
 	return (mtx);
 }

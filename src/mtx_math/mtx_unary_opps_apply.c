@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 22:12:37 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/30 21:15:03 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 04:16:42 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ t_mtx	*mtx_apply_f(t_mtx *a, float (*func)(float), t_mtx *out)
 	t_mopp	mo;
 	t_mtx	*ret;
 
-	printf("mtx_apply_f : STARTING APPLY\n");
 	if (!a && a->dtype == DTYPE_F)
 		return (MTX_ERROR("no input mtx or has wrong dtype"));
 	ret = out;
@@ -62,13 +61,8 @@ t_mtx	*mtx_apply_f(t_mtx *a, float (*func)(float), t_mtx *out)
 		return (MTX_ERROR("malloc error"));
 	if (!mtx_are_same_type(a, ret, NULL) || !mtx_are_same_shape(a, ret))
 		return (MTX_ERROR("a -> out shape or dtype mismatch"));
-
-	printf("mtx_apply_f : INIT math opp\n");
 	__mtx_init_math_opp(&mo, a, a, ret);
-	printf("mtx_apply_f : INIT DONE\n"); 
 	mo.oppf = func;
-	printf("mtx_apply_f : starting apply_f\n"); 
-
 	_mtx_apply_f(&mo);
 	return (ret);
 }

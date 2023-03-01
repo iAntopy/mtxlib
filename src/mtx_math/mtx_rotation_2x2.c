@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 01:56:14 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/30 21:12:17 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 04:14:05 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ t_mtx	*mtx_get_rotmat_2x2(float ang, t_mtx *out)
 			return (MTX_ERROR("malloc error"));
 	}
 	__fill_rotmat_2x2(sinf(ang), cosf(ang), ret->arr);
-	return (ret);	
+	return (ret);
 }

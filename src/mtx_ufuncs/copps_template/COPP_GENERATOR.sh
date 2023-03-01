@@ -21,8 +21,8 @@ then
 		if test -d "${DIRECTORY}"; then
 			cd "${DIRECTORY}"
 			rm mtx*.c
-			mv "__BASE_${OPP}i_COPPS.c" '__BASE_ZZZi_COPPS.c'
-			mv "__BASE_${OPP}f_COPPS.c" '__BASE_ZZZf_COPPS.c'
+			mv "__BASE_${OPP}i_COPPS.c" '__BASE_zzzi_COPPS.c'
+			mv "__BASE_${OPP}f_COPPS.c" '__BASE_zzzf_COPPS.c'
 			cd ../copps_template
 		fi
 	done
@@ -35,17 +35,17 @@ do
 	echo "$DIRECTORY"
 
 #: <<'END'
-#	if [ $(ls -l | grep '__BASE_ZZZ' | wc -l) = 2 ]
+#	if [ $(ls -l | grep '__BASE_zzz' | wc -l) = 2 ]
 	if test -d "${DIRECTORY}"; then
 		echo "directory found"
-		if [ $(ls -l "${DIRECTORY}" | grep '__BASE_ZZZ' | wc -l) = 2 ]; then
-#		if [-f "${DIRECTORY}/__BASE_ZZZi_COPPS.c" && -f "${DIRECTORY}/__BASE_ZZZf_COPPS.c"]; then
+		if [ $(ls -l "${DIRECTORY}" | grep '__BASE_zzz' | wc -l) = 2 ]; then
+#		if [-f "${DIRECTORY}/__BASE_zzzi_COPPS.c" && -f "${DIRECTORY}/__BASE_zzzf_COPPS.c"]; then
 			echo "ALMOST THERE !"
 			cd temp_payload
-			SED_SCRIPT="s/ZZZ/${OPP}/g"
+			SED_SCRIPT="s/zzz/${OPP}/g"
 			for f in mtx*.c; do
 				FNAME=$(echo $f | sed $SED_SCRIPT)
-				SED_F_SCRIPT="s/FFF/$(printf "%-30s" $FNAME)/g"
+				SED_F_SCRIPT="s/fff/$(printf "%-30s" $FNAME)/g"
 				CP_NAME='../'${DIRECTORY}"/${FNAME}"
 				echo 'copied file '"${CP_NAME}"
 				echo "sed script : ${SED_SCRIPT}"
@@ -57,13 +57,13 @@ do
 			rm *_temp
 			BASE_FILE_I="__BASE_${OPP}i_COPPS.c"
 			BASE_FILE_F="__BASE_${OPP}f_COPPS.c"
-			SED_F_SCRIPT="s/FFF/$(printf "%-30s" ${BASE_FILE_I})/g"
-			sed "${SED_F_SCRIPT}" '__BASE_ZZZi_COPPS.c' > 'B_temp'
+			SED_F_SCRIPT="s/fff/$(printf "%-30s" ${BASE_FILE_I})/g"
+			sed "${SED_F_SCRIPT}" '__BASE_zzzi_COPPS.c' > 'B_temp'
 			sed "${SED_SCRIPT}" 'B_temp' > "${BASE_FILE_I}"
-			SED_F_SCRIPT="s/FFF/$(printf "%-30s" ${BASE_FILE_F})/g"
-			sed "${SED_F_SCRIPT}" '__BASE_ZZZf_COPPS.c' > 'B_temp'
+			SED_F_SCRIPT="s/fff/$(printf "%-30s" ${BASE_FILE_F})/g"
+			sed "${SED_F_SCRIPT}" '__BASE_zzzf_COPPS.c' > 'B_temp'
 			sed "${SED_SCRIPT}" 'B_temp' > "${BASE_FILE_F}"
-			rm B_temp '__BASE_ZZZi_COPPS.c' '__BASE_ZZZf_COPPS.c'
+			rm B_temp '__BASE_zzzi_COPPS.c' '__BASE_zzzf_COPPS.c'
 			TRGT_H="${INCL_DIR}mtx_cumul_ufuncs.h"
 			if [ ! -f $TRGT_H ];
 			then
@@ -71,7 +71,7 @@ do
 				cp "${INCL_DIR}CUMUL_TEMPLATE" $TRGT_H # "${INCL_DIR}mtx_cumul_ufuncs.h"
 			fi
 			UP_OPP=$(echo $OPP | tr '[:lower:]' '[:upper:]')
-			echo "\n\n//// ${UP_OPP} OPERATIONS" | tee -a "${INCL_DIR}mtx_cumul_ufuncs.h"
+			echo "\n//// ${UP_OPP} OPERATIONS" | tee -a "${INCL_DIR}mtx_cumul_ufuncs.h"
 			echo 't_mtx	*'"mtx_${OPP}"'(t_mtx *mtx, int axis, t_mtx *out);' | tee -a "${INCL_DIR}mtx_cumul_ufuncs.h"
 			grep -h 'void' *.c | grep -v 'static' | while read -r line;
 			do
@@ -79,7 +79,7 @@ do
 			done
 			cd ../copps_template
 		else
-			echo "ERROR creating ${OPP}. The __BASE_ZZZi_COPPS.c and __BASE_ZZZf_COPPS.c files should be in the ZZZ_copps directory in the mtx_ufuncs/ directory and \
+			echo "ERROR creating ${OPP}. The __BASE_zzzi_COPPS.c and __BASE_zzzf_COPPS.c files should be in the zzz_copps directory in the mtx_ufuncs/ directory and \
 			and	completed with its functions."
 		fi
 	else

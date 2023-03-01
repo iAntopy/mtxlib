@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:20:53 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/14 16:39:12 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 04:33:35 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,12 @@ void	ft_swap_f(float *a, float *b);
 int		ft_clamp(int n, int min, int max);
 void	ft_memclear(void *dest, size_t size);
 
-int	ft_printf(const char *fmt, ...);
-int	ft_vprintf(const char *fmt, va_list *ap);
+int		ft_printf(const char *fmt, ...);
+int		ft_vprintf(const char *fmt, va_list *ap);
 void	*fperror(char *fmt, ...);
 ssize_t	ft_timedelta_usec(char *note);
 float	ft_random(void);
-int	ft_randint(int min, int range);
+int		ft_randint(int min, int range);
 
 typedef struct s_list
 {

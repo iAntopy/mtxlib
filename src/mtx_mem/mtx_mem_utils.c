@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mtx_mem_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/28 23:23:04 by iamongeo          #+#    #+#             */
+/*   Updated: 2023/02/28 23:24:08 by iamongeo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "mtxlib.h"
 
@@ -5,13 +16,11 @@ int	malloc_free_p(size_t size, void **ptr)
 {
 	if (size)
 	{
-//		printf("malloc size %zu\n", size);
 		*ptr = malloc(size);
 		return (ptr != NULL);
 	}
 	else if (*ptr)
 	{
-//		printf("free ptr %p\n", *ptr);
 		free(*ptr);
 		*ptr = NULL;
 	}
@@ -22,19 +31,16 @@ void	*malloc_free(size_t size, void **ptr)
 {
 	if (size)
 	{
-//		printf("malloc size %zu\n", size);
 		*ptr = malloc(size);
 		if (ptr)
 			return (ptr);
 	}
 	else if (*ptr)
 	{
-//		printf("free ptr %p\n", *ptr);
 		free(*ptr);
 		*ptr = NULL;
 	}
 	return (NULL);
-
 }
 
 size_t	mtx_get_dsize(int dtype)
