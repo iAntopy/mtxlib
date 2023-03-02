@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtxu_sum.c                                         :+:      :+:    :+:   */
+/*   mtxu_ZZZ.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:43:20 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 00:01:01 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 22:24:34 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,25 @@ static t_mtx	*__route_sum_rowwise(t_mtx *mtx, t_mtx *out)
 {
 	int	out_null;
 
-	printf("routing rowwise\n");
 	out_null = !out;
 	if (out_null)
 	{
 		out = mtx_create_empty(mtx->shape[1], 1, mtx->dtype);
 		if (!out)
-			return (MTX_ERROR("malloc error"));
+			return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	}
 	if (!mtx_are_same_type(mtx, out, NULL))
-		return (MTX_ERROR("mtx/out dtype mismatch"));
+		return (mtx_err((char *)__FUNCTION__, "mtx/out dtype mismatch"));
 	if (!(mtx->shape[1] == out->shape[0]))
-		return (MTX_ERROR("invalid out shape"));
+		return (mtx_err((char *)__FUNCTION__, "invalid out shape"));
 	if (mtx->dtype == DTYPE_F)
 		_mtx_sumf_row(mtx, out);
 	else if (mtx->dtype == DTYPE_I)
 		_mtx_sumi_row(mtx, out);
 	else if (out_null)
-		return (MTX_ERR_CLR("invalid dtype", &out));
+		return (mtx_e_clr((char *)__FUNCTION__, "invalid dtype", &out));
 	else
-		return (MTX_ERROR("invalid dtype"));
+		return (mtx_err((char *)__FUNCTION__, "invalid dtype"));
 	return (out);
 }
 
@@ -43,26 +42,25 @@ static t_mtx	*__route_sum_colwise(t_mtx *mtx, t_mtx *out)
 {
 	int	out_null;
 
-	printf("routing colwise\n");
 	out_null = !out;
 	if (out_null)
 	{
 		out = mtx_create_empty(mtx->shape[0], 1, mtx->dtype);
 		if (!out)
-			return (MTX_ERROR("malloc error"));
+			return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	}
 	if (!mtx_are_same_type(mtx, out, NULL))
-		return (MTX_ERROR("mtx/out dtype mismatch"));
+		return (mtx_err((char *)__FUNCTION__, "mtx/out dtype mismatch"));
 	if (!(mtx->shape[0] == out->shape[0]))
-		return (MTX_ERROR("invalid out shape"));
+		return (mtx_err((char *)__FUNCTION__, "invalid out shape"));
 	if (mtx->dtype == DTYPE_F)
 		_mtx_sumf_col(mtx, out);
 	else if (mtx->dtype == DTYPE_I)
 		_mtx_sumi_col(mtx, out);
 	else if (out_null)
-		return (MTX_ERR_CLR("invalid dtype", &out));
+		return (mtx_e_clr((char *)__FUNCTION__, "invalid dtype", &out));
 	else
-		return (MTX_ERROR("invalid dtype"));
+		return (mtx_err((char *)__FUNCTION__, "invalid dtype"));
 	return (out);
 }
 
@@ -70,26 +68,25 @@ static t_mtx	*__route_sum_whole(t_mtx *mtx, t_mtx *out)
 {
 	int	out_null;
 
-	printf("routing whole\n");
 	out_null = !out;
 	if (out_null)
 	{
 		out = mtx_create_empty(1, 1, mtx->dtype);
 		if (!out)
-			return (MTX_ERROR("malloc error"));
+			return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	}
 	if (!mtx_are_same_type(mtx, out, NULL))
-		return (MTX_ERROR("mtx/out dtype mismatch"));
+		return (mtx_err((char *)__FUNCTION__, "mtx/out dtype mismatch"));
 	if (!((out->shape[0] == 1) && out->shape[1] == 1))
-		return (MTX_ERROR("invalid out shape"));
+		return (mtx_err((char *)__FUNCTION__, "invalid out shape"));
 	if (mtx->dtype == DTYPE_F)
 		_mtx_sumf_whole(mtx, out);
 	else if (mtx->dtype == DTYPE_I)
 		_mtx_sumi_whole(mtx, out);
 	else if (out_null)
-		return (MTX_ERR_CLR("invalid dtype", &out));
+		return (mtx_e_clr((char *)__FUNCTION__, "invalid dtype", &out));
 	else
-		return (MTX_ERROR("invalid dtype"));
+		return (mtx_err((char *)__FUNCTION__, "invalid dtype"));
 	return (out);
 }
 
@@ -97,10 +94,9 @@ t_mtx	*mtx_sum(t_mtx *mtx, int axis, t_mtx *out)
 {
 	t_mtx	*ret;
 
-	printf("sum START\n");
 	ret = out;
 	if (!mtx)
-		return (MTX_ERROR("no input mtx"));
+		return (mtx_err((char *)__FUNCTION__, "no input mtx"));
 	if (axis == ROWWISE)
 		ret = __route_sum_rowwise(mtx, ret);
 	else if (axis == COLWISE)
@@ -108,6 +104,6 @@ t_mtx	*mtx_sum(t_mtx *mtx, int axis, t_mtx *out)
 	else if (axis == WHOLE)
 		ret = __route_sum_whole(mtx, ret);
 	else
-		return (MTX_ERROR("invalid axis"));
+		return (mtx_err((char *)__FUNCTION__, "invalid axis"));
 	return (ret);
 }

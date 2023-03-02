@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:13:21 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 04:45:00 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/22 18:17:20 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,5 +288,4 @@ void	_mtx_ratan2i_line_r(t_mtx *a, t_mtx *b, t_mtx *out);
 void	_mtx_riatan2i_line_r(t_mtx *a, t_mtx *b);
 void	_mtx_ratan2i_line_c(t_mtx *a, t_mtx *b, t_mtx *out);
 void	_mtx_riatan2i_line_c(t_mtx *a, t_mtx *b);
-
 #endif

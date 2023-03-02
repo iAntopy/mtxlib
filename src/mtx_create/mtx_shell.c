@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 22:47:09 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/30 21:04:01 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:15:32 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 t_mtx	*mtx_shell(t_mtx *mtx, int rows, int cols, int dtype)
 {
 	if (!mtx || (rows < 1) || (cols < 1))
-		return (MTX_ERROR("input missing or row/col < 1"));
+		return (mtx_err((char *)__FUNCTION__, "input missing or row/col < 1"));
 	if (!mtx_isvalid_dtype(dtype))
-		return (MTX_ERROR("dtype is invalid"));
+		return (mtx_err((char *)__FUNCTION__, "dtype is invalid"));
 	if ((rows == 1) || (cols == 1))
 		__mtx_setup_1d(mtx, rows, cols, mtx_get_dsize(dtype));
 	else

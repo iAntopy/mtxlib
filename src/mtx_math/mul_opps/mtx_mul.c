@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_mul.c                                          :+:      :+:    :+:   */
+/*   mtx_ZZZ.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 03:33:18 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 04:06:36 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/02 00:07:11 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ static void	put_biggest_first(t_mtx **a, t_mtx **b, int specs[2])
 
 static t_mtx	*route_opp(t_mtx *a, t_mtx *b, t_mtx *out, int specs[2])
 {
-	static MOPP_FUNC	opps[2][6] = {
+	static t_mopp_fc	opps[2][6] = {
 	{_mtx_muli_scalar, _mtx_rmuli_scalar, _mtx_muli_line_r,
 		_mtx_rmuli_line_r, _mtx_muli_line_c, _mtx_rmuli_line_c},
 	{_mtx_mulf_scalar, _mtx_rmulf_scalar, _mtx_mulf_line_r,
 		_mtx_rmulf_line_r, _mtx_mulf_line_c, _mtx_rmulf_line_c}};
 	int					rev;
-	MOPP_FUNC			act_opp;
+	t_mopp_fc			act_opp;
 
 	rev = specs[1];
 	act_opp = NULL;
@@ -49,7 +49,7 @@ static t_mtx	*route_opp(t_mtx *a, t_mtx *b, t_mtx *out, int specs[2])
 	if (act_opp)
 		act_opp(a, b, out);
 	else
-		return (MTX_ERROR("mismatch shapes "));
+		return (mtx_err((char *)__FUNCTION__, "mismatch shapes "));
 	return (out);
 }
 
@@ -63,21 +63,18 @@ t_mtx	*mtx_mul(t_mtx *a, t_mtx *b, t_mtx *out)
 	out_null = !out;
 	ret = out;
 	if (!(a || b) || !mtx_are_same_type(a, b, ret))
-		return (MTX_ERROR("missing inputs or mismatch dtypes"));
+		return (mtx_err((char *)__FUNCTION__,
+				"missing inputs or mismatch dtypes"));
 	same_shape = mtx_are_same_shape(a, b);
 	specs[0] = same_shape;
 	put_biggest_first(&a, &b, specs);
 	if (!ret && !mtx_dup_empty(a, &ret, a->dtype))
-		return (MTX_ERROR("malloc error"));
+		return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	if (same_shape && (a->dtype == DTYPE_F))
 		_mtx_mulf_mtx(a, b, ret);
 	else if (same_shape && (a->dtype == DTYPE_I))
 		_mtx_muli_mtx(a, b, ret);
-	else if (!route_opp(a, b, ret, specs))
-	{
-		if (out_null)
-			mtx_clear(&ret);
-		ret = NULL;
-	}
+	else if (!route_opp(a, b, ret, specs) && out_null)
+		mtx_clear(&ret);
 	return (ret);
 }

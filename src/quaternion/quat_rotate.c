@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 01:33:38 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/02/28 23:31:37 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:44:15 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_mtx	*_quat_rotate(t_mtx *mtx, t_quat *q, t_mtx *out)
 t_mtx	*_quat_irotate(t_mtx *mtx, t_quat *q)
 {
 	if (!mtx->swap && !mtx_malloc_swap(mtx))
-		return (MTX_ERROR("malloc error"));
+		return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	__mtx_dotf_nx4_4x4(mtx->shape[0],
 		mtx->arr, (float *)q->__rot_arr, mtx->swap);
 	_mtx_swap_arrays(mtx);
@@ -35,15 +35,16 @@ t_mtx	*_quat_irotate(t_mtx *mtx, t_quat *q)
 t_mtx	*quat_irotate(t_mtx *mtx, t_quat *q)
 {
 	if (!mtx || !q)
-		return (MTX_ERROR("missing params"));
+		return (mtx_err((char *)__FUNCTION__, "missing params"));
 	if (mtx->is_view)
-		return (MTX_ERROR("Can't output quaternion rotation to view"));
+		return (mtx_err((char *)__FUNCTION__,
+				"Can't output quaternion rotation to view"));
 	else if (!mtx_malloc_swap(mtx))
-		return (MTX_ERROR("malloc error"));
+		return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	__mtx_dotf_nx4_4x4(mtx->shape[0],
 		mtx->arr, (float *)q->__rot_arr, mtx->swap);
 	if (!mtx_swap_arrays(mtx))
-		return (MTX_ERROR("swap error"));
+		return (mtx_err((char *)__FUNCTION__, "swap error"));
 	return (mtx);
 }
 
@@ -54,12 +55,12 @@ t_mtx	*quat_rotate(t_mtx *mtx, t_quat *q, t_mtx *out)
 	t_mtx	*ret;
 
 	if (!mtx || !q)
-		return (MTX_ERROR("missing mtx or quaternion"));
+		return (mtx_err((char *)__FUNCTION__, "missing mtx or quaternion"));
 	ret = out;
 	if (!ret && !mtx_dup_empty(mtx, &ret, DTYPE_F))
-		return (MTX_ERROR("malloc error"));
+		return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	if (!mtx_are_same_shape(mtx, ret))
-		return (MTX_ERROR("mtx -> out shape mismatch"));
+		return (mtx_err((char *)__FUNCTION__, "mtx -> out shape mismatch"));
 	__mtx_dotf_nx4_4x4(mtx->shape[0],
 		mtx->arr, (float *)q->__rot_arr, ret->arr);
 	return (ret);

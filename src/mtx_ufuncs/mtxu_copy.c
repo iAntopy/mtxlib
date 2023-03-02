@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 22:35:05 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 00:03:54 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:18:20 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_mtx	*mtx_dup_struct(t_mtx *mtx, t_mtx **out)
 	t_mtx	*new;
 
 	if (!mtx)
-		return (MTX_ERROR("no input mtx"));
+		return (mtx_err((char *)__FUNCTION__, "no input mtx"));
 	if (!malloc_free_p(sizeof(t_mtx), (void **)&new))
-		return (MTX_ERROR("malloc error"));
+		return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	ft_memcpy(new, mtx, sizeof(t_mtx));
 	new->arr = NULL;
 	new->swap = NULL;
@@ -35,24 +35,19 @@ t_mtx	*mtx_dup_empty(t_mtx *mtx, t_mtx **out, int dtype)
 
 	if (!mtx
 		|| (dtype && mtx_get_dsize(mtx->dtype) != mtx_get_dsize(dtype)))
-		return (MTX_ERROR("no mtx or dsize mismatch"));
+		return (mtx_err((char *)__FUNCTION__, "no mtx or dsize mismatch"));
 	if (!mtx_dup_struct(mtx, &new))
-		return (MTX_ERROR("malloc error"));
+		return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	arr_size = mtx_sizeof_array(mtx);
-	printf("dup empty : new->arr before malloc : %p\n", new->arr);
 	if (!malloc_free_p(arr_size, (void **)&(new->arr)))
 	{
 		mtx_clear(&new);
-		return (MTX_ERROR("malloc error "));
+		return (mtx_err((char *)__FUNCTION__, "malloc error "));
 	}
-	printf("dup empty : new->arr after malloc : %p\n", new->arr);
 	new->dtype = dtype;
 	new->view_ptr = &(new->arr);
-	printf("dup empty : new->dtype, new->view_ptr : %d, %p\n",
-		new->dtype, new->view_ptr);
 	if (out)
 		*out = new;
-	printf("dup empty : returning new\n");
 	return (new);
 }
 
@@ -62,11 +57,11 @@ t_mtx	*mtx_copy(t_mtx *mtx)
 	t_mtx	*new;
 
 	if (!mtx)
-		return (MTX_ERROR("no intput mtx"));
+		return (mtx_err((char *)__FUNCTION__, "no intput mtx"));
 	if (mtx->is_view)
-		return (MTX_ERROR("cannot copy view"));
+		return (mtx_err((char *)__FUNCTION__, "cannot copy view"));
 	if (!mtx_dup_empty(mtx, &new, mtx->dtype))
-		return (MTX_ERROR("malloc error"));
+		return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	ft_memcpy(new->arr, mtx->arr, mtx_sizeof_array(mtx));
 	return (new);
 }

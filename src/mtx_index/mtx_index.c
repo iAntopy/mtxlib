@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 03:35:22 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 03:35:42 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:17:26 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ void	*_mtx_idx(void *arr, int *strides, int row, int col)
 void	*mtx_index(t_mtx *mtx, int row, int col)
 {
 	if (row < 0 || col < 0 || row >= mtx->shape[0] || col >= mtx->shape[1])
-		return (MTX_ERROR("index out of bounds"));
+		return (mtx_err((char *)__FUNCTION__, "index out of bounds"));
 	return (_mtx_idx(_mtx_arr(mtx), mtx->strides, row, col));
 }

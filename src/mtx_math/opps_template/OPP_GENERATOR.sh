@@ -14,14 +14,14 @@ echo $1
 if [[ $1 = "re" ]];
 then
 	echo "HERE WE GO RESET TIME !!!"
+	rm "${INCL_DIR}mtx_arithmetic.h"
 	for OPP in $(echo $STD_OPPS | xargs)
 	do
-		DIRECTORY="${MTX_MATH_DIR}${OPP}_opps"
-		rm "${INCL_DIR}mtx_arithmetic.h"
-		if test -d "${DIRECTORY}"; then
-			cd "${DIRECTORY}"
+		OPPDIR="${MTX_MATH_DIR}${OPP}_opps"
+		if test -d "${OPPDIR}"; then
+			cd "${OPPDIR}"
 			rm mtx*.c
-			mv "__BASE_${OPP}_OPPS.c" '__BASE_ZZZ_OPPS.c'
+#			mv "__BASE_${OPP}_OPPS.c" '__BASE_ZZZ_OPPS.c'
 			cd ../opps_template
 		fi
 	done
@@ -30,13 +30,13 @@ fi
 for OPP in $(echo $STD_OPPS | xargs)
 do
 	echo $OPP
-	DIRECTORY="${MTX_MATH_DIR}${OPP}_opps"
-	echo "$DIRECTORY"
+	OPPDIR="${MTX_MATH_DIR}${OPP}_opps"
+	echo "$OPPDIR"
 
 #: <<'END'
-	if test -d "${DIRECTORY}"; then
+	if test -d "${OPPDIR}"; then
 		echo "directory found"
-		if test -f "${DIRECTORY}/__BASE_ZZZ_OPPS.c"; then
+		if test -f "${OPPDIR}/__BASE_${OPP}_OPPS.c"; then
 			echo "ALMOST THERE !"
 			cd temp_payload
 			SED_TITLE_SCRIPT="s/ZZZ/${OPP}/g"
@@ -44,19 +44,19 @@ do
 			for f in mtx*.c; do
 				FNAME=$(echo $f | sed $SED_TITLE_SCRIPT)
 				SED_F_SCRIPT="s/FFF/$(printf "%-30s" $FNAME)/g"
-				CP_NAME='../'${DIRECTORY}"/${FNAME}"
+				CP_NAME='../'${OPPDIR}"/${FNAME}"
 				echo 'copied file '"${CP_NAME}"
 				echo "sed script : ${SED_SCRIPT}"
 				sed "${SED_F_SCRIPT}" $f > "${CP_NAME}_temp" # "${CP_NAME}" > $CP_NAME
 				sed "${SED_SCRIPT}" "${CP_NAME}_temp" > $CP_NAME
 			done
 			cd ../
-			cd $DIRECTORY
+			cd $OPPDIR
 			rm *_temp
-			BASE_FILE="__BASE_${OPP}_OPPS.c"
-			SED_F_SCRIPT="s/FFF/$(printf "%-30s" ${BASE_FILE})/g"
-			sed "${SED_F_SCRIPT}" '__BASE_ZZZ_OPPS.c' > 'B_temp'
-			sed "${SED_SCRIPT}" 'B_temp' > "${BASE_FILE}"
+#			BASE_FILE="__BASE_${OPP}_OPPS.c"
+#			SED_F_SCRIPT="s/FFF/$(printf "%-30s" ${BASE_FILE})/g"
+#			sed "${SED_F_SCRIPT}" '__BASE_ZZZ_OPPS.c' > 'B_temp'
+#			sed "${SED_SCRIPT}" 'B_temp' > "${BASE_FILE}"
 			rm B_temp '__BASE_ZZZ_OPPS.c'
 			TRGT_H="${INCL_DIR}mtx_arithmetic.h"
 			if [ ! -f $TRGT_H ];

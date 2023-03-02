@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:53:46 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 05:09:15 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:18:51 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "mtxlib.h"
@@ -25,7 +25,8 @@ t_mtx	*_mtx_fill_zeros(t_mtx *mtx)
 	int	*arr;
 
 	if (mtx_get_dsize(mtx->dtype) != 4)
-		return (MTX_ERROR("Can't fill mtx with dsize other then 4"));
+		return (mtx_err((char *)__FUNCTION__,
+				"Can't fill mtx with dsize other then 4"));
 	arr = _mtx_arr(mtx);
 	i = -1;
 	while (++i < mtx->shape[0])
@@ -97,7 +98,7 @@ t_mtx	*mtx_fill(t_mtx *mtx, void *value)
 	size_t	dsize;
 
 	if (!mtx || !value)
-		return (MTX_ERROR("missing params"));
+		return (mtx_err((char *)__FUNCTION__, "missing params"));
 	dsize = mtx_get_dsize(mtx->dtype);
 	if (mtx->is_view)
 	{

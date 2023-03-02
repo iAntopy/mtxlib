@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef MTX_CUMUL_UFUNCS_H
 # define MTX_CUMUL_UFUNCS_H
 
@@ -20,5 +19,3 @@ void	__mtx_init_cumul_opp(t_copp *co, t_mtx *mtx, t_mtx *out);
 void	_mtx_copp_whole(t_copp *co);
 void	_mtx_copp_by_row(t_copp *co);
 void	_mtx_copp_by_col(t_copp *co);
-
-

@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 17:33:43 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/04 02:15:45 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:36:45 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	__mtx_meanf_init(float *a, float *out)
 {
-	UNUSED(a);
+	(void)a;
 	*out = 0;
 }
 

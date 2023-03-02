@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 17:36:35 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 00:03:01 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:18:34 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_mtx	*mtx_reshape(t_mtx *mtx, int rows, int cols)
 	int	dsize;
 
 	if (!mtx || mtx->is_view || mtx->is_transposed)
-		return (MTX_ERROR("no input or is view/trans"));
+		return (mtx_err((char *)__FUNCTION__, "no input or is view/trans"));
 	if ((rows * cols) != (mtx->shape[0] * mtx->shape[1]))
-		return (MTX_ERROR("incompatible in/out shapes"));
+		return (mtx_err((char *)__FUNCTION__, "incompatible in/out shapes"));
 	mtx->shape[0] = rows;
 	mtx->shape[1] = cols;
 	dsize = mtx_get_dsize(mtx->dtype);

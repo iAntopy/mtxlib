@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 16:14:45 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/30 21:02:07 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:15:23 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ t_mtx	*mtx_random(int rows, int cols, t_mtx *out)
 	{
 		ret = mtx_create_empty(rows, cols, DTYPE_F);
 		if (!ret)
-			return (MTX_ERROR("malloc error"));
+			return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	}
 	if (!((ret->shape[0] == rows) && (ret->shape[1] == cols))
 		|| (ret->dtype != DTYPE_F))
-		return (MTX_ERROR(" mismatch output shape/dtype"));
+		return (mtx_err((char *)__FUNCTION__, " mismatch output shape/dtype"));
 	__mtx_fill_random(ret);
 	return (ret);
 }
@@ -82,11 +82,11 @@ t_mtx	*mtx_randint(int rows, int cols, int limits[2], t_mtx *out)
 	{
 		ret = mtx_create_empty(rows, cols, DTYPE_I);
 		if (!ret)
-			return (MTX_ERROR(" malloc error"));
+			return (mtx_err((char *)__FUNCTION__, " malloc error"));
 	}
 	if (!((ret->shape[0] == rows) && (ret->shape[1] == cols))
 		|| (ret->dtype != DTYPE_I))
-		return (MTX_ERROR("mismatch output shape/dtype"));
+		return (mtx_err((char *)__FUNCTION__, "mismatch output shape/dtype"));
 	if (limits[0] > limits[1])
 		ft_swap_i(limits, limits + 1);
 	__mtx_fill_randint(ret, limits[0], limits[1] - limits[0]);

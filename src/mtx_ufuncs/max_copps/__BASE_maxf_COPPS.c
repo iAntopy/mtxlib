@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 17:12:36 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/03 20:59:14 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:35:44 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	__mtx_maxf_init(int *a, int *out)
 {
-	UNUSED(a);
+	(void)a;
 	*out = INT_MIN;
 }
 
@@ -26,7 +26,7 @@ void	__mtx_maxf_cumul(int *a, int *out)
 
 void	__mtx_maxf_post(int *out, int n)
 {
-	UNUSED(n);
-	UNUSED(out);
+	(void)n;
+	(void)out;
 	return ;
 }

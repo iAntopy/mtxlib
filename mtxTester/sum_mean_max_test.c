@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   sum_mean_max_test.c                                :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 06:53:25 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/04 02:10:27 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 22:43:22 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main()
 {
 	t_mtx		*mtx;
 	t_mtx		*mtx_view;
-	const int	slice[4] = {0, 0, 3, INT_MAX};
+	int			slice[4] = {0, 0, 3, INT_MAX};
 	t_mtx		*out_row;
 	t_mtx		*out_col;
 	t_mtx		*out_scalar;
@@ -57,7 +57,7 @@ int	main()
 	printf("COLWISE mean output : \n");
 	mtx_print(out_col);
 
-	mtx_view = mtx_slice_view(mtx, slice);
+	mtx_view = mtx_slice_view(mtx, slice, NULL);
 	printf("view slice : \n");
 	mtx_print(mtx_view);
 	mtx_display_info(mtx_view);

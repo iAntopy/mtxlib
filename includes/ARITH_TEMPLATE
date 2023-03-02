@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef MTX_ARITHMETIC_H
 # define MTX_ARITHMETIC_H
 
@@ -31,5 +30,3 @@ void	__mtx_std_scalar(t_mopp *mo);
 void	__mtx_std_mtx(t_mopp *mo);
 void	__mtx_std_line_col(t_mopp *mo);
 void	__mtx_std_line_row(t_mopp *mo);
-
-

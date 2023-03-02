@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 23:21:56 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/02/28 23:22:50 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:43:13 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	*mtx_clear(t_mtx **mtx)
 	if ((*mtx)->swap)
 		malloc_free_p(0, (void **)&((*mtx)->swap));
 	malloc_free_p(0, (void **)mtx);
+	*mtx = NULL;
 	return (NULL);
 }
 

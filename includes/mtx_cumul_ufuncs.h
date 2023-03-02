@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:13:21 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 04:40:26 by iamongeo         ###   ########.fr       */
+/*   Updated: 2022/06/22 18:17:20 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ void	_mtx_maxi_whole(t_mtx *mtx, t_mtx *out);
 
 //// MEAN OPERATIONS
 t_mtx	*mtx_mean(t_mtx *mtx, int axis, t_mtx *out);
-void	__mtx_meani_init(int *a, int *out);
-void	__mtx_meani_cumul(int *a, int *out);
-void	__mtx_meani_post(int *out, int n);
 void	__mtx_meanf_init(float *a, float *out);
 void	__mtx_meanf_cumul(float *a, float *out);
 void	__mtx_meanf_post(float *out, int n);
+void	__mtx_meani_init(int *a, int *out);
+void	__mtx_meani_cumul(int *a, int *out);
+void	__mtx_meani_post(int *out, int n);
 void	_mtx_meanf_row(t_mtx *mtx, t_mtx *out);
 void	_mtx_meanf_col(t_mtx *mtx, t_mtx *out);
 void	_mtx_meani_row(t_mtx *mtx, t_mtx *out);
@@ -109,5 +109,4 @@ void	_mtx_hypoti_row(t_mtx *mtx, t_mtx *out);
 void	_mtx_hypoti_col(t_mtx *mtx, t_mtx *out);
 void	_mtx_hypotf_whole(t_mtx *mtx, t_mtx *out);
 void	_mtx_hypoti_whole(t_mtx *mtx, t_mtx *out);
-
 #endif

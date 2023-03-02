@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 17:33:43 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/03 21:01:30 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:35:31 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	__mtx_hypoti_init(int *a, int *out)
 {
-	UNUSED(a);
+	(void)a;
 	*out = 0;
 }
 
@@ -28,7 +28,7 @@ void	__mtx_hypoti_post(int *out, int n)
 {
 	float	temp;
 
-	UNUSED(n);
+	(void)n;
 	temp = 1;
 	temp *= *out;
 	*out = 1;

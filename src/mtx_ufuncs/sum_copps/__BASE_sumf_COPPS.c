@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 17:12:36 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/03 20:50:47 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:37:21 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	__mtx_sumf_init(float *a, float *out)
 {
-	UNUSED(a);
+	(void)a;
 	*out = 0;
 }
 
@@ -25,7 +25,7 @@ void	__mtx_sumf_cumul(float *a, float *out)
 
 void	__mtx_sumf_post(float *out, int n)
 {
-	UNUSED(out);
-	UNUSED(n);
+	(void)out;
+	(void)n;
 	return ;
 }

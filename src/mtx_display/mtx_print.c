@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 21:22:27 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 02:46:22 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 22:27:07 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	mtx_print_single_row_2d(t_mtx *mtx, int row)
 		printf(DATA_C"%6.3f ", *(float *)_mtx_idx(marr, mtx->strides, row, i));
 	}
 	printf(BRKT_C"]");
-	if (row == (mtx->shape[0] - 1))
+	if (row != (mtx->shape[0] - 1))
 		printf("\n");
 }
 

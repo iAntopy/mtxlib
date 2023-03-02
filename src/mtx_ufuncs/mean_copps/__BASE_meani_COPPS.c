@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 17:33:43 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/04 02:14:22 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:36:50 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	__mtx_meani_init(int *a, int *out)
 {
-	UNUSED(a);
+	(void)a;
 	*out = 0;
 }
 

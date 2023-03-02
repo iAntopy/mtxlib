@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:01:06 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/07/19 20:30:09 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:15:14 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ t_mtx	*mtx_identity(int n, t_mtx *out, int dtype)
 	t_mtx	*ret;
 
 	if (n < 1)
-		return (MTX_ERROR("invalid negative shape value"));
+		return (mtx_err((char *)__FUNCTION__, "invalid negative shape value"));
 	ret = out;
 	if (!ret)
 		ret = mtx_create_empty(n, n, dtype);
 	else if (out->shape[0] != out->shape[1])
-		return (MTX_ERROR("output mtx must be symetrical"));
+		return (mtx_err((char *)__FUNCTION__, "output mtx must be symetrical"));
 	if (!ret)
-		return (MTX_ERROR("malloc error"));
+		return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	if (ret->is_view)
 		_mtx_fill_zeros(ret);
 	else

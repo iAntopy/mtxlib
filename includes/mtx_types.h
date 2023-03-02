@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:14:49 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 05:17:42 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/02 00:13:47 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct s_quaternion_base
 	t_mtx	__tr_view;
 }	t_quat;
 
-typedef void (* MOPP_FUNC)(t_mtx *, t_mtx *, t_mtx *);
-typedef void (* DOPP_FUNC)(t_dopp *);
+typedef void	(*t_mopp_fc)(t_mtx *, t_mtx *, t_mtx *);
+typedef void	(*t_dopp_fc)(t_dopp *);
 
 #endif

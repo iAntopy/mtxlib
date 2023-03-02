@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 17:05:40 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 03:34:18 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:16:59 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_dopp	*__mtx_init_dopp(t_dopp *dop, t_mtx *a, t_mtx *b, t_mtx *out)
 	if (dop->inplace_mtx || out->is_view)
 	{
 		if (!mtx_malloc_swap(out))
-			return (MTX_ERROR("malloc error"));
+			return (mtx_err((char *)__FUNCTION__, "malloc error"));
 		dop->o = out->swap;
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:21:30 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 00:10:45 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:19:02 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "mtxlib.h"
@@ -37,7 +37,7 @@ static int	*__validate_setup(t_mtx *m, int slice[4], int *rr, int *cr)
 	ex = slice[2];
 	ey = slice[3];
 	if (!slice)
-		return (MTX_ERROR("missing input slice"));
+		return (mtx_err((char *)__FUNCTION__, "missing input slice"));
 	sx = ft_clamp(((sx < 0) * m->shape[0]) + sx, 0, m->shape[0] - 1);
 	sy = ft_clamp(((sy < 0) * m->shape[1]) + sy, 0, m->shape[1] - 1);
 	ex = ft_clamp(((ex < 0) * m->shape[0]) + ex, sx + 1, m->shape[0]);
@@ -54,12 +54,12 @@ t_mtx	*mtx_slice_view(t_mtx *mtx, int slice[4], t_mtx	*out)
 	int		crange;
 
 	if (!mtx)
-		return (MTX_ERROR("missing mtx input"));
+		return (mtx_err((char *)__FUNCTION__, "missing mtx input"));
 	if (!__validate_setup(mtx, slice, &rrange, &crange))
-		return (MTX_ERROR("invalid slice"));
+		return (mtx_err((char *)__FUNCTION__, "invalid slice"));
 	ret = out;
-	if (!ret || !mtx_dup_struct(mtx, &ret))
-		return (MTX_ERROR("!mtx or malloc error"));
+	if (!ret && !mtx_dup_struct(mtx, &ret))
+		return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	ret->offset = (mtx->strides[0] * slice[0] + mtx->strides[1] * slice[1]);
 	ret->shape[0] = rrange;
 	ret->shape[1] = crange;
@@ -80,7 +80,7 @@ t_mtx	*mtx_view(t_mtx *mtx, t_mtx *vout)
 	t_mtx	*view;
 
 	if (!mtx)
-		return (MTX_ERROR("!mtx"));
+		return (mtx_err((char *)__FUNCTION__, "!mtx"));
 	if (vout)
 	{
 		ft_memcpy(vout, mtx, sizeof(t_mtx));
@@ -89,7 +89,7 @@ t_mtx	*mtx_view(t_mtx *mtx, t_mtx *vout)
 		view = vout;
 	}
 	else if (!mtx_dup_struct(mtx, &view))
-		return (MTX_ERROR("malloc error"));
+		return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	view->arr = mtx->arr;
 	vout->is_view = 0;
 	return (view);

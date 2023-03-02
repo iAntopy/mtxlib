@@ -17,12 +17,12 @@ then
 	rm "${INCL_DIR}mtx_cumul_ufuncs.h"
 	for OPP in $(echo $STD_COPPS | xargs)
 	do
-		DIRECTORY="${MTX_CUMUL_DIR}${OPP}_copps"
-		if test -d "${DIRECTORY}"; then
-			cd "${DIRECTORY}"
+		OPPDIR="${MTX_CUMUL_DIR}${OPP}_copps"
+		if test -d "${OPPDIR}"; then
+			cd "${OPPDIR}"
 			rm mtx*.c
-			mv "__BASE_${OPP}i_COPPS.c" '__BASE_zzzi_COPPS.c'
-			mv "__BASE_${OPP}f_COPPS.c" '__BASE_zzzf_COPPS.c'
+#			mv "__BASE_${OPP}i_COPPS.c" '__BASE_zzzi_COPPS.c'
+#			mv "__BASE_${OPP}f_COPPS.c" '__BASE_zzzf_COPPS.c'
 			cd ../copps_template
 		fi
 	done
@@ -31,38 +31,41 @@ fi
 for OPP in $(echo $STD_COPPS | xargs)
 do
 	echo $OPP
-	DIRECTORY="${MTX_CUMUL_DIR}${OPP}_copps"
-	echo "$DIRECTORY"
+	OPPDIR="${MTX_CUMUL_DIR}${OPP}_copps"
+	echo "$OPPDIR"
 
 #: <<'END'
 #	if [ $(ls -l | grep '__BASE_zzz' | wc -l) = 2 ]
-	if test -d "${DIRECTORY}"; then
+	if test -d "${OPPDIR}"; then
 		echo "directory found"
-		if [ $(ls -l "${DIRECTORY}" | grep '__BASE_zzz' | wc -l) = 2 ]; then
-#		if [-f "${DIRECTORY}/__BASE_zzzi_COPPS.c" && -f "${DIRECTORY}/__BASE_zzzf_COPPS.c"]; then
+		ls -l $OPPDIR
+#		echo "nb files starting with ${OPP} base file __BASE_${OPP} : $(ls -l $OPPDIR | grep __BASE_$OPP | grep '\.c' | wc -l)"
+		if [ $(ls -l $OPPDIR | grep __BASE_$OPP | grep '\.c' | wc -l) = 2 ]; then
+#		if [-f "${OPPDIR}/__BASE_zzzi_COPPS.c" && -f "${OPPDIR}/__BASE_zzzf_COPPS.c"]; then
 			echo "ALMOST THERE !"
 			cd temp_payload
 			SED_SCRIPT="s/zzz/${OPP}/g"
 			for f in mtx*.c; do
 				FNAME=$(echo $f | sed $SED_SCRIPT)
 				SED_F_SCRIPT="s/fff/$(printf "%-30s" $FNAME)/g"
-				CP_NAME='../'${DIRECTORY}"/${FNAME}"
+				CP_NAME='../'${OPPDIR}"/${FNAME}"
 				echo 'copied file '"${CP_NAME}"
 				echo "sed script : ${SED_SCRIPT}"
 				sed "${SED_F_SCRIPT}" $f > "${CP_NAME}_temp" # "${CP_NAME}" > $CP_NAME
 				sed "${SED_SCRIPT}" "${CP_NAME}_temp" > $CP_NAME
+#				sed "${SED_F_SCRIPT}; ${SED_SCRIPT}" > $CP_NAME
 			done
 			cd ../
-			cd $DIRECTORY
+			cd $OPPDIR
 			rm *_temp
-			BASE_FILE_I="__BASE_${OPP}i_COPPS.c"
-			BASE_FILE_F="__BASE_${OPP}f_COPPS.c"
-			SED_F_SCRIPT="s/fff/$(printf "%-30s" ${BASE_FILE_I})/g"
-			sed "${SED_F_SCRIPT}" '__BASE_zzzi_COPPS.c' > 'B_temp'
-			sed "${SED_SCRIPT}" 'B_temp' > "${BASE_FILE_I}"
-			SED_F_SCRIPT="s/fff/$(printf "%-30s" ${BASE_FILE_F})/g"
-			sed "${SED_F_SCRIPT}" '__BASE_zzzf_COPPS.c' > 'B_temp'
-			sed "${SED_SCRIPT}" 'B_temp' > "${BASE_FILE_F}"
+#			BASE_FILE_I="__BASE_${OPP}i_COPPS.c"
+#			BASE_FILE_F="__BASE_${OPP}f_COPPS.c"
+#			SED_F_SCRIPT="s/fff/$(printf "%-30s" ${BASE_FILE_I})/g"
+#			sed "${SED_F_SCRIPT}" '__BASE_zzzi_COPPS.c' > 'B_temp'
+#			sed "${SED_SCRIPT}" 'B_temp' > "${BASE_FILE_I}"
+#			SED_F_SCRIPT="s/fff/$(printf "%-30s" ${BASE_FILE_F})/g"
+#			sed "${SED_F_SCRIPT}" '__BASE_zzzf_COPPS.c' > 'B_temp'
+#			sed "${SED_SCRIPT}" 'B_temp' > "${BASE_FILE_F}"
 			rm B_temp '__BASE_zzzi_COPPS.c' '__BASE_zzzf_COPPS.c'
 			TRGT_H="${INCL_DIR}mtx_cumul_ufuncs.h"
 			if [ ! -f $TRGT_H ];

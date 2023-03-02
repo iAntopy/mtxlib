@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 02:01:52 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/02/28 23:24:30 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:39:23 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	mtx_swap_arrays(t_mtx *mtx)
 
 	if (!mtx || !mtx->swap)
 	{
-		MTX_ERROR("!mtx or !swap");
+		mtx_err((char *)__FUNCTION__, "!mtx or !swap");
 		return (0);
 	}
 	temp = mtx->arr;
@@ -39,10 +39,10 @@ int	mtx_swap_arrays(t_mtx *mtx)
 void	*mtx_malloc_swap(t_mtx *mtx)
 {
 	if (!mtx)
-		return (MTX_ERROR("no input mtx"));
+		return (mtx_err((char *)__FUNCTION__, "no input mtx"));
 	if (!mtx->swap
 		&& !malloc_free_p(mtx_sizeof_array(mtx), (void **)&mtx->swap))
-		return (MTX_ERROR("malloc error"));
+		return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	return (mtx->swap);
 }
 
@@ -62,7 +62,8 @@ t_mtx	*__mtx_copy_view_swap_to_array_4bytes(t_mtx *view)
 
 	dsize = mtx_get_dsize(view->dtype);
 	if (!view || !view->is_view || !view->swap || dsize != 4)
-		return (MTX_ERROR("no view or !is_view or !swap or dsize != 4"));
+		return (mtx_err((char *)__FUNCTION__,
+				"no view or !is_view or !swap or dsize != 4"));
 	swap = view->swap;
 	arr = _mtx_arr(view);
 	i = -1;

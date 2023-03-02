@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 16:28:07 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/02/28 23:30:11 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:22:29 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ t_quat	*quat_combine(t_quat *q1, t_quat *q2, t_quat *out)
 	t_quat	*ret;
 
 	if (!q1 || !q2)
-		return (MTX_ERROR("missing params"));
+		return (mtx_err((char *)__FUNCTION__, "missing params"));
 	ret = out;
 	if (!ret)
 		ret = quat_create_empty(NULL);
 	if (!ret)
-		return (MTX_ERROR("malloc error"));
+		return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	__quat_combine(q1, q2, ret, q2->q[0]);
 	__quat_init_rot_mtx(ret->__rot_arr, ret->q + 1, ret->q[0]);
 	return (ret);
@@ -65,7 +65,7 @@ t_quat	*quat_add(t_quat *q, float rll, float ptc, float yaw)
 	float	sin_ang;
 
 	if (!q)
-		return (MTX_ERROR("missing params"));
+		return (mtx_err((char *)__FUNCTION__, "missing params"));
 	if (!(rll || ptc || yaw))
 		return (q);
 	i = -1;

@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 18:31:38 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/02/28 23:32:20 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:44:28 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_quat	*_quat_translation_set(t_quat *q, float x, float y, float z)
 	float	*_arr;
 
 	if (!q)
-		return (MTX_ERROR("missing quaternion"));
+		return (mtx_err((char *)__FUNCTION__, "missing quaternion"));
 	_arr = (float *)_mtx_arr(q->rot_mtx);
 	*(_arr++) = x;
 	*(_arr++) = y;
@@ -34,7 +34,7 @@ t_quat	*_quat_translation_move(t_quat *q, float dx, float dy, float dz)
 	float	*_arr;
 
 	if (!q)
-		return (MTX_ERROR("missing quaternion"));
+		return (mtx_err((char *)__FUNCTION__, "missing quaternion"));
 	_arr = (float *)_mtx_arr(q->rot_mtx);
 	*(_arr++) += dx;
 	*(_arr++) += dy;
@@ -50,7 +50,8 @@ t_quat	*quat_translation_set(t_quat *q, t_mtx *pos)
 	float	*_parr;
 
 	if (!q || !pos || (pos->dtype != DTYPE_F))
-		return (MTX_ERROR("missing quaternion or pos, or dtype not float."));
+		return (mtx_err((char *)__FUNCTION__,
+				"missing quaternion or pos, or dtype not float."));
 	_qarr = (float *)_mtx_arr(q->rot_mtx);
 	_parr = (float *)_mtx_arr(pos);
 	*(_qarr++) += *(_parr++);
@@ -67,7 +68,8 @@ t_quat	*quat_translation_move(t_quat *q, t_mtx *delta)
 	float	*_parr;
 
 	if (!q || !delta || (delta->dtype != DTYPE_F))
-		return (MTX_ERROR("missing quaternion or pos, or dtype not float."));
+		return (mtx_err((char *)__FUNCTION__,
+				"missing quaternion or pos, or dtype not float."));
 	_qarr = (float *)_mtx_arr(q->rot_mtx);
 	_parr = (float *)_mtx_arr(delta);
 	*(_qarr++) += *(_parr++);
