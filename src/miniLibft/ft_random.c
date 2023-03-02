@@ -6,11 +6,11 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 16:05:47 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 00:27:47 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/02 00:26:11 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "mtx_libft.h"
 #include <time.h>
 
 //Generates random uniformaly distributed float nb between [0, 1].

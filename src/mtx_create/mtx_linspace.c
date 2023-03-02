@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 00:32:42 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 02:42:36 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/02 00:56:47 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_mtx	*mtx_linspace(float start, float end, int n_divs, int w_end)
 
 	if (!n_divs || start == end)
 		return (fperror("mtx_linspace : n_divs or range == 0"));
-	n_divs += !!w_end;
+//	n_divs += !!w_end;
 	mtx = mtx_create_empty(n_divs, 1, DTYPE_F);
 	if (!mtx)
 		return (NULL);

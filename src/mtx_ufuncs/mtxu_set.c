@@ -6,11 +6,10 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 17:56:12 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/29 17:57:31 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/02 00:34:25 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "mtxlib.h"
 
 //only inits full arrays not views.

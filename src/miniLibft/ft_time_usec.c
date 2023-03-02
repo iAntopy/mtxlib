@@ -6,13 +6,12 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 00:28:41 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 00:32:18 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/02 00:26:35 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "mtxlib.h"
 #include <sys/time.h>
-#include <stdio.h>
 
 static void	ft_put_delta_t(ssize_t d, char *note)
 {
