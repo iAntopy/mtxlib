@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 02:01:52 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 23:39:23 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:46:45 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ int	mtx_swap_arrays(t_mtx *mtx)
 	return (1);
 }
 
-void	*mtx_malloc_swap(t_mtx *mtx)
+void	*ft_malloc_swap(t_mtx *mtx)
 {
 	if (!mtx)
 		return (mtx_err((char *)__FUNCTION__, "no input mtx"));
 	if (!mtx->swap
-		&& !malloc_free_p(mtx_sizeof_array(mtx), (void **)&mtx->swap))
+		&& !ft_malloc_p(mtx_sizeof_array(mtx), (void **)&mtx->swap))
 		return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	return (mtx->swap);
 }
@@ -49,7 +49,7 @@ void	*mtx_malloc_swap(t_mtx *mtx)
 // For inplace destructive opperations in a view mtx such as dot prod.
 // first puts the result in a swap owned by the view mtx. Than copies
 // the swap array in the original array. This function does not malloc
-// the swap array, use mtx_malloc_swap() before the destructive
+// the swap array, use ft_malloc_swap() before the destructive
 // opperation and route the output to swap. THIS OPPERATION IS 
 // INNEFFICIANT.
 t_mtx	*__mtx_copy_view_swap_to_array_4bytes(t_mtx *view)

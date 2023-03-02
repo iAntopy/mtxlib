@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 23:55:34 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 23:22:56 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:51:54 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_quat	*quat_create_empty(t_quat *out)
 	t_quat	*ret;
 
 	ret = out;
-	if (!ret && malloc_free_p(sizeof(t_quat), (void **)&ret))
+	if (!ret && ft_malloc_p(sizeof(t_quat), (void **)&ret))
 		return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	ft_memclear(ret, sizeof(t_quat));
 	__mtx_fill_identity_f(4, (float *)ret->__rot_arr);
@@ -87,7 +87,7 @@ t_quat	*quat_create(float ang, float x, float y, float z)
 {
 	t_quat	*q;
 
-	if (!malloc_free_p(sizeof(t_quat), (void **)&q))
+	if (!ft_malloc_p(sizeof(t_quat), (void **)&q))
 		return (mtx_err((char *)__FUNCTION__, "malloc error"));
 	ft_memclear(q, sizeof(t_quat));
 	q->uv[1] = x;

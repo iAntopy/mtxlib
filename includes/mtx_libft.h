@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   mtx_libft.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:20:53 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/02 00:28:31 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:30:08 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef MTX_LIBFT_H
+# define MTX_LIBFT_H
 
 # define BLACK_C	"\033[0;30m"
 # define RED_C		"\033[0;31m"
@@ -57,9 +57,12 @@
 # include <stdlib.h>
 # include "mtx_ft_printf.h"
 
+/*
 void	*ft_memset(void *s, int c, size_t n);
 void	ft_bzero(void *s, size_t n);
+
 void	*ft_memcpy(void *dest, const void *src, size_t n);
+
 void	*ft_memccpy(void *dest, const void *src, int c, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
@@ -77,7 +80,10 @@ int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *str);
 void	*ft_calloc(size_t nmemb, size_t size);
-
+*/
+int		mtx_free_p(void **ret);
+int		mtx_malloc_p(size_t size, void **ret);
+/*
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
@@ -117,19 +123,20 @@ void	ft_putstr_fd(char const *s, int fd);
 void	ft_putendl_fd(char const *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putbin(const void *addr, size_t n);
-
+*/
 void	ft_swap_i(int *a, int *b);
 void	ft_swap_f(float *a, float *b);
 int		ft_clamp(int n, int min, int max);
 void	ft_memclear(void *dest, size_t size);
-
+/*
 int		ft_printf(const char *fmt, ...);
 int		ft_vprintf(const char *fmt, va_list *ap);
-void	*fperror(char *fmt, ...);
+*/
+void	*mtx_fperror(char *fmt, ...);
 ssize_t	ft_timedelta_usec(char *note);
 float	ft_random(void);
 int		ft_randint(int min, int range);
-
+/*
 typedef struct s_list
 {
 	void			*content;
@@ -151,5 +158,5 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_lstprint_int(t_list *lst);
 void	ft_lstprint_str(t_list *lst);
 void	ft_lstprint_float(t_list *lst);
-
+*/
 #endif

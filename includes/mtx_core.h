@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:18:46 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/02 21:25:11 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/02 07:42:43 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	__mtx_setup_2d(t_mtx *mtx, int rows, int cols, size_t stride);
 // MEMORY MANAGEMENT
 void	*mtx_clear(t_mtx **mtx);
 void	*mtx_clear_list(int n, ...);
-int		malloc_free_p(size_t size, void **ptr);
-void	*malloc_free(size_t size, void **ptr);
+//int		malloc_free_p(size_t size, void **ptr);
+//void	*malloc_free(size_t size, void **ptr);
 size_t	mtx_get_dsize(int dtype);
 size_t	mtx_get_nb_elems(t_mtx *mtx);
 size_t	mtx_sizeof_array(t_mtx *mtx);

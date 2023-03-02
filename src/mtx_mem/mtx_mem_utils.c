@@ -6,11 +6,33 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 23:23:04 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/02/28 23:24:08 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:13:42 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mtxlib.h"
+
+int	mtx_malloc_p(size_t size, void **ptr)
+{
+	void	*p;
+
+	if (!ptr || !size)
+		return (0);
+	p = malloc(size);
+	*ptr = p;
+	return (p != NULL);
+}
+
+int	mtx_free_p(void **ptr)
+{
+	if (ptr && *ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+	return (1);
+}
+/*
 
 int	malloc_free_p(size_t size, void **ptr)
 {
@@ -42,6 +64,7 @@ void	*malloc_free(size_t size, void **ptr)
 	}
 	return (NULL);
 }
+*/
 
 size_t	mtx_get_dsize(int dtype)
 {

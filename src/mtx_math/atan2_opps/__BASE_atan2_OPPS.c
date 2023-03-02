@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 03:05:11 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 04:11:10 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:53:51 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	__mtx_std_atan2i(int *v1, int *v2, int *out)
 	v1 = v2;
 	v2 = out;
 	out = v1;
-	fperror("%s: Unsupported int type for atan2, Use float", __FUNCTION__);
+	mtx_err((char *)__FUNCTION__, "Unsupported int type for atan2, Use float");
 }
 
 void	__mtx_std_atan2f(float *v1, float *v2, float *out)
@@ -44,5 +44,5 @@ void	__mtx_std_ratan2i(int *v1, int *v2, int *out)
 	v1 = v2;
 	v2 = out;
 	out = v1;
-	fperror("%s: Unsupported int type for atan2. Use float.", __FUNCTION__);
+	mtx_err((char *)__FUNCTION__, "Unsupported int type for atan2. Use float.");
 }

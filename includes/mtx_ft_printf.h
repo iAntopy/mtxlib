@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   mtx_ft_printf.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 15:16:50 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/07 15:48:47 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/02 08:12:15 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef MTX_FT_PRINTF_H
+# define MTX_FT_PRINTF_H
 # include <stdarg.h>
 # include <unistd.h>
 
