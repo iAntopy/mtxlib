@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 08:36:19 by iamongeo          #+#    #+#             */
-/*   Updated: 2022/06/30 21:13:19 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/03 04:56:50 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,5 @@ void	__mtx_sqrtf(float *arr, float *out, size_t n_elem)
 
 t_mtx	*mtx_sqrtf(t_mtx *mtx, t_mtx *out)
 {
-	printf("Get in the weeds\n");
 	return (mtx_apply_f(mtx, sqrtf, out));
 }

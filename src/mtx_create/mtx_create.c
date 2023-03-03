@@ -6,7 +6,7 @@
 /*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 17:47:08 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/02 08:40:54 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/03 04:58:38 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ t_mtx	*mtx_create_array(void *arr, int rows, int cols, int dtype)
 {
 	t_mtx		*mtx;
 
-	printf("arr ptr : %p\n", arr);
 	if (!arr)
 		return (mtx_err((char *)__FUNCTION__, "no array provided"));
 	mtx = mtx_create_empty(rows, cols, dtype);

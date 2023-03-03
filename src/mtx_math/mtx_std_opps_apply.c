@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 02:33:54 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 04:15:52 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/03 04:56:12 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	__mtx_std_scalar(t_mopp *mo)
 	int	j;
 
 	mo->bv = _mtx_idx(mo->b, mo->bs, 0, 0);
-	mtx_print_mopp_i(mo);
 	i = -1;
 	while (++i < mo->r)
 	{
