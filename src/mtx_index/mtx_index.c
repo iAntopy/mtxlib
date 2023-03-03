@@ -6,13 +6,13 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 03:35:22 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 23:17:26 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/02 21:29:23 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mtxlib.h"
 
-int	mtx_index_is_inbound(t_mtx *mtx, int row, int col)
+inline int	mtx_index_is_inbound(t_mtx *mtx, int row, int col)
 {
 	return (row >= 0 && col >= 0
 		&& row < mtx->shape[0] && col < mtx->shape[1]);
@@ -24,7 +24,7 @@ int	mtx_index_is_inbound(t_mtx *mtx, int row, int col)
 // On regular arrays the view_ptr member will be a ptr to the mtx->arr
 // member itself (mtx->view_ptr = &mtx->arr). That way view matrices 
 // always have access the original array even after it has been swapped.
-void	*_mtx_arr(t_mtx *mtx)
+inline void	*_mtx_arr(t_mtx *mtx)
 {
 	return (*(mtx->view_ptr) + mtx->offset);
 }
@@ -33,12 +33,12 @@ void	*_mtx_arr(t_mtx *mtx)
 // offset by mtx->offset before entering this function. For
 // regular matrices (non view) arr should be mtx->arr. In
 // either case strides is mtx->strdes.
-void	*_mtx_idx(void *arr, int *strides, int row, int col)
+inline void	*_mtx_idx(void *arr, int *strides, int row, int col)
 {
 	return (arr + (strides[0] * row) + (strides[1] * col));
 }
 
-void	*mtx_index(t_mtx *mtx, int row, int col)
+inline void	*mtx_index(t_mtx *mtx, int row, int col)
 {
 	if (row < 0 || col < 0 || row >= mtx->shape[0] || col >= mtx->shape[1])
 		return (mtx_err((char *)__FUNCTION__, "index out of bounds"));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mtx_core.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
+/*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:18:46 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 04:35:28 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/03/02 21:25:11 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ void	*mtx_index(t_mtx *mtx, int row, int col);
 void	*_mtx_arr(t_mtx *mtx);
 void	*_mtx_idx(void *arr, int *strides, int row, int col);
 int		mtx_index_is_inbound(t_mtx *mtx, int row, int col);
+int		*_mtx_index_iptr(t_mtx *mtx, int row, int col);
+float	*_mtx_index_fptr(t_mtx *mtx, int row, int col);
+int		_mtx_index_i(t_mtx *mtx, int row, int col);
+float	_mtx_index_f(t_mtx *mtx, int row, int col);
 
 // PRINT FUNCS
 void	mtx_print(t_mtx *mtx);
