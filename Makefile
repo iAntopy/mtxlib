@@ -10,7 +10,7 @@ LIBFT	= $(LFTDIR)/libft.a
 INCLS	= -Iincludes  -I$(LFTDIR)
 
 CC	= gcc
-CFLAGS	= -Wall -Wextra -Werror $(INCLS) -lm
+CFLAGS	= -Wall -Wextra -Werror $(INCLS)
 
 AR	= ar -rcs
 
