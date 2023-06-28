@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 03:29:17 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/01 23:16:50 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:22:19 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	_mtx_doti_1x4_1x4(t_mtx *m1, t_mtx *m2)
 int	mtx_doti_1d_1d(t_mtx *m1, t_mtx *m2)
 {
 	if (!mtx_isvalid_broadcast_dot(m1, m2))
-	{	
+	{
 		mtx_err((char *)__FUNCTION__, "invalid broadcast");
 		return (0);
 	}

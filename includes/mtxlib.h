@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mtxlib.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
+/*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:32:39 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/02 08:34:44 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:23:03 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@
 # include <time.h>
 # include <stdio.h>
 
-//# include "mtx_libft.h"
 # include "libft.h"
 
 # include "mtx_types.h"
 # include "mtx_core.h"
 # include "mtx_ufuncs.h"
 # include "mtx_trig.h"
-# include "mtx_arithmetic.h"	//AUTO_GENERATED
-# include "mtx_cumul_ufuncs.h"	//AUTO GENERATED
+# include "mtx_arithmetic.h"
+# include "mtx_cumul_ufuncs.h"
 # include "mtx_linalg.h"
 # include "mtx_quaternion.h"
 

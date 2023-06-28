@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mtx_create.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iamongeo <marvin@42quebec.com>             +#+  +:+       +#+        */
+/*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 17:47:08 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/03 04:58:38 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:22:12 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	__mtx_setup_1d(t_mtx *mtx, int rows, int cols, size_t stride)
 }
 
 void	__mtx_setup_2d(t_mtx *mtx, int rows, int cols, size_t stride)
-{	
+{
 	mtx->ndims = (unsigned char)2;
 	mtx->shape[0] = rows;
 	mtx->shape[1] = cols;

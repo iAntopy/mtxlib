@@ -6,7 +6,7 @@
 /*   By: iamongeo <iamongeo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 03:33:18 by iamongeo          #+#    #+#             */
-/*   Updated: 2023/03/02 00:07:11 by iamongeo         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:20:44 by iamongeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	put_biggest_first(t_mtx **a, t_mtx **b, int specs[2])
 	specs[1] = 0;
 	if (!specs[0] && ((*a == NULL) || ((*a)->shape[0] == 1)
 			|| ((*a)->ndims == 1 && (*b)->ndims == 2)))
-	{	
+	{
 		temp = *a;
 		*a = *b;
 		*b = temp;
